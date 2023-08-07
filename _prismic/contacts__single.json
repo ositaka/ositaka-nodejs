@@ -1,0 +1,255 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID"
+      }
+    },
+    "title": {
+      "type": "Text",
+      "config": {
+        "label": "Title"
+      }
+    },
+    "services_title": {
+      "type": "Text",
+      "config": {
+        "label": "Services Title",
+        "placeholder": "Ex:"
+      }
+    },
+    "services_options": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "option": {
+            "type": "Text",
+            "config": {
+              "label": "Option",
+              "placeholder": "Ex: Branding"
+            }
+          }
+        },
+        "label": "Services Options"
+      }
+    },
+    "budget_title": {
+      "type": "Text",
+      "config": {
+        "label": "Budget Title"
+      }
+    },
+    "budget_options": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "option": {
+            "type": "Text",
+            "config": {
+              "label": "Option",
+              "placeholder": "Ex: 1.5-5k"
+            }
+          }
+        },
+        "label": "Budget Options"
+      }
+    },
+    "delivery_title": {
+      "type": "Text",
+      "config": {
+        "label": "Delivery Title"
+      }
+    },
+    "delivery_options": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "option": {
+            "type": "Text",
+            "config": {
+              "label": "Option",
+              "placeholder": "Ex: 3 months"
+            }
+          }
+        },
+        "label": "Delivery Options"
+      }
+    },
+    "project_title": {
+      "type": "Text",
+      "config": {
+        "label": "Project Title"
+      }
+    },
+    "form": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "name": {
+            "type": "Text",
+            "config": {
+              "label": "Name",
+              "placeholder": "Ex: Your name"
+            }
+          },
+          "company": {
+            "type": "Text",
+            "config": {
+              "label": "Company",
+              "placeholder": "Ex: Company"
+            }
+          },
+          "email": {
+            "type": "Text",
+            "config": {
+              "label": "E-mail",
+              "placeholder": "Ex: E-mail"
+            }
+          },
+          "phone": {
+            "type": "Text",
+            "config": {
+              "label": "Phone",
+              "placeholder": "Ex: Phone number"
+            }
+          },
+          "message": {
+            "type": "Text",
+            "config": {
+              "label": "Message",
+              "placeholder": "Ex: Tell us about yourself and your project"
+            }
+          },
+          "button": {
+            "type": "Text",
+            "config": {
+              "label": "Button",
+              "placeholder": "Ex: Send request"
+            }
+          }
+        },
+        "label": "Form",
+        "repeat": false
+      }
+    }
+  },
+  "SEO": {
+    "seo": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "seo_title": {
+            "type": "Text",
+            "config": {
+              "label": "SEO Title",
+              "placeholder": "A line of text with less than 60 characters"
+            }
+          },
+          "seo_description": {
+            "type": "Text",
+            "config": {
+              "label": "SEO Description",
+              "placeholder": "Two line of text with less than 155 characters"
+            }
+          },
+          "seo_image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "SEO Image"
+            }
+          }
+        },
+        "label": "SEO",
+        "repeat": false
+      }
+    }
+  },
+  "FAQ's": {
+    "faqs_title": {
+      "type": "Text",
+      "config": {
+        "label": "FAQs Title",
+        "placeholder": "Ex: FAQ's"
+      }
+    },
+    "faqs_description": {
+      "type": "Text",
+      "config": {
+        "label": "FAQ's Description",
+        "placeholder": "Ex: Find out here the answears for the most common questions when starting a new project with Media Creators Studio."
+      }
+    },
+    "faqs_list": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "faq_title": {
+            "type": "Text",
+            "config": {
+              "label": "FAQ Title",
+              "placeholder": "Ex: Can I update my website?"
+            }
+          },
+          "faq_text": {
+            "type": "StructuredText",
+            "config": {
+              "multi": "paragraph, preformatted, strong, em, hyperlink, list-item, o-list-item",
+              "label": "FAQ Text",
+              "placeholder": "You can type multiple paragraphs."
+            }
+          }
+        },
+        "label": "FAQ's List"
+      }
+    }
+  },
+  "Testimonials": {
+    "testimonials_title": {
+      "type": "Text",
+      "config": {
+        "label": "Testimonials Title",
+        "placeholder": "Ex: See how we’ve helped other people, just like you!"
+      }
+    },
+    "testimonials_list": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "image"
+            }
+          },
+          "name": {
+            "type": "Text",
+            "config": {
+              "label": "Name",
+              "placeholder": "Ex: Luc Verbeke"
+            }
+          },
+          "brand": {
+            "type": "Text",
+            "config": {
+              "label": "Brand",
+              "placeholder": "Ex: Viva Sara"
+            }
+          },
+          "text": {
+            "type": "Text",
+            "config": {
+              "label": "Text",
+              "placeholder": "You can type one full paragraph."
+            }
+          }
+        },
+        "label": "Testimonials List"
+      }
+    }
+  }
+}

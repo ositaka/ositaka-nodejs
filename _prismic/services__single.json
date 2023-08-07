@@ -1,0 +1,185 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID"
+      }
+    },
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title",
+        "placeholder": "Add a short title (ex: Your closest digital creative studio)"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": null,
+        "choices": {
+          "service": {
+            "type": "Slice",
+            "fieldset": "Service",
+            "description": "Service",
+            "icon": "receipt",
+            "display": "list",
+            "non-repeat": {
+              "is_video": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "Image",
+                  "placeholder_true": "Video",
+                  "default_value": false,
+                  "label": "Image or Video?"
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [
+                    {
+                      "name": "phone",
+                      "width": 480,
+                      "height": null
+                    }
+                  ],
+                  "label": "Image / Video Poster"
+                }
+              },
+              "video": {
+                "type": "Link",
+                "config": {
+                  "select": "media",
+                  "label": "Video",
+                  "placeholder": "Select a video file"
+                }
+              },
+              "background_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Background Color"
+                }
+              },
+              "service_title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Service Title",
+                  "placeholder": "Add one word title (ex: Branding)"
+                }
+              },
+              "service_description": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Service Description",
+                  "placeholder": "Add a short description or intro for this service."
+                }
+              },
+              "service_intro_title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading4",
+                  "label": "Service Intro Title",
+                  "placeholder": "Add a short intro title (ex: The creation of a brand)"
+                }
+              },
+              "service_text": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "strong,em",
+                  "label": "Service Text",
+                  "placeholder": "Add a full paragraph with the description of the service."
+                }
+              },
+              "service_projects_title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Service Projects Title",
+                  "placeholder": "Add a short title (ex: Discover our branding projects)"
+                }
+              }
+            },
+            "repeat": {
+              "project_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Project Image"
+                }
+              },
+              "project": {
+                "type": "Link",
+                "config": {
+                  "label": "Project",
+                  "placeholder": "Add a new project",
+                  "select": null
+                }
+              },
+              "project_brand": {
+                "type": "Text",
+                "config": {
+                  "label": "Project Brand",
+                  "placeholder": "Brand of the project (ex: Viva Sara)"
+                }
+              },
+              "project_title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Project Title",
+                  "placeholder": "Add a short description or a long title"
+                }
+              },
+              "background_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Background Color"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "SEO": {
+    "seo": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "seo_title": {
+            "type": "Text",
+            "config": {
+              "label": "SEO Title",
+              "placeholder": "A line of text with less than 60 characters"
+            }
+          },
+          "seo_description": {
+            "type": "Text",
+            "config": {
+              "label": "SEO Description",
+              "placeholder": "Two line of text with less than 155 characters"
+            }
+          },
+          "seo_image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "SEO Image"
+            }
+          }
+        },
+        "label": "SEO",
+        "repeat": false
+      }
+    }
+  }
+}

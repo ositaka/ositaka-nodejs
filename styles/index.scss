@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap');
+
+@import './base/reset';
+
+@import './utils/variables';
+@import './utils/functions';
+@import './utils/mixins';
+@import './utils/responsive';
+
+@import './shared/animations';
+@import './shared/buttons';
+@import './shared/layout';
+@import './shared/transitions';
+@import './shared/typography';
+
+@import './base/fonts';
+@import './base/base';
+@import './base/forms';
+
+@import './components/bubbles';
+@import './components/cursor';
+@import './components/preloader';
+
+@import './layout/menu';
+@import './layout/navigation';
+@import './layout/footer';
+
+@import './pages/about/about';
+@import './pages/home/home';
+@import './pages/intro/intro';
+@import './pages/services/services';
+@import './pages/work/work';
+@import './pages/work_page/work_page';
+@import './pages/contacts/contacts';
+
+// @import './pages/_404/_404';

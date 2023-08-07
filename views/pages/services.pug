@@ -1,0 +1,72 @@
+extends ../base.pug
+
+block variables
+  - var template = 'services'
+
+
+block content
+  .services(data-background="#fff" data-color="#000")
+    .services__wrapper
+
+      section.services__hero
+        h1.title__h1.services__hero__title(data-animation="title")=services.data.title[0].text
+
+      section.services__list
+        each service in services.data.body
+          if (service.slice_type === 'service')
+            .services__item
+              figure.services__item__media
+                picture(height=`${service.primary.image.dimensions.height}` width=`${service.primary.image.dimensions.width}` style=`background-color: ${service.primary.background_color}`)
+                  //- is video && is on 4g
+                  if (service.primary.is_video === true && connection === '4g' || connection === 'undefined') 
+                    video(preload="auto" playsinline loop muted disablepictureinpicture
+                      srcset=`
+                        ${service.primary.video_mobile.url} 768w, 
+                        ${service.primary.video_desktop.url} 769w`)
+
+                  //- is image
+                  else
+                    if (typeof(service.primary.image.phone) !== 'undefined')
+                      source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? service.primary.image.phone.url : service.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                      source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? service.primary.image.url.replace('?auto=compress,format', '') : service.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+                    img.services__item__media__image(alt=service.primary.image.alt data-src=service.primary.image.url.replace('?auto=compress,format', '') height=`${service.primary.image.dimensions.height}` width=`${service.primary.image.dimensions.width}`)
+
+              .services__item__content
+                h2.title__h1.services__item__content__title(data-animation="title")=service.primary.service_title[0].text
+                h3.title__h3.services__item__content__description(data-animation="title")=service.primary.service_description[0].text
+                .services__item__text
+                  h4.title__h4.services__item__text__title(data-animation="title")=service.primary.service_intro_title[0].text
+                  p.text__body.services__item__text__copy!=service.primary.service_text[0].text
+
+                .services__projects__title
+                  h3.title__h2(data-animation="title")=`${service.primary.service_projects_title.length ? service.primary.service_projects_title[0].text : ''}`
+
+                .services__projects
+                  each project in service.items
+                    if (project)
+                      a.services__projects__item(href=`/${lang}/${lang === 'en' ? 'work' : ''}/${project.project.uid}/`)
+                        figure.services__projects__item__media
+                          picture(height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}` style=`background-color: ${project.background_color}`)
+                            img.services__projects__item__media__image(
+                              alt=project.project_image.alt
+                              data-src=`
+                                ${connection === '4g' || connection === 'undefined' ?
+                                  project.project_image.url.replace('?auto=compress,format', isPhone ? '?w=480' : '?w=900' )
+                                :
+                                  project.project_image.url.replace('?auto=compress,format', isPhone ? '?q=30&w=360&auto=compress,format' : '?q=30&w=600&auto=compress,format')}`
+                                height=`${project.project_image.dimensions.height}`
+                                width=`${project.project_image.dimensions.width}`)
+                        
+                        .services__projects__item__text
+                          h4.title__h5.services__projects__item__text__title=project.project_brand
+                          h4.title__h3.title__h3-bold(data-animation="title")=project.project_title[0].text
+
+      section.home__about
+        .title__h1(data-animation="title") Something about us
+
+        //- a.home__services__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
+        a.home__about__button(href=`/en/about/` data-animation="link")
+          span Learn more about us
+
+      include ../partials/start-project
+      include ../partials/footer

@@ -1,0 +1,84 @@
+* {
+  span span {
+    transform: translateY(200%) rotateY(-20deg) rotateZ(20deg) skewX(30deg);
+    transition: none;
+    will-change: transform;
+  }
+
+  &.in-view span span {
+    transform: translateY(0%) rotateY(0deg) rotateZ(0deg) skewX(0deg);
+    transition: transform 1.4s $ease-mc;
+  }
+}
+
+[data-animation='link'] {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  width: max-content;
+}
+
+[data-animation='link'] span {
+  display: inline-block;
+  transform-origin: center center 0.5em;
+  vertical-align: middle;
+}
+
+[data-animation='label'],
+[data-animation='paragraph'],
+[data-animation='title'],
+[data-animation='chain'] {
+  span {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+}
+
+/**
+ * Marquue
+**/
+.marquee__list {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100vw;
+
+  &:nth-child(1) {
+    margin-bottom: -4rem;
+  }
+
+  & a {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.marquee__list__content {
+  animation: marquee 32s linear infinite;
+  animation-delay: -16s; // half-time
+  display: inline-block;
+  will-change: transform;
+}
+
+.marquee__list__content__copy {
+  animation: marquee__copy 32s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes marquee__copy {
+  from {
+    transform: translate3d(0%, 0, 0);
+  }
+  to {
+    transform: translate3d(-200%, 0, 0);
+  }
+}

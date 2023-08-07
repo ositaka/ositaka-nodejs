@@ -1,0 +1,12 @@
+.footer {
+  margin-top: 0;
+  height: 46rem;
+  width: 100%;
+  z-index: z('footer');
+}
+
+.footer__wrapper {
+  @extend %container;
+
+  text-align: center;
+}

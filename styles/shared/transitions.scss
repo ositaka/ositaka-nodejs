@@ -1,0 +1,19 @@
+%transition-bg__desktop {
+  transition: background-color 3s $ease-mc, color 1s $ease-mc;
+}
+
+%transition-bg__mobile {
+  transition: background-color 300ms ease-in-out;
+}
+
+%transition-500ms {
+  transition: all 1s $ease-mc;
+}
+
+%transition-1s {
+  transition: all 1.6s $ease-mc;
+}
+
+%transition-2s {
+  transition: all 2.6s $ease-mc;
+}

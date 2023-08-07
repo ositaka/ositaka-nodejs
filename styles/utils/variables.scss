@@ -1,0 +1,21 @@
+$color-background: #fff;
+$color-text: #000;
+
+$font-aristotelica: 'Aristotelica Display Demibold';
+$font-quicksand: 'Quicksand', sans-serif;
+
+$ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+$ease-mc: cubic-bezier(0, 0.85, 0.15, 1);
+
+$z-indexes: (
+  'preloader',
+  'cursor',
+  'cursor-trail',
+  'overlay',
+  'navigation',
+  'footer',
+  'content',
+  'bubble',
+  'fixed',
+  'canvas'
+);

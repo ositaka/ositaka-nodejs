@@ -1,0 +1,100 @@
+body {
+  font-family: $font-quicksand;
+}
+
+.title__h1 {
+  font-size: 9.8rem;
+  font-weight: 700;
+  letter-spacing: -0.036em;
+  line-height: 11.2rem;
+}
+
+.title__h2 {
+  font-size: 7.71rem;
+  font-weight: 700;
+  letter-spacing: -0.034em;
+  line-height: 8.6rem;
+}
+
+.title__h3 {
+  font-size: 4.58rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 5.56rem;
+
+  &.title__h3-bold {
+    font-weight: 700;
+  }
+
+  @include media('<phone') {
+    font-size: 6rem;
+    letter-spacing: -0.04em;
+    line-height: 7.6rem;
+  }
+}
+
+.title__h4 {
+  font-size: 2.83rem;
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  line-height: 3.3rem;
+
+  // @include media('<phone') {
+  //   font-size: 4.5rem;
+  //   letter-spacing: -0.032em;
+  //   line-height: 5.8rem;
+  // }
+}
+
+.title__h5 {
+  font-size: 2.36rem;
+  font-weight: 300;
+
+  &.title__h5-bold {
+    font-weight: 700;
+  }
+}
+
+body,
+.text__body,
+.button__text {
+  font-size: 2.68rem;
+  font-weight: 400;
+  line-height: 4.46rem;
+
+  @include media('<phone') {
+    font-size: 18px;
+    line-height: 32px;
+  }
+}
+
+.text__body-small {
+  font-size: 2.2rem;
+  line-height: 3.4rem;
+
+  @include media('<phone') {
+    font-size: 16px;
+    line-height: 29px;
+  }
+}
+
+a {
+  font-weight: 500;
+}
+
+%title-44 {
+  font-family: $font-quicksand;
+  font-size: 4.4rem;
+  line-height: 1;
+}
+
+%text-body {
+  font-size: 2.68rem;
+  font-weight: 400;
+  line-height: 4.46rem;
+
+  @include media('<phone') {
+    font-size: 18px;
+    line-height: 32px;
+  }
+}

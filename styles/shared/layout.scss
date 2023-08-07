@@ -1,0 +1,44 @@
+%page {
+  @extend %cover;
+
+  opacity: 0;
+  visibility: hidden;
+  z-index: z('content');
+}
+
+%page__wrapper {
+  color: inherit;
+}
+
+%container {
+  padding: 0 28.9rem;
+
+  @include media('<phone') {
+    padding: 6rem;
+  }
+
+  // @include media('>phone', '<=tablet') {
+  //   padding: 6rem;
+  // }
+}
+
+%container-large {
+  padding: 0 14.3rem;
+
+  @include media('<phone') {
+    padding: 3rem;
+  }
+}
+
+%full-height {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  min-height: 110rem;
+
+  @include media('<phone') {
+    height: unset;
+    min-height: 100vh;
+  }
+}

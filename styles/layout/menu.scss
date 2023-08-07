@@ -1,0 +1,200 @@
+.button-menu {
+  display: flex;
+  height: 6rem;
+  mix-blend-mode: difference;
+  place-items: center;
+  pointer-events: auto;
+  position: fixed;
+  right: 3rem;
+  top: 2.35rem;
+  width: 6rem;
+  z-index: z('navigation');
+
+  @include media('<phone') {
+    height: 10rem;
+    width: 10rem;
+  }
+}
+
+.button-menu svg {
+  transition: transform 0.5s ease;
+}
+
+.button-menu:hover svg {
+  transform: scale(1.1);
+}
+
+.frame--menu-open .button-menu {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.button-enter {
+  cursor: not-allowed;
+  margin-top: 4vh;
+  transition: transform 0.5s ease;
+}
+
+.button-enter:hover {
+  transform: translateX(15px) rotate(-40deg);
+}
+
+.menu__wrapper {
+  background: #f7f7f7;
+  display: grid;
+  grid-area: 1 / 1 / 2 / 2;
+  grid-template-columns: 100%;
+  grid-template-rows: 100vh;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  width: 100%;
+}
+
+.menu__wrapper.menu__wrapper--open {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.overlay {
+  grid-area: 1 / 1 / 2 / 2;
+  height: 100%;
+  pointer-events: none;
+  position: relative;
+  width: 100%;
+}
+
+.menu {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  grid-area: 1 / 1 / 2 / 2;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+
+  & label {
+    display: block;
+  }
+}
+
+.menu__item {
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+  will-change: opacity, transform;
+
+  &::after {
+    background-color: black;
+    border-radius: 1rem;
+    content: '';
+    display: block;
+    height: 0.5rem;
+    position: relative;
+    top: -6rem;
+    transition: all 0.4s ease-in-out;
+    width: 0rem;
+  }
+
+  & span {
+    position: relative;
+    transition: letter-spacing 0.5s ease-in-out, margin 0.3s 0.1s ease-in-out;
+  }
+
+  // &:hover {
+  //   span {
+  //     letter-spacing: 0.5rem;
+  //     margin-left: 11rem;
+  //   }
+
+  //   &::after {
+  //     width: 8rem;
+  //   }
+  // }
+}
+
+.menu__content {
+  @extend %text-body;
+
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 134rem;
+
+  & > * {
+    width: 49.7%;
+  }
+
+  @include media('<phone') {
+    flex-direction: column;
+    width: 50rem;
+
+    & > * {
+      width: 100%;
+    }
+
+    & .menu__info {
+      flex-direction: column-reverse;
+      margin-top: 10rem;
+
+      & .menu__follow {
+        display: none;
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.menu__nav label {
+  margin-left: 0.4rem;
+}
+
+.menu__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu__contacts a,
+.menu__follow a {
+  display: block;
+  position: relative;
+}
+
+.button__close {
+  display: flex;
+  height: 6rem;
+  min-width: 6rem;
+  place-items: center;
+  position: absolute;
+  right: 3.2rem;
+  top: 2.35rem;
+  z-index: z('navigation');
+
+  & svg {
+    width: 6rem;
+  }
+
+  & span {
+    @extend %text-body;
+  }
+}
+
+.button__close:focus-visible,
+.button__close:hover {
+  stroke: var(--color-button__close-hover);
+}
+
+.menu__wrapper,
+.overlay {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: z('overlay');
+}

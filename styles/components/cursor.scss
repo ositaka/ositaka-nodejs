@@ -1,0 +1,40 @@
+.cursor {
+  display: none;
+  visibility: hidden;
+}
+
+.desktop .cursor {
+  align-items: center;
+  background: white;
+  border-radius: 80%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  height: 1.5rem;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  position: fixed;
+  transition: width 0.3s, height 0.3s;
+  user-select: none;
+  visibility: visible;
+  width: 1.5rem;
+  will-change: position;
+  z-index: z('cursor');
+
+  &__hover {
+    background: black;
+    mix-blend-mode: normal;
+  }
+
+  &__text {
+    color: white;
+    display: none;
+  }
+}
+
+.box {
+  height: 80vh;
+  margin: 10vh;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 2;
+}

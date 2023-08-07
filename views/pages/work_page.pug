@@ -1,0 +1,185 @@
+extends ../base.pug
+
+block variables
+  - var template = 'work_page'
+
+block content
+  .work_page(data-background="#fff" data-color="#000")
+    .work_page__wrapper
+
+      .work_page__header
+        h2.text__body.work_page__project(data-animation="title")=work_page.data.brand_name
+        .work_page__title
+          h1.title__h2(data-animation="title")=work_page.data.title[0].text
+          h3.title__h5.title__h5-bold.work_page__project__areas(data-animation="title")=work_page.data.project_areas
+
+      .work_page__body
+        each section in work_page.data.body
+
+          if (section.slice_type === 'full_screen')
+            section.work_page__full-screen
+              figure.work_page__full-screen__media
+                picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
+                  //- is video && is on 4g
+                  if (section.primary.is_video === true && (connection === '4g' || connection === 'undefined')) 
+                    video(preload="auto" playsinline loop muted disablepictureinpicture
+                      srcset=`
+                        ${section.primary.video_mobile.url} 768w, 
+                        ${section.primary.video_desktop.url} 769w
+                      ` style=`background-color: ${section.primary.background_color}`)
+
+                  //- is video && is not on 4g: show image
+                  else if (section.primary.is_video === true && connection !== '4g' && typeof(section.primary.image.phone) !== 'undefined')
+                    source(media='(max-width: 768px)' srcset=`${section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                    source(media='(min-width: 769px)' srcset=`${section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+                    img(alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+                  
+                  //- is image
+                  else
+                    if (typeof(section.primary.image.phone) !== 'undefined')
+                      source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.primary.image.phone.url : section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                      source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.primary.image.url.replace('?auto=compress,format', '') : section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+                    img(alt=section.primary.image.alt data-src=section.primary.image.url.replace('?auto=compress,format', '') height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+
+
+          if (section.slice_type === 'media')
+            section.work_page__media
+              figure.work_page__media__media
+                picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
+                  //- is video && is on 4g
+                  if (section.primary.is_video === true && connection === '4g' || section.primary.is_video === true && connection === 'undefined')
+                    video(preload="auto" playsinline loop muted disablepictureinpicture
+                      srcset=`
+                        ${section.primary.video_mobile.url} 768w, 
+                        ${section.primary.video_desktop.url} 1769w
+                      ` style=`background-color: ${section.primary.background_color}`)
+
+                  //- is video && is not on 4g: show image
+                  else if (section.primary.is_video === true && connection !== '4g' && typeof(section.primary.image.phone) !== 'undefined')
+                    source(media='(max-width: 768px)' srcset=`${section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                    source(media='(min-width: 769px)' srcset=`${section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+                    img(alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+                  
+                  //- is image
+                  else
+                    if (typeof(section.primary.image.phone) !== 'undefined')
+                      source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.primary.image.phone.url : section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                      source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.primary.image.url.replace('?auto=compress,format', '') : section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+                    img(alt=section.primary.image.alt data-src=section.primary.image.url.replace('?auto=compress,format', '') height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+
+
+          if (section.slice_type === 'gallery')
+            - var isFlipped = section.primary.flip_gallery === true
+            
+            sectio(class=`work_page__gallery ${isFlipped ? 'flipped' : '' }`)
+
+              - var total = section.items.length 
+              - var totalDivided = Math.round(total / 2)
+                
+              | <div class="work_page__gallery__col">
+              - var count = 0;
+                each item in section.items
+
+                  if (isFlipped)
+                    if count === totalDivided - 1
+                      | </div>
+                      | <div class="work_page__gallery__col">
+
+                  else
+                    if count === totalDivided
+                      | </div>
+                      | <div class="work_page__gallery__col">
+
+                  figure.work_page__gallery__media
+                    picture(height=`${item.gallery_image.dimensions.height}` width=`${item.gallery_image.dimensions.width}` style=`background-color: ${item.background_color}`)
+                      //- is video && is on 4g
+                      if (item.is_video === true && (connection === '4g' || connection === 'undefined'))
+                        video(preload="auto" playsinline loop muted disablepictureinpicture
+                          srcset=`
+                            ${item.gallery_video.url} 768w, 
+                            ${item.gallery_video.url} 769w`)
+
+                      
+                      //- is video && is not on 4g: show image
+                      else if (item.is_video === true && connection !== '4g' && typeof(item.gallery_image) !== 'undefined')
+                        img(alt=item.gallery_image.alt data-src=`${connection === '4g' || connection === 'undefined' ? item.gallery_image.url.replace('?auto=compress,format', '') : item.gallery_image.url.replace('?auto=compress,format', '?q=30&w=480&auto=compress,format')}` height=`${item.gallery_image.dimensions.height}` width=`${item.gallery_image.dimensions.width}`)
+                      
+                      //- is image
+                      else
+                        img.work_page__gallery__media__gallery_image(alt=item.gallery_image.alt data-src=`${connection === '4g' || connection === 'undefined' ? item.gallery_image.url.replace('?auto=compress,format', '') : item.gallery_image.url.replace('?auto=compress,format', '?q=30&w=600&auto=compress,format')}` width=`${item.gallery_image.dimensions.width}` height=`${item.gallery_image.dimensions.height}`)
+
+                  if (item.gallery_image_caption)
+                    p.text__body-small.work_page__gallery__media__caption(data-animation="title")=item.gallery_image_caption
+                      
+                  - count++;
+                | </div>
+
+
+          if (section.slice_type === 'info')
+            section.work_page__info
+
+              if (section.primary.title_size === 'Small')
+                .work_page__info__small
+                  h3.title__h4.work_page__info__title(data-animation="title")!=section.primary.info_title ? section.primary.info_title.replace(/\n/g, '<br>') : ''
+                  .work_page__info__description(data-animation="paragraph")!=PrismicDOM.RichText.asHtml(section.primary.info_description).replace(/\n/g, '<br>')
+
+              else
+                .work_page__info__big
+                  h3.title__h2.work_page__info__title(data-animation="title")!=section.primary.info_title.replace(/\n/g, '<br>')
+
+
+
+      .work_page__next
+        //- Arrow
+        //- if !isDesktop
+        //- .work__list__item__icon
+        //-   svg(viewbox='0 0 32 32' width="32" height="32" data-animation="arrow")
+        //-     path(d='M17,25.61h0A15.19,15.19,0,0,1,26.57,16h0' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" fill="none")
+        //-     path(d='M26.57,16h0A15.19,15.19,0,0,1,17,6.39h0' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" fill="none")
+        //-     line(x1='5.43' y1='16' x2='26.57' y2='16' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px")
+
+
+        .work_page__next__marquee__list
+          .work_page__next__marquee__list__content
+            //- a.work_page__next__link(href=`/${lang}/${work_page.uid}/${work_page.data.next_project.uid}/`)=globals[0].data.next_project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+          .work_page__next__marquee__list__content.work_page__next__marquee__list__content__copy
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+
+        .work_page__next__marquee__list
+          .work_page__next__marquee__list__content
+            //- a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next_project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+          .work_page__next__marquee__list__content.work_page__next__marquee__list__content__copy
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
+
+
+      include ../partials/footer

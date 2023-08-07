@@ -1,0 +1,37 @@
+input,
+textarea {
+  @extend %text-body;
+
+  border: none;
+  border-bottom: 0.2rem solid $color-text;
+  color: $color-text;
+  display: block;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  line-height: 1.6;
+  outline: none;
+  padding: 2rem 0;
+  transition: border 300ms ease;
+  width: 100%;
+
+  &:focus-within {
+    border-bottom: 0.2rem solid red;
+  }
+
+  &[type='submit'] {
+    border: none;
+    width: auto;
+  }
+}
+
+label {
+  span {
+    position: relative;
+    top: 6rem;
+    transition: top 300ms ease;
+  }
+
+  &:focus-within span {
+    top: 2rem;
+  }
+}

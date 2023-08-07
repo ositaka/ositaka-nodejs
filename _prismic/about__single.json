@@ -1,0 +1,280 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID"
+      }
+    },
+    "hero_title": {
+      "type": "Text",
+      "config": {
+        "label": "Hero Title"
+      }
+    },
+    "words": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "word": {
+            "type": "Text",
+            "config": {
+              "label": "Word"
+            }
+          }
+        },
+        "label": "Words"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [
+          {
+            "name": "phone",
+            "width": 480,
+            "height": null
+          }
+        ],
+        "label": "Image"
+      }
+    },
+    "background_color_top_image": {
+      "type": "Color",
+      "config": {
+        "label": "Background Color Top Image"
+      }
+    },
+    "about_intro": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "title": {
+            "type": "Text",
+            "config": {
+              "label": "Title"
+            }
+          },
+          "text": {
+            "type": "Text",
+            "config": {
+              "label": "Text"
+            }
+          },
+          "link": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["contacts"],
+              "label": "Link"
+            }
+          },
+          "button": {
+            "type": "Text",
+            "config": {
+              "label": "Button"
+            }
+          }
+        },
+        "label": "About Intro",
+        "repeat": false
+      }
+    },
+    "team_title": {
+      "type": "Text",
+      "config": {
+        "label": "Team Title"
+      }
+    },
+    "creators": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "photo": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [
+                {
+                  "name": "phone",
+                  "width": 480,
+                  "height": null
+                }
+              ],
+              "label": "Photo"
+            }
+          },
+          "name": {
+            "type": "Text",
+            "config": {
+              "label": "Name"
+            }
+          },
+          "role": {
+            "type": "Text",
+            "config": {
+              "label": "role"
+            }
+          },
+          "bio": {
+            "type": "StructuredText",
+            "config": {
+              "multi": "paragraph,strong,em,hyperlink",
+              "allowTargetBlank": true,
+              "label": "Bio"
+            }
+          },
+          "background_color": {
+            "type": "Color",
+            "config": {
+              "label": "Background Color"
+            }
+          }
+        },
+        "label": "Creators"
+      }
+    },
+    "image_sections": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "section_image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [
+                {
+                  "name": "phone",
+                  "width": 480,
+                  "height": null
+                }
+              ],
+              "label": "Section Image"
+            }
+          },
+          "text": {
+            "type": "Text",
+            "config": {
+              "label": "Text"
+            }
+          },
+          "background_color": {
+            "type": "Color",
+            "config": {
+              "label": "Background Color"
+            }
+          }
+        },
+        "label": "Image Sections"
+      }
+    },
+    "quotes": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "text": {
+            "type": "Text",
+            "config": {
+              "label": "Text"
+            }
+          },
+          "author": {
+            "type": "Text",
+            "config": {
+              "label": "Author"
+            }
+          }
+        },
+        "label": "Quotes"
+      }
+    },
+    "projects_title": {
+      "type": "Text",
+      "config": {
+        "label": "Projects Title"
+      }
+    },
+    "projects": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "project_image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [
+                {
+                  "name": "phone",
+                  "width": 480,
+                  "height": null
+                }
+              ],
+              "label": "Project Image"
+            }
+          },
+          "project": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["work_page"],
+              "label": "Project"
+            }
+          },
+          "brand": {
+            "type": "Text",
+            "config": {
+              "label": "Brand"
+            }
+          },
+          "title": {
+            "type": "Text",
+            "config": {
+              "label": "Title"
+            }
+          },
+          "background_color": {
+            "type": "Color",
+            "config": {
+              "label": "Background Color"
+            }
+          }
+        },
+        "label": "Projects"
+      }
+    }
+  },
+  "SEO": {
+    "seo": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "seo_title": {
+            "type": "Text",
+            "config": {
+              "label": "SEO Title",
+              "placeholder": "A line of text with less than 60 characters"
+            }
+          },
+          "seo_description": {
+            "type": "Text",
+            "config": {
+              "label": "SEO Description",
+              "placeholder": "Two line of text with less than 155 characters"
+            }
+          },
+          "seo_image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "SEO Image"
+            }
+          }
+        },
+        "label": "SEO",
+        "repeat": false
+      }
+    }
+  }
+}

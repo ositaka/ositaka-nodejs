@@ -1,0 +1,71 @@
+extends ../base.pug
+
+block variables
+  - var template = 'home'
+
+
+block content
+  .home(data-background="#fff" data-color="#000")
+    .home__wrapper
+
+      section.home__hero
+        h1.title__h1.home__hero__title(data-animation="title")=home.data.title[0].text
+        h1.title__h1.home__hero__title(data-animation="title")=connection === '4g' || connection === 'undefined' ? 'Yes, 4g' : 'No, not 4g'
+        figure.home__hero__media
+          picture(height=`${home.data.video[0].video_preview.dimensions.height}` width=`${home.data.video[0].video_preview.dimensions.width}` style=`background-color: ${home.data.video[0].background_color}`)
+            if (connection === '4g' || connection === 'undefined') 
+              video(preload="auto" playsinline loop muted disablepictureinpicture
+                srcset=`
+                  ${home.data.video[0].video_mobile.url} 768w, 
+                  ${home.data.video[0].video_desktop.url} 769w
+                `)
+            else
+              if (typeof(home.data.video[0].video_preview.phone) !== 'undefined')
+                source(media='(max-width: 768px)' srcset=`${home.data.video[0].video_preview.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                source(media='(min-width: 769px)' srcset=`${home.data.video[0].video_preview.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+              img(alt=home.data.video[0].video_preview.alt data-src=home.data.video[0].video_preview.url height=`${home.data.video[0].video_preview.dimensions.height}` width=`${home.data.video[0].video_preview.dimensions.width}`)
+
+      section.home__intro
+        h2.title__h3(data-animation="title")=home.data.intro
+      
+      section.home__projects
+        h2.title__h1(data-animation="title")=home.data.featured_projects_title
+
+        each project in home.data.featured_projects
+          a(href=`/${lang}/${lang === 'en' ? 'projects' : 'change-me'}/${project.project.uid}/`).home__projects__item
+            .home__projects__item__text
+              h4.title__h5(data-animation="title")=project.project_brand
+              h3.title__h3.title__h3-bold(data-animation="title")=project.project_title[0].text
+              h5.title__h4.home__projects__item__text__medias(data-animation="chain")=project.project_areas
+
+            figure.home__projects__item__media
+              picture(height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}` style=`background-color: ${project.background_color}`)
+                if (typeof(project.project_image.phone) !== 'undefined')
+                  source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? project.project_image.phone.url : project.project_image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                  source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? project.project_image.url.replace('?auto=compress,format', '') : project.project_image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+                img.home__projects__item__media__image(alt=project.project_image.alt data-src=project.project_image.url.replace('?auto=compress,format', '') height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}`)
+
+        a.home__projects__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
+          span=home.data.featured_projects_button
+
+      section.home__services
+        .title__h1(data-animation="title") List of Services
+
+        //- a.home__services__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
+        a.home__services__button(href=`/en/services/` data-animation="link")
+          span Learn more about our Services
+
+
+      section.home__about
+        .title__h1(data-animation="title") Something about us
+
+        //- a.home__services__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
+        a.home__about__button(href=`/en/about/` data-animation="link")
+          span Learn more about us
+
+        
+      //- h2.title__h1(data-animation="title") What's next? 
+      //- a.button__text(href=`/${lang}/services/`) See our services
+
+      include ../partials/start-project
+      include ../partials/footer

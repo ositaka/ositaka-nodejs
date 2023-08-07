@@ -1,0 +1,44 @@
+.bubble {
+  position: absolute;
+  z-index: -1;
+}
+
+.bubble-secondary {
+  animation: scaling 18s cubic-bezier(0.86, 0, 0.07, 1) infinite alternate;
+  transition: top 1.3s ease-out, right 9s ease-out;
+}
+
+@-webkit-keyframes floating {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1.5) rotate(360deg);
+  }
+}
+
+@keyframes floating {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1.5) rotate(360deg);
+  }
+}
+
+@-webkit-keyframes scaling {
+  from {
+    transform: scale(1.15, 1.15);
+  }
+  to {
+    transform: scale(1.25, 1.25);
+  }
+}
+@keyframes scaling {
+  from {
+    transform: scale(1.15, 1.15);
+  }
+  to {
+    transform: scale(1.25, 1.25);
+  }
+}

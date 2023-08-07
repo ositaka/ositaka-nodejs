@@ -1,0 +1,46 @@
+{
+  "Main": {
+    "awards_title": {
+      "type": "Text",
+      "config": {
+        "label": "Awards Title",
+        "placeholder": "Ex: \"Awards & Recognition\""
+      }
+    },
+    "awards_list": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "award_title": {
+            "type": "Text",
+            "config": {
+              "label": "Award Title",
+              "placeholder": "Ex: \"CSS Reel\""
+            }
+          },
+          "award_label": {
+            "type": "Text",
+            "config": {
+              "label": "Award Label",
+              "placeholder": "Ex: \"Site of The Day\""
+            }
+          },
+          "award_date": {
+            "type": "Date",
+            "config": {
+              "label": "Award Date"
+            }
+          },
+          "award_link": {
+            "type": "Text",
+            "config": {
+              "label": "Award Link",
+              "placeholder": "Ex: https://www.cssreel.com/website/pierre-sports--mats-made-to-last"
+            }
+          }
+        },
+        "label": "Awards List"
+      }
+    }
+  }
+}

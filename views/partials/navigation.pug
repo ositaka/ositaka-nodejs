@@ -1,0 +1,92 @@
+block variables
+  - var altLangs = altLangs
+  - var lang = lang
+  - var parent_en = parent_en
+  - var parent_nl = parent_nl
+  - var parent_pt = parent_pt
+
+.navigation
+  a.navigation__logo.is-open(href=`/${lang}/`) m<span class="navigation__logo__span">edia </span>c<span class="navigation__logo__span">reators</span>
+  h1=connection
+    
+  .langs
+    ul.langs__list
+      li.langs__list__item
+        a.langs__list__link(href="#" id=`${ lang === 'en' ? 'en' : lang === 'nl' ? 'nl' : lang === 'pt' ? 'pt' : 'en'}` data-animation="link")
+          span=lang
+
+      each altLang in altLangs
+        if ( altLang.lang === 'en-gb' )
+          li.langs__list__item
+            if (typeof(parent_en) == 'undefined')
+              a.langs__list__link#en(href=`/en/${altLang.uid === 'home' ?  '' : altLang.uid + '/'}` data-animation="link") 
+                span en
+            else if (typeof(parent_en[0]) !== 'undefined')
+              a.langs__list__link#en(href=`/en/${parent_en[0].uid}/${altLang.uid === 'home' ?  '' : altLang.uid}/` data-animation="link")
+                span en
+
+        if ( altLang.lang === 'nl-be' )
+          li.langs__list__item
+            if (typeof(parent_nl) == 'undefined')
+              a.langs__list__link#nl(href=`/nl/${altLang.uid === 'home' ?  '' : altLang.uid + '/'}` data-animation="link")
+                span nl
+            else if (typeof(parent_nl[0]) !== 'undefined')
+              a.langs__list__link#nl(href=`/nl/${parent_nl[0].uid}/${altLang.uid === 'home' ?  '' : altLang.uid}/` data-animation="link")
+                span nl
+
+        if ( altLang.lang === 'pt-pt' )
+          li.langs__list__item
+            if (typeof(parent_pt) == 'undefined')
+              a.langs__list__link#pt(href=`/pt/${altLang.uid === 'home' ?  '' : altLang.uid + '/'}` data-animation="link")
+                span pt
+            else if (typeof(parent_pt[0]) !== 'undefined')
+              a.langs__list__link#pt(href=`/´pt/${parent_pt[0].uid}/${altLang.uid === 'home' ?  '' : altLang.uid}/` data-animation="link")
+                span pt
+
+.menu__wrapper
+  .menu
+    .menu__content
+      nav.menu__nav
+        label.title__h5 menu
+        each item in navigation.data.list
+          if isDesktop
+            a.menu__item.title__h1(href=Link(item.link) data-animation="link")
+              span.menu__item-text=item.text
+          else
+            a.menu__item.title__h1(href=Link(item.link))
+              span.menu__item-text=item.text
+      
+      .menu__info
+        .menu__follow
+          label.title__h5 follow us on 
+          a(href="#" data-animation="link") 
+            span Behance
+          a(href="#" data-animation="link") 
+            span Instagram
+          a(href="#" data-animation="link") 
+            span Dribble
+
+        .menu__contacts
+          label.title__h5 get in touch 
+          a(href="mailto:info@mediacreators.studio" data-animation="link") 
+            span info@mediacreators.studio
+          a(href="tel:+351924262218" data-animation="link") 
+            span +351 924 262 218
+
+    a.unbutton.button__close
+      .button__close__text
+        div(data-animation="link")
+          span close
+      svg(width='46' height='46' viewbox='0 0 46 46' fill='none' xmlns='http://www.w3.org/2000/svg')
+        line(x1='11.7432' y1='11.7096' x2='34.3707' y2='34.3371' stroke='black' stroke-width='2')
+        line(x1='11.7021' y1='34.4096' x2='34.3295' y2='11.7822' stroke='black' stroke-width='2')
+
+//- From https://codepen.io/sebastien-gilbert/pen/VwLzvGV?editors=1010
+//- Edit the paths here: https://yqnn.github.io/svg-path-editor/
+svg.overlay(width='100%' height='100%' viewbox='0 0 100 100' preserveaspectratio='none')
+  path.overlay__path(vector-effect='non-scaling-stroke' d='M 0 100 V 100 Q 50 100 100 100 V 100 z')
+
+a.unbutton.button-menu(aria-label='Open menu')
+  svg(width='32' height='12' viewbox='0 0 32 12')
+    line(y1='1' x2='32' y2='1' stroke='white' stroke-width='2')
+    line(y1='11' x2='32' y2='11' stroke='white' stroke-width='2')

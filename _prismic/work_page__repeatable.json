@@ -1,0 +1,295 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID"
+      }
+    },
+    "parent_page": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": ["work"],
+        "label": "Parent Page"
+      }
+    },
+    "brand_name": {
+      "type": "Text",
+      "config": {
+        "label": "Brand Name",
+        "placeholder": "Ex: Viva Sara"
+      }
+    },
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading2",
+        "label": "Title"
+      }
+    },
+    "project_areas": {
+      "type": "Text",
+      "config": {
+        "label": "Project Areas",
+        "placeholder": "Project areas (ex: Branding, Web, Packaging)"
+      }
+    },
+    "next_project": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": ["work_page"],
+        "label": "Next Project"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "gallery": {
+            "type": "Slice",
+            "fieldset": "Gallery",
+            "description": "Gallery",
+            "icon": "collections",
+            "display": "list",
+            "non-repeat": {
+              "flip_gallery": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "No",
+                  "placeholder_true": "Yes",
+                  "default_value": false,
+                  "label": "Flip Gallery?"
+                }
+              }
+            },
+            "repeat": {
+              "gallery_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [
+                    {
+                      "name": "Phone",
+                      "width": 480,
+                      "height": null
+                    }
+                  ],
+                  "label": "Gallery Image"
+                }
+              },
+              "is_video": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "Image",
+                  "placeholder_true": "Video",
+                  "default_value": false,
+                  "label": "Image or Video?"
+                }
+              },
+              "gallery_video": {
+                "type": "Link",
+                "config": {
+                  "select": "media",
+                  "label": "Gallery Video",
+                  "placeholder": "Select video file"
+                }
+              },
+              "background_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Background Color"
+                }
+              },
+              "gallery_image_caption": {
+                "type": "Text",
+                "config": {
+                  "label": "Gallery Image Caption"
+                }
+              }
+            }
+          },
+          "info": {
+            "type": "Slice",
+            "fieldset": "Info",
+            "description": "Info",
+            "icon": "text_fields",
+            "display": "list",
+            "non-repeat": {
+              "info_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Info Title"
+                }
+              },
+              "info_description": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "strong,em,hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "Info Description",
+                  "placeholder": "This is only available when \"Small\" is selected on \"Title Size\""
+                }
+              },
+              "title_size": {
+                "type": "Select",
+                "config": {
+                  "options": ["Big", "Small"],
+                  "default_value": "Big",
+                  "label": "Title Size"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "media": {
+            "type": "Slice",
+            "fieldset": "Media",
+            "description": "Image or Video",
+            "icon": "video_label",
+            "display": "list",
+            "non-repeat": {
+              "is_video": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "Image",
+                  "placeholder_true": "Video",
+                  "default_value": false,
+                  "label": "Image or Video?"
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [
+                    {
+                      "name": "phone",
+                      "width": 768,
+                      "height": null
+                    }
+                  ],
+                  "label": "Image"
+                }
+              },
+              "video_desktop": {
+                "type": "Link",
+                "config": {
+                  "select": "media",
+                  "label": "Video Desktop",
+                  "placeholder": "Select a video file for Desktop"
+                }
+              },
+              "video_mobile": {
+                "type": "Link",
+                "config": {
+                  "select": "media",
+                  "label": "Video Mobile",
+                  "placeholder": "Select a video file for Mobile"
+                }
+              },
+              "background_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Background Color"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "full_screen": {
+            "type": "Slice",
+            "fieldset": "Full Screen",
+            "description": "Fullscreen Media",
+            "icon": "aspect_ratio",
+            "display": "list",
+            "non-repeat": {
+              "is_video": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "Image",
+                  "placeholder_true": "Video",
+                  "default_value": false,
+                  "label": "Image or Video?"
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [
+                    {
+                      "name": "phone",
+                      "width": 768,
+                      "height": null
+                    }
+                  ],
+                  "label": "Image"
+                }
+              },
+              "video_desktop": {
+                "type": "Link",
+                "config": {
+                  "select": "media",
+                  "label": "Video Desktop",
+                  "placeholder": "Select a video file for Desktop"
+                }
+              },
+              "video_mobile": {
+                "type": "Link",
+                "config": {
+                  "select": "media",
+                  "label": "Video Mobile",
+                  "placeholder": "Select a video file for Mobile"
+                }
+              },
+              "background_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Background Color"
+                }
+              }
+            },
+            "repeat": {}
+          }
+        }
+      }
+    }
+  },
+  "SEO": {
+    "seo": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "seo_title": {
+            "type": "Text",
+            "config": {
+              "label": "SEO Title",
+              "placeholder": "A line of text with less than 60 characters"
+            }
+          },
+          "seo_description": {
+            "type": "Text",
+            "config": {
+              "label": "SEO Description",
+              "placeholder": "Two line of text with less than 155 characters"
+            }
+          },
+          "seo_image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "SEO Image"
+            }
+          }
+        },
+        "label": "SEO",
+        "repeat": false
+      }
+    }
+  }
+}

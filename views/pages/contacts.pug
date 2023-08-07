@@ -1,0 +1,89 @@
+extends ../base.pug
+
+block variables
+  - var template = 'contacts'
+
+block content
+  .contacts(data-background="#fff" data-color="#000")
+    .contacts__wrapper
+      .contacts__header
+        h1.title__h1.contacts__title(data-animation="title")!=contacts.data.title.replace(/\n/g, '<br>')
+
+      section.contacts__form
+        form(name='contact' method='POST' action='/message-sent')
+          input(type='hidden' name='form' value='contact')
+
+          .contacts__form__services
+            h2.title__h3=contacts.data.services_title
+            ul.contacts__form__options.contacts__form__options__services
+              each item in contacts.data.services_options
+                li=item.option
+                  input(type="checkbox" name="services" value=`${item.option}`)
+
+          .contacts__form__budget
+            h2.title__h3=contacts.data.budget_title
+            ul.contacts__form__options.contacts__form__options__budget
+              each item in contacts.data.budget_options
+                li=item.option
+                  input(type="checkbox" name="budget" value=`${item.option}`)
+
+          .contacts__form__delivery
+            h2.title__h3=contacts.data.delivery_title
+            ul.contacts__form__options.contacts__form__options__delivery
+              each item in contacts.data.delivery_options
+                li=item.option
+                  input(type="checkbox" name="delivery" value=`${item.option}`)
+
+          .contacts__form__project
+            h2.title__h3=contacts.data.project_title
+            label
+              span=contacts.data.form[0].name
+              input#name(type='text' name='name' required)
+            label
+              span=contacts.data.form[0].company
+              input#company(type='text' name='company')
+            label
+              span=contacts.data.form[0].email
+              input#email(type='email' name='email' required)
+            label
+              span=contacts.data.form[0].phone
+              input#phone(type='tel' name='phone' required)
+            label
+              span=contacts.data.form[0].message
+              textarea#message(name='message' required rows='4')
+          input.contacts__form__button(type='submit' value=`${contacts.data.form[0].button}`)
+
+
+      section.contacts__faqs
+        .contacts__faqs__header
+          .contacts__faqs__header__title
+            h2.title__h2(data-animation="title")=contacts.data.faqs_title
+          .contacts__faqs__header__text
+            h3.title__h3(data-animation="title")=contacts.data.faqs_description
+        
+        .contacts__faqs__list
+          each item in contacts.data.faqs_list
+            article.contacts__faqs__list__item
+              .contacts__faqs__list__item__title
+                h3.title__h3.title__h3-bold.contacts__faqs__list__item__title__title(data-animation="title")=item.faq_title
+                .plus
+              .contacts__faqs__list__item__text(data-animation="title")=item.faq_text[0].text.replace(/\n/g, '<br>')
+          
+          //- article.contacts__faqs__list__item
+          //-   h3.title__h3.title__h3-bold.contacts__faqs__list__item__title(data-animation="title") Can I update my website?
+          //-   .contacts__faqs__list__item__text
+          //-     p My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. 
+          //-     p My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. 
+          
+          //- article.contacts__faqs__list__item
+          //-   h3.title__h3.title__h3-bold.contacts__faqs__list__item__title(data-animation="title") What other services your creative studio offers?
+          //-   .contacts__faqs__list__item__text
+          //-     p My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. 
+          //-     p My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. My proccess looks like this and that. 
+
+
+      section.contacts__testimonials
+        h2.title__h2(data-animation="title") See how we’ve helped other people, just like you!
+
+
+      include ../partials/footer

@@ -1,0 +1,52 @@
+extends ../base.pug
+
+block variables
+  - var template = 'work'
+
+block content
+  .work(data-background="#fff" data-color="#000")
+    .work__wrapper
+      .work__hero
+        h1.sr-only=work.data.title
+      
+      .work__list
+        - var total = work.data.works.length 
+        - var totalDivided = Math.round(total / 2)
+          
+        | <div class="work__list__col">
+        - var count = 0;
+          each item in work.data.works
+            if count === totalDivided
+              | </div>
+              | <div class="work__list__col">
+
+            a.work__list__item(href=`/${lang}/${work.uid}/${item.work_link.uid}`)
+              figure.work__list__item__media
+                //- if (item.is_video === true)
+                //-   video(preload="auto" playsinline autoplay loop muted disablepictureinpicture)
+                //-     source(src=`${item.gallery_video.url}` type="video/mp4")
+                //- else
+                picture(height=`${item.work_image.dimensions.height}` width=`${item.work_image.dimensions.width}` style=`background-color: ${item.background_color}`)
+                  if (typeof(item.work_image.phone) !== 'undefined')
+                    source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? item.work_image.phone.url : item.work_image.phone.url.replace('?auto=compress,format', '?q=30')}`)
+                    source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? item.work_image.url.replace('?auto=compress,format', '') : item.work_image.url.replace('?auto=compress,format', '?q=30&w=900')}`)
+                  img.work__list__item__media__image(alt=item.work_image.alt data-src=item.work_image.url.replace('?auto=compress,format', '') height=`${item.work_image.dimensions.height}` width=`${item.work_image.dimensions.width}`)
+
+              .work__list__item__text
+                h2.title__h6.work__list__item__text__title(data-animation="title")=item.work_title
+                small.text__body.text__body-small.work__list__item__text__medias(data-animation="chain")=item.work_medias
+
+                if !isDesktop
+                  .work__list__item__icon
+                    svg(viewbox='0 0 32 32' width="32" height="32" data-animation="arrow")
+                      path(d='M17,25.61h0A15.19,15.19,0,0,1,26.57,16h0' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" fill="none")
+                      path(d='M26.57,16h0A15.19,15.19,0,0,1,17,6.39h0' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" fill="none")
+                      line(x1='5.43' y1='16' x2='26.57' y2='16' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px")
+
+
+            - count++;
+          | </div>
+
+
+      include ../partials/start-project
+      include ../partials/footer

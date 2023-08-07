@@ -1,0 +1,173 @@
+.home {
+  @extend %page;
+}
+// hero
+.home__hero {
+  margin-top: 40.2rem;
+  z-index: -1;
+
+  &__title {
+    @extend %container;
+
+    margin-top: 32rem;
+    padding-right: 62.46rem;
+    margin-bottom: 25.3rem;
+
+    @include media('<phone') {
+      margin-top: 28rem;
+      margin-bottom: 10rem;
+      padding-right: 3rem;
+    }
+  }
+
+  &__media {
+    overflow: hidden;
+
+    & * {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 100vh;
+
+      @include media('<phone') {
+        min-height: auto;
+      }
+    }
+  }
+}
+
+// intro
+.home__intro {
+  @extend %full-height;
+  @extend %container;
+
+  padding-right: 62.46rem;
+
+  @include media('<phone') {
+    margin: 28rem 0 32rem;
+    min-height: auto;
+    padding-right: 5rem;
+  }
+}
+
+.home__projects {
+  @extend %container;
+
+  & .title__h1 {
+    margin-bottom: 32rem;
+    text-align: center;
+
+    @include media('<phone') {
+      margin-bottom: 20rem;
+    }
+  }
+}
+
+.home__projects__item {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 16rem 0;
+
+  &__media,
+  &__text {
+    width: 49%;
+  }
+
+  &__media {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100rem;
+    overflow: hidden;
+
+    & * {
+      height: 100%;
+      min-height: 120rem;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+
+  &__text {
+    padding-right: 12rem;
+
+    & .home__projects__item__text__medias {
+      margin-top: 6rem;
+    }
+  }
+
+  &:nth-child(odd) {
+    flex-direction: row-reverse;
+
+    & .home__projects__item__text {
+      padding-left: 12rem;
+      padding-right: 0;
+    }
+  }
+
+  @include media('<phone') {
+    background-color: white;
+    flex-direction: column-reverse;
+    height: auto;
+    margin: 20rem -3rem 25rem;
+    width: calc(100% + 6rem);
+
+    &__media,
+    &__text {
+      width: 100%;
+    }
+
+    &__media {
+      align-items: center;
+      display: flex;
+      height: 80rem;
+      justify-content: center;
+      margin-bottom: 7.5rem;
+      min-height: unset;
+      max-height: 40vh;
+
+      & picture {
+        min-height: unset;
+      }
+    }
+
+    &__text {
+      padding-left: 3rem;
+      padding-right: 6rem;
+    }
+
+    & .home__projects__item__media__image {
+      object-fit: cover;
+      margin-top: unset;
+      min-height: 40vh;
+      width: 100%;
+    }
+
+    &:nth-child(odd) {
+      flex-direction: column-reverse;
+
+      & .home__projects__item__text {
+        padding-left: 3rem;
+        padding-right: 6rem;
+      }
+    }
+  }
+}
+
+@include media('<phone') {
+  .home__projects__button {
+    display: block;
+    margin-top: -15rem;
+  }
+}
+
+.home__services {
+  @extend %container;
+  @extend %full-height;
+}
+
+.home__about {
+  @extend %container;
+  @extend %full-height;
+}

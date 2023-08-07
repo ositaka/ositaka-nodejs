@@ -1,0 +1,21 @@
+{
+  "name": "Media Creators Studio",
+  "short_name": "Media Creators",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png?v=1",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png?v=1",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/?via=app",
+  "theme_color": "#3131f1",
+  "background_color": "#3131f1",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -1,0 +1,35 @@
+.intro {
+  @extend %center;
+  @extend %page;
+
+  overflow: hidden;
+  text-align: center;
+
+  &:before,
+  &:after {
+    content: '';
+    height: 24rem;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &:before {
+    background: linear-gradient(
+      to bottom,
+      $color-text 0%,
+      rgba($color-text, 0) 100%
+    );
+    top: 0;
+  }
+
+  &:after {
+    background: linear-gradient(
+      to top,
+      $color-text 0%,
+      rgba($color-text, 0) 100%
+    );
+    bottom: 0;
+  }
+}

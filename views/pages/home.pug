@@ -10,7 +10,6 @@ block content
 
       section.home__hero
         h1.title__h1.home__hero__title(data-animation="title")=home.data.title[0].text
-        h1.title__h1.home__hero__title(data-animation="title")=connection === '4g' || connection === 'undefined' ? 'Yes, 4g' : 'No, not 4g'
         figure.home__hero__media
           picture(height=`${home.data.video[0].video_preview.dimensions.height}` width=`${home.data.video[0].video_preview.dimensions.width}` style=`background-color: ${home.data.video[0].background_color}`)
             if (connection === '4g' || connection === 'undefined') 

@@ -15,7 +15,6 @@ export default class Work extends Page {
             },
             langs: {
                 en: '#en',
-                nl: '#nl',
                 pt: '#pt',
             }
         })

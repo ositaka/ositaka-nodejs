@@ -49,15 +49,15 @@ module.exports = {
       chunkFilename: '[id].css'
     }),
 
-    // new ImageMinimizerPlugin({
-    //   minimizerOptions: {
-    //     plugins: [
-    //       ['gifsicle', { interlaced: true }],
-    //       ['jpegtran', { progressive: true }],
-    //       ['optipng', { optimizationLevel: 8 }]
-    //     ]
-    //   }
-    // }),
+    new ImageMinimizerPlugin({
+      minimizerOptions: {
+        plugins: [
+          ['gifsicle', { interlaced: true }],
+          ['jpegtran', { progressive: true }],
+          ['optipng', { optimizationLevel: 8 }]
+        ]
+      }
+    }),
 
     new GenerateSW({
       clientsClaim: true,

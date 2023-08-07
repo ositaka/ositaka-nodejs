@@ -2,7 +2,7 @@ import GSAP from 'gsap'
 import Component from 'classes/Component'
 
 export default class Navigation extends Component {
-  constructor({ template, langEN, langNL, langPT, menu, menuLinks, siteurl, seo_title }) {
+  constructor({ template, langEN, langPT, menu, menuLinks, siteurl, seo_title }) {
     super({
       element: '.navigation',
       elements: {
@@ -15,14 +15,13 @@ export default class Navigation extends Component {
       },
       langs: {
         en: '#en',
-        nl: '#nl',
         pt: '#pt',
         menu: '.navigation__list',
         siteurl: '.navigation__logo'
       },
     })
 
-    this.onChange(template, langEN, langNL, langPT, menu, menuLinks, siteurl, seo_title)
+    this.onChange(template, langEN, langPT, menu, menuLinks, siteurl, seo_title)
 
   }
 
@@ -35,14 +34,6 @@ export default class Navigation extends Component {
       this.elements.textCursor.innerHTML = 'view'
       this.elements.textContacts.innerHTML = 'get in touch'
       this.elements.textFollow.innerHTML = 'follow us on'
-    }
-
-    const changeTextNL = () => {
-      this.elements.textClose.innerHTML = ''
-      this.elements.textClose.innerHTML = '<div data-animation="link"><span>sluiten</span></div>'
-      this.elements.textCursor.innerHTML = 'bekijk'
-      this.elements.textContacts.innerHTML = 'neem contact op'
-      this.elements.textFollow.innerHTML = 'Volg ons op'
     }
 
     const changeTextPT = () => {
@@ -59,18 +50,12 @@ export default class Navigation extends Component {
       changeTextEN()
     })
 
-    this.langs.nl.addEventListener('click', event => {
-      document.documentElement.lang = 'nl'
-      changeTextNL()
-    })
-
     this.langs.pt.addEventListener('click', event => {
       document.documentElement.lang = 'pt'
       changeTextPT()
     })
 
     if (document.documentElement.lang === 'en') { changeTextEN() }
-    else if (document.documentElement.lang === 'nl') { changeTextNL() }
     else if (document.documentElement.lang === 'pt') { changeTextPT() }
 
     // overlay (SVG path element)
@@ -239,11 +224,10 @@ export default class Navigation extends Component {
     })
   }
 
-  onChange(template, langEN, langNL, langPT, menu, /* menuLinks, */ siteurl, seo_title) {
+  onChange(template, langEN, langPT, menu, /* menuLinks, */ siteurl, seo_title) {
     if (typeof menu !== 'undefined') {
       document.title = seo_title
       this.langs.en.setAttribute('href', langEN);
-      this.langs.nl.setAttribute('href', langNL);
       this.langs.pt.setAttribute('href', langPT);
       this.langs.siteurl.setAttribute('href', siteurl);
 
@@ -255,6 +239,5 @@ export default class Navigation extends Component {
       // })
     }
   }
-
 
 }

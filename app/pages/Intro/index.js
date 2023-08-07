@@ -12,7 +12,6 @@ export default class Intro extends Page {
       },
       langs: {
         en: '#en',
-        nl: '#nl',
         pt: '#pt',
       }
     })

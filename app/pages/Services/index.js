@@ -16,7 +16,6 @@ export default class Services extends Page {
       },
       langs: {
         en: '#en',
-        nl: '#nl',
         pt: '#pt',
       }
     })

@@ -163,7 +163,6 @@ class App {
 
       const divContent = div.querySelector('.content');
       const langEN = div.querySelector('.langs #en') ? div.querySelector('.langs #en').href : '';
-      const langNL = div.querySelector('.langs #nl') ? div.querySelector('.langs #nl').href : '';
       const langPT = div.querySelector('.langs #pt') ? div.querySelector('.langs #pt').href : '';
       const menu = div.querySelector('.langs__list__link').innerHTML;
       const menuLinks = Array.prototype.slice.call(div.querySelectorAll('.menu__item'));
@@ -173,7 +172,6 @@ class App {
 
       this.template = divContent.getAttribute('data-template');
       this.langEN = langEN;
-      this.langNL = langNL;
       this.langPT = langPT;
       this.menu = menu;
       this.menuLinks = menuLinks;
@@ -181,7 +179,7 @@ class App {
       this.footerDiv = footerDiv;
       this.seo_title = seo_title;
 
-      this.navigation.onChange(this.template, this.langEN, this.langNL, this.langPT, this.menu, this.menuLinks, this.siteurl, this.seo_title);
+      this.navigation.onChange(this.template, this.langEN, this.langPT, this.menu, this.menuLinks, this.siteurl, this.seo_title);
 
       // this.footer.onChange(this.footerDiv);
 

@@ -35,13 +35,11 @@ const initApi = (req) => {
 
 const langs = Object.freeze({
   'en': 'en-gb',
-  'nl': 'nl-be',
   'pt': 'pt-pt'
 })
 
 const langsReversed = Object.freeze({ // Prismic
   'en-gb': 'en',
-  'nl-be': 'nl',
   'pt-pt': 'pt'
 })
 
@@ -294,7 +292,6 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
     // console.log(work_page.data.body[0].primary.image.phone !== 'undefined')
 
     const { results: parent_en } = await api.query(Prismic.Predicates.at('document.type', 'work_page'), { lang: "en-gb" })
-    const { results: parent_nl } = await api.query(Prismic.Predicates.at('document.type', 'work_page'), { lang: "nl-be" })
     const { results: parent_pt } = await api.query(Prismic.Predicates.at('document.type', 'work_page'), { lang: "pt-pt" })
     const { results: globals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
 
@@ -306,7 +303,6 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
       lang,
       meta,
       parent_en,
-      parent_nl,
       parent_pt,
       work_page,
     });

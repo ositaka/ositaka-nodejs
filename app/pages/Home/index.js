@@ -17,7 +17,6 @@ export default class Home extends Page {
       },
       langs: {
         en: '#en',
-        nl: '#nl',
         pt: '#pt',
       }
     })

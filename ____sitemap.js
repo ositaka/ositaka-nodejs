@@ -12,13 +12,11 @@ const initApi = (req) => {
 
 const langs = Object.freeze({
     'en': 'en-gb',
-    'nl': 'nl-be',
     'pt': 'pt-pt'
 })
 
 const langsReversed = Object.freeze({ // Prismic
     'en-gb': 'en',
-    'nl-be': 'nl',
     'pt-pt': 'pt'
 })
 

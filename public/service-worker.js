@@ -101,22 +101,22 @@ define(['./workbox-37481be9'], (function (workbox) { 'use strict';
     "revision": "a12bd42fa3f8b1239b60744027730893"
   }, {
     "url": "android-chrome-192x192.png",
-    "revision": "6bcca02d2de8b1458004f17be9ba96ff"
+    "revision": "dd512c1aae7acaef6a0baba62b3551b5"
   }, {
     "url": "android-chrome-512x512.png",
-    "revision": "f91679b4a3bfea285d4f2ab760b77ba8"
+    "revision": "167c087564fd4fa53123ac2b473736a5"
   }, {
     "url": "apple-touch-icon.png",
-    "revision": "e32923b5984853e1605b74f7eaed6bd4"
+    "revision": "3cd14eb23e04ca6b8b6a3d141fdc3026"
   }, {
     "url": "bubble.json",
     "revision": "d8e26ccb3c6e9adf050be8bb7481e47a"
   }, {
     "url": "favicon-16x16.png",
-    "revision": "37117f7905ba766997bf756fa8143a7c"
+    "revision": "6bce3b44355f68fccd32a05d3507e71f"
   }, {
     "url": "favicon-32x32.png",
-    "revision": "b97f229af86fbc1ad443a81b192088c3"
+    "revision": "52b0116cc7b8b3708e9edf3cb0f9e7b4"
   }, {
     "url": "logo.svg",
     "revision": "68fe178972c1012ec668ffc27716d316"
@@ -131,10 +131,10 @@ define(['./workbox-37481be9'], (function (workbox) { 'use strict';
     "revision": "b84c7c38a20d2d1f8e2a6e80fcd08278"
   }, {
     "url": "mstile-144x144.png",
-    "revision": "e3ef1a8bde2462427c9f52e55bef490b"
+    "revision": "5deb917e66f185378b05f3ca9f769849"
   }, {
     "url": "og-card.jpg",
-    "revision": "56e6087f708ad92af95b66469ddffd2f"
+    "revision": "fc24544d009b34bff3e576a1404139d5"
   }, {
     "url": "safari-pinned-tab.svg",
     "revision": "871e212e89880972c83368855e0c51b9"

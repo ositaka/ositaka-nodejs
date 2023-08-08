@@ -357,8 +357,8 @@ app.post('/message-sent', (req, res) => {
     ,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'nuno@mediacreators.studio', // generated ethereal user
-      pass: '72QGxIWOYTfRtjKV'  // generated ethereal password
+      user: 'email@website.com', // generated ethereal user
+      pass: 'XXXXXXXXXXXXXXXXX'  // generated ethereal password
     },
     tls: {
       rejectUnauthorized: false

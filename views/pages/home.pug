@@ -47,24 +47,12 @@ block content
         a.home__projects__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
           span=home.data.featured_projects_button
 
-      section.home__services
-        .title__h1(data-animation="title") List of Services
-
-        //- a.home__services__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
-        a.home__services__button(href=`/en/services/` data-animation="link")
-          span Learn more about our Services
-
-
       section.home__about
-        .title__h1(data-animation="title") Something about us
+        .title__h1(data-animation="title") Something about me
 
         //- a.home__services__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
         a.home__about__button(href=`/en/about/` data-animation="link")
-          span Learn more about us
-
+          span Learn more about me
         
-      //- h2.title__h1(data-animation="title") What's next? 
-      //- a.button__text(href=`/${lang}/services/`) See our services
-
       include ../partials/start-project
       include ../partials/footer

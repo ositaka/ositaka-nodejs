@@ -8,16 +8,7 @@ block content
     .about__wrapper
 
       section.about__hero
-        h1.title__h1.about__hero__title(data-animation="title" style="margin-bottom:0")!=about.data.hero_title.replace('.', '<br>')
-        h1.title__h1.about__hero__title(style="margin-top:0")
-          span(style="letter-spacing: -10rem") &nbsp;
-          span.typewritter__text
-        .about__hero__title__list
-          each word, index in about.data.words
-            if ( index < about.data.words.length -1)
-              =`${word.word},`
-            else
-              =`${word.word}`
+        h1.title__h1.about__hero__title(data-animation="title")!=about.data.hero_title
 
         figure.about__hero__media
           picture(height=`${about.data.image.dimensions.height}` width=`${about.data.image.dimensions.width}` style=`background-color: ${about.data.background_color_top_image}`)
@@ -29,27 +20,17 @@ block content
       section.about__intro__text
         h2.title__h4.about__intro__text__title(data-animation="title")=about.data.about_intro[0].title
         .about__intro__text__copy
-          p.text__body!=about.data.about_intro[0].text
+          .text__body-small!=PrismicDOM.RichText.asHtml(about.data.about_intro[0].text)
+
           p.text__body
-            a.about__intro__text__button(href=`/${lang}/${about.data.about_intro[0].link.uid}/` data-animation="link")
+            a.about__intro__text__button.text__body-small(href=`/${lang}/${about.data.about_intro[0].link.uid}/` data-animation="link")
               span=about.data.about_intro[0].button
 
       section.about__creators
-        h1.title__h1.about__creators__title(data-animation="title")=about.data.team_title
-        .about__creators__bubble
-          include ../bubbles/the-creators
+        h2.title__h1.about__creators__title(data-animation="title")=about.data.team_title.replace(/\n/g, '<br>')
+        //- .about__creators__bubble
+        //-   include ../bubbles/the-creators
         
-        .about__creators__list
-          each creator in about.data.creators 
-            .about__creators__list__item
-              .about__creators__list__item__header
-                figure.about__creators__list__item__header__photo
-                  picture(height=`${creator.photo.dimensions.height}` width=`${creator.photo.dimensions.width}` style=`background-color: ${creator.background_color}`)
-                    img.about__creators__list__item__header__photo__media(alt=creator.photo.alt data-src=creator.photo.url height=`${creator.photo.dimensions.height}` width=`${creator.photo.dimensions.width}`)
-                .about__creators__list__item__header__copy
-                  h2.title__h3.title__h3-bold.about__creator__name(data-animation="title")!=creator.name
-                  h3.title__h5.about__creator__role(data-animation="chain")!=creator.role
-              .text__body.text__body-small.about__creator__bio!=PrismicDOM.RichText.asHtml(creator.bio).replace(/<p>/g, '<p data-animation="paragraph">')
 
       each section in about.data.image_sections
         section.about__image__section
@@ -62,34 +43,8 @@ block content
           .about__image__section__copy
             h1.title__h3(data-animation="title")=section.text
 
-      section.about__quotes
-        .about__quotes__icon
-          svg(width="109" height="67" viewBox="0 0 109 67")
-            path(d="M0.427754 48.836C0.523754 47.012 1.14776 45.044 2.29976 42.932L22.7478 7.79601C24.0918 5.30001 25.9638 3.38002 28.3638 2.03601C30.8597 0.692017 33.4038 0.0200195 35.9958 0.0200195C38.8758 0.0200195 41.5158 0.740025 43.9158 2.18002C47.7558 4.48402 50.2038 7.60401 51.2598 11.54C52.4118 15.476 51.8838 19.316 49.6758 23.06L29.2278 58.484C27.8838 60.98 25.9638 62.948 23.4678 64.388C21.0678 65.732 18.4758 66.404 15.6918 66.404C13.0998 66.404 10.5558 65.684 8.05976 64.244C5.27576 62.612 3.16376 60.404 1.72376 57.62C0.379759 54.836 -0.0522457 51.908 0.427754 48.836ZM56.5878 48.836C56.6838 47.012 57.3078 45.044 58.4598 42.932L78.9078 7.79601C80.2518 5.30001 82.1238 3.38002 84.5238 2.03601C87.0198 0.692017 89.5638 0.0200195 92.1558 0.0200195C95.0358 0.0200195 97.6758 0.740025 100.076 2.18002C103.82 4.38802 106.268 7.50801 107.42 11.54C108.668 15.476 108.092 19.316 105.692 23.06L85.3878 58.484C84.0438 60.98 82.1238 62.9 79.6278 64.244C77.2278 65.588 74.6838 66.26 71.9958 66.26C69.1158 66.26 66.5238 65.588 64.2198 64.244C61.4358 62.612 59.3238 60.404 57.8838 57.62C56.5398 54.836 56.1078 51.908 56.5878 48.836Z")
-
-        .about__quotes__list
-          each quote in about.data.quotes
-            .about__quotes__list__item
-              h1.title__h3.title__h3-bold.about__quotes__list__item__title(data-animation="title")=quote.text
-              .text__body.text__body-small.about__quotes__list__item__author(data-animation="chain")=`— ${quote.author}`
-
-      section.about__projects
-        h1.title__h1.about__projects__title(data-animation="title")!=about.data.projects_title
-        .about__projects__list
-          each project in about.data.projects 
-            a.about__projects__list__item(href=`/${lang}/${lang === 'en' ? 'work' : ''}/${project.project.uid}/`)
-              figure.about__projects__list__item__media
-                picture(height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}` style=`background-color: ${project.background_color}`)
-                  if (typeof(project.project_image.phone) !== 'undefined')
-                    source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? project.project_image.phone.url : project.project_image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
-                    source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? project.project_image.url.replace('?auto=compress,format', '') : project.project_image.url.replace('?auto=compress,format', '?q=30&w=600&auto=compress,format')}`)
-                  img.about__projects__list__item__media__image(alt=project.project_image.alt data-src=project.project_image.url.replace('?auto=compress,format', '') height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}`)
-              .about__projects__list__item__text
-                h2.title__h5.about__projects__list__item__text__title(data-animation="title")=project.brand
-                h3.title__h3.title__h3-bold(data-animation="title")=project.title
-
       section.about__awards
-        h1.title__h1.about__awards__title(data-animation="title")!=awards[0].data.awards_title.replace(/\n/g, '<br>')
+        h2.title__h1.about__awards__title(data-animation="title")!=awards[0].data.awards_title.replace(/\n/g, '<br>')
         .about__awards__list
           each award in awards[0].data.awards_list
             a.about__awards__list__item(href=`${award.award_link}` target="_blank" rel="noopener noreferrer")

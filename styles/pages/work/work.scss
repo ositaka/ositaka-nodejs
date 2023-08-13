@@ -1,5 +1,9 @@
 .work {
   @extend %page;
+
+  & footer {
+    display: none;
+  }
 }
 
 .work__wrapper {
@@ -24,8 +28,8 @@
     width: 50%;
 
     &:last-child {
-      margin-top: -10rem;
-      margin-bottom: 10rem;
+      margin-top: -20rem;
+      margin-bottom: 20rem;
 
       & .work__list__item {
         padding-left: 1.5rem;

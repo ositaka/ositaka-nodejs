@@ -210,6 +210,7 @@ app.get('/:lang/:uid/', async (req, res) => {
 
     const { results: awards } = await api.query(Prismic.Predicates.at('document.type', 'awards'), { lang: langs[req.params.lang] })
 
+    console.log(about.data.about_intro[0])
     res.render('pages/about', {
       ...defaults,
       altLangs,
@@ -353,12 +354,11 @@ app.post('/message-sent', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     host: 'smtp-relay.sendinblue.com',
-    port: 587
-    ,
+    port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'email@website.com', // generated ethereal user
-      pass: 'XXXXXXXXXXXXXXXXX'  // generated ethereal password
+      user: process.env.SENDINBLUE_USER, // generated ethereal user
+      pass: process.env.SENDINBLUE_PASS  // generated ethereal password
     },
     tls: {
       rejectUnauthorized: false
@@ -367,8 +367,8 @@ app.post('/message-sent', (req, res) => {
 
   // setup email data with unicode symbols
   let mailOptions = {
-    from: '"Media Creators Studio" <info@mediacreators.studio>', // sender address
-    to: `${req.body.email}, info@mediacreators.studio`, // list of receivers
+    from: '"OSITAKA / Nuno Marques" <info@ositaka.com>', // sender address
+    to: `${req.body.email}, info@ositaka.com`, // list of receivers
     bcc: 'ositaka@gmail.com', // list of hidden receivers
     subject: 'New Contact Message', // Subject line
     text: 'Hello world?', // plain text body

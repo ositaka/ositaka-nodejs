@@ -46,7 +46,7 @@ block content
             section.work_page__media
               figure.work_page__media__media
                 //- picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
-                picture style=`background-color: ${section.primary.background_color}`)
+                picture(style=`background-color: ${section.primary.background_color}`)
                   //- is video && is on 4g
                   if (section.primary.is_video === true && connection === '4g' || section.primary.is_video === true && connection === 'undefined')
                     video(preload="auto" playsinline loop muted disablepictureinpicture
@@ -140,47 +140,6 @@ block content
         //-     line(x1='5.43' y1='16' x2='26.57' y2='16' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px")
 
 
-        .work_page__next__marquee__list
-          .work_page__next__marquee__list__content
-            //- a.work_page__next__link(href=`/${lang}/${work_page.uid}/${work_page.data.next_project.uid}/`)=globals[0].data.next_project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-          .work_page__next__marquee__list__content.work_page__next__marquee__list__content__copy
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
-
-        .work_page__next__marquee__list
-          .work_page__next__marquee__list__content
-            //- a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next_project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-          .work_page__next__marquee__list__content.work_page__next__marquee__list__content__copy
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-            a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.project
-
-
+        a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${work_page.data.next_project.uid}/` data-animation="title")=globals[0].data.next
+      
       include ../partials/footer

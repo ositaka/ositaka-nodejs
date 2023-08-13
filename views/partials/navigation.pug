@@ -2,16 +2,15 @@ block variables
   - var altLangs = altLangs
   - var lang = lang
   - var parent_en = parent_en
-  - var parent_nl = parent_nl
   - var parent_pt = parent_pt
 
 .navigation
-  a.navigation__logo.is-open(href=`/${lang}/`) m<span class="navigation__logo__span">edia </span>c<span class="navigation__logo__span">reators</span>
+  a.navigation__logo.is-open(href=`/${lang}/`) <span class="navigation__logo__span">o</span>s<span class="navigation__logo__span">i</span>t<span class="navigation__logo__span">a</span>k<span class="navigation__logo__span">a</span>
     
   .langs
     ul.langs__list
       li.langs__list__item
-        a.langs__list__link(href="#" id=`${ lang === 'en' ? 'en' : lang === 'nl' ? 'nl' : lang === 'pt' ? 'pt' : 'en'}` data-animation="link")
+        a.langs__list__link(href="#" id=`${ lang === 'en' ? 'en' : 'pt'}` data-animation="link")
           span=lang
 
       each altLang in altLangs
@@ -23,15 +22,6 @@ block variables
             else if (typeof(parent_en[0]) !== 'undefined')
               a.langs__list__link#en(href=`/en/${parent_en[0].uid}/${altLang.uid === 'home' ?  '' : altLang.uid}/` data-animation="link")
                 span en
-
-        if ( altLang.lang === 'nl-be' )
-          li.langs__list__item
-            if (typeof(parent_nl) == 'undefined')
-              a.langs__list__link#nl(href=`/nl/${altLang.uid === 'home' ?  '' : altLang.uid + '/'}` data-animation="link")
-                span nl
-            else if (typeof(parent_nl[0]) !== 'undefined')
-              a.langs__list__link#nl(href=`/nl/${parent_nl[0].uid}/${altLang.uid === 'home' ?  '' : altLang.uid}/` data-animation="link")
-                span nl
 
         if ( altLang.lang === 'pt-pt' )
           li.langs__list__item

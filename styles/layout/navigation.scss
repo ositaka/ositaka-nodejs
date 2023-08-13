@@ -26,7 +26,8 @@
     transition: width 1.3s ease, padding 0.7s ease, opacity 0.4s ease;
     width: 0;
 
-    &:nth-child(2) {
+    &:nth-child(2),
+    &:nth-child(3) {
       padding-right: 0;
     }
   }
@@ -35,11 +36,6 @@
     & .navigation__logo__span {
       opacity: 1;
       width: 75%;
-
-      &:nth-child(2) {
-        padding-right: 7rem;
-        width: 125%;
-      }
     }
   }
 

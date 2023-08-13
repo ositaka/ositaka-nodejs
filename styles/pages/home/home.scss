@@ -1,9 +1,10 @@
 .home {
   @extend %page;
 }
+
 // hero
 .home__hero {
-  margin-top: 40.2rem;
+  margin-top: 32rem;
   z-index: -1;
 
   &__title {
@@ -170,4 +171,14 @@
 .home__about {
   @extend %container;
   @extend %full-height;
+
+  padding-right: 62.46rem;
+
+  &__button {
+    margin-top: 6rem;
+  }
+
+  @include media('<phone') {
+    padding-right: 0rem;
+  }
 }

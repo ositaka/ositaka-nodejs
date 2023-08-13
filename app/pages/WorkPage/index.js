@@ -49,7 +49,6 @@ export default class WorkPage extends Page {
     }
   }
 
-
   onResize() {
     super.onResize()
   }
@@ -83,11 +82,8 @@ export default class WorkPage extends Page {
 
   }
 
-
   destroy() {
     super.destroy()
-
   }
-
 }
 

@@ -1,7 +1,6 @@
 
 import Page from 'classes/Page'
 import Detection from 'classes/Detection'
-import Typewritter from 'animations/Typewritter'
 
 export default class About extends Page {
     constructor() {
@@ -12,7 +11,6 @@ export default class About extends Page {
                 wrapper: '.about__wrapper',
                 navigation: '.navigation',
                 title: '.about__hero__title',
-                typewritter: '.about__hero__title__list',
                 start: '.start__project__wrapper',
             },
             langs: {
@@ -20,29 +18,6 @@ export default class About extends Page {
                 pt: '#pt',
             }
         })
-    }
-
-    create() {
-        super.create()
-
-        if (this.elements.typewritter) {
-            new Typewritter({
-                text: this.elements.typewritter.textContent,
-                time: 90
-            })
-        }
-
-        // slideshow
-        var current = 0,
-            slides = document.querySelectorAll(".about__quotes__list__item");
-
-        setInterval(function () {
-            for (var i = 0; i < slides.length; i++) {
-                slides[i].style.display = 'none';
-            }
-            current = (current != slides.length - 1) ? current + 1 : 0;
-            slides[current].style.display = 'block';
-        }, 9000);
     }
 
     update() {

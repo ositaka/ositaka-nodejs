@@ -18,7 +18,7 @@ block variables
 //                                      @@@@@@@@@                
 //                                                               
 //     developed by                                              
-//     Nuno Marques @ mediacreators.studio                       
+//     Nuno Marques @ ositaka.com                       
 //                                                               
 
 doctype html
@@ -32,7 +32,7 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "de
 
     title=meta.seo_title
     meta(name="description" content=meta.seo_description)
-    meta(name="author" content="Media Creators Studio (Nuno Marques & Birgit Verbeke)")
+    meta(name="author" content="OSITAKA (Nuno Marques)")
 
     link(href="main.css" rel="stylesheet")
 
@@ -41,8 +41,8 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "de
     link(rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png")
     link(rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png")
     link(rel="mask-icon" href="/safari-pinned-tab.svg" color="#3131f1")
-    meta(name="apple-mobile-web-app-title" content="Media Creators")
-    meta(name="application-name" content="Media Creators")
+    meta(name="apple-mobile-web-app-title" content="OSITAKA")
+    meta(name="application-name" content="OSITAKA")
     meta(name="msapplication-TileColor" content="#3131f1")
     meta(name="msapplication-TileImage" content="/mstile-144x144.png")
 
@@ -50,12 +50,8 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "de
     meta(property="og:title" content=meta.seo_title)
     meta(property="og:description" content=meta.seo_description)
     meta(property="og:image" content=meta.seo_image ? meta.seo_image.url : '')
-    meta(property="og:url" content="https://mediacreators.studio")
-    meta(property="og:email" content="info@mediacreators.studio")
-    meta(property="og:image" content="https://mediacreators.studio/og-card.jpg")
-    meta(property="og:video" content="https://mediacreators.studio/video/showreel-fullscreen@720p.mp4")
-    meta(property="og:video:width" content="1280")
-    meta(property="og:video:height" content="720")
+    meta(property="og:url" content="https://ositaka.com")
+    meta(property="og:image" content="https://ositaka.com/og-card.jpg")
 
     meta(name="twitter:card" content="summary_large_image")
     meta(name="twitter:title" content=meta.seo_title)
@@ -85,7 +81,7 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "de
     .cursor
       .cursor__text view
 
-    //- script(async, defer, src="https://static.cdn.prismic.io/prismic.js?new=true&repo=media-creators-studio")
+    //- script(async, defer, src="https://static.cdn.prismic.io/prismic.js?new=true&repo=ositaka")
     
     script.
       window.ASSETS = !{JSON.stringify(assets).replace(/<\//g, "<\\/")}
@@ -97,7 +93,7 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "de
     script(defer, src=`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`)
     script(defer).
       window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date()); gtag('config', "UA-146657896-1")
+      gtag('js', new Date()); gtag('config', "UA-XXXXXXXX-1")
 
 
     //- * fps v1.0.0 — https://www.cssscript.com/javascript-library-check-display-frames-per-second-fps/
@@ -115,7 +111,12 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "de
     //-       //- alert("less then 30fps")
     //-       document.documentElement.classList.add('30fps')
     //-     }
-    //-   }, 2000)    
+    //-   }, 2000)
 
 
-| <link rel="prefetch" href="https://media-creators.cdn.prismic.io/media-creators/6cdb67a6-3fe0-4429-98b7-237c7c6aa84c_pierre-sports__shop-product%401920_lighter.mp4" as="video" type="video/mp4" crossorigin="anonymous">
+//= Pre-fetch assets
+if (isDesktop)
+  | <link rel="prefetch" href="https://ositaka.cdn.prismic.io/ositaka/dbf8d2ba-25b3-4e97-a83e-18f160c8d23e_pierre-sports__shop-product__desktop.mp4" as="video" type="video/mp4" crossorigin="anonymous">
+
+if (isPhone)
+  | <link rel="prefetch" href="https://ositaka.cdn.prismic.io/ositaka/7f727a10-a8ba-4c9f-9a92-bf3aba3ea7dc_pierre-sports__shop-product__mobile.mp4" as="video" type="video/mp4" crossorigin="anonymous">

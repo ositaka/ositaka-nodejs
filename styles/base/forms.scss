@@ -6,7 +6,7 @@ textarea {
   border-bottom: 0.2rem solid $color-text;
   color: $color-text;
   display: block;
-  font-weight: 300;
+  font: inherit;
   letter-spacing: 0.1rem;
   line-height: 1.6;
   outline: none;
@@ -26,12 +26,17 @@ textarea {
 
 label {
   span {
+    display: block;
+    height: 4rem;
     position: relative;
+    overflow: hidden;
     top: 6rem;
-    transition: top 300ms ease;
+    transition: top 300ms ease, font-size 300ms ease;
   }
 
-  &:focus-within span {
+  &:focus-within span,
+  & span.filled {
+    font-size: 2rem;
     top: 2rem;
   }
 }

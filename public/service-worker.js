@@ -118,11 +118,17 @@ define(['./workbox-37481be9'], (function (workbox) { 'use strict';
     "url": "favicon-32x32.png",
     "revision": "52b0116cc7b8b3708e9edf3cb0f9e7b4"
   }, {
+    "url": "favicon.ico",
+    "revision": "27939c3ef65e01745e1c7f0601c688f1"
+  }, {
+    "url": "icon.png",
+    "revision": "c49723f0858df4c9249fe14b28ad0826"
+  }, {
     "url": "logo.svg",
     "revision": "68fe178972c1012ec668ffc27716d316"
   }, {
     "url": "main.css",
-    "revision": "0ecae47d8be0ed7a2d9338153ececf1d"
+    "revision": "b4450be400e01a001b12b6a44780ab33"
   }, {
     "url": "menu-icon-close.svg",
     "revision": "9dc5c8b386feea586c9bd50f29182131"
@@ -141,6 +147,12 @@ define(['./workbox-37481be9'], (function (workbox) { 'use strict';
   }, {
     "url": "site.webmanifest",
     "revision": "5ba4f5aee89b45c75ec0c5a77c7ba90a"
+  }, {
+    "url": "tile-wide.png",
+    "revision": "3cddbf2b5989e1b99d294ff33440c2c6"
+  }, {
+    "url": "tile.png",
+    "revision": "35c5dae4bed4c1724e90014d8d1a6b22"
   }], {});
 
 }));

@@ -11,7 +11,7 @@ export default class Work extends Page {
                 wrapper: '.work__wrapper',
                 navigation: '.navigation',
                 workList: '.work__list',
-                start: '.start__project__wrapper',
+                // start: '.start__project__wrapper',
             },
             langs: {
                 en: '#en',
@@ -92,7 +92,7 @@ export default class Work extends Page {
             })
         })
 
-        observer.observe(this.elements.start)
+        // observer.observe(this.elements.start)
     }
 
     update() {

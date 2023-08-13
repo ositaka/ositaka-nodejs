@@ -44,15 +44,18 @@ block content
                   source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? project.project_image.url.replace('?auto=compress,format', '') : project.project_image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
                 img.home__projects__item__media__image(alt=project.project_image.alt data-src=project.project_image.url.replace('?auto=compress,format', '') height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}`)
 
-        a.home__projects__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
-          span=home.data.featured_projects_button
+        a.home__projects__button.has-arrow(href=`/${lang}/${home.data.featured_projects_link.uid}/`)
+          div(data-animation="link")
+            span=home.data.featured_projects_button
+          include ../partials/arrow
 
       section.home__about
-        .title__h1(data-animation="title") Something about me
-
-        //- a.home__services__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
-        a.home__about__button(href=`/en/about/` data-animation="link")
-          span Learn more about me
+        .title__h1(data-animation="title")=home.data.about_title
+        a.home__about__button.has-arrow(href=`/${lang}/${home.data.about_link.uid}/`)
+          div(data-animation="link")
+            span=home.data.about_button
+          include ../partials/arrow
+          
         
       include ../partials/start-project
       include ../partials/footer

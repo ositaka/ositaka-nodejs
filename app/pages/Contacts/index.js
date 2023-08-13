@@ -12,7 +12,7 @@ export default class Contacts extends Page {
                 services: '.contacts__form__options__services li',
                 budget: '.contacts__form__options__budget li',
                 delivery: '.contacts__form__options__delivery li',
-                submit: '.contacts__form__button',
+                labels: '.contacts__form__project .field',
             },
             langs: {
                 en: '#en',
@@ -53,21 +53,18 @@ export default class Contacts extends Page {
             })
         }
 
+        const setLabelsActive = (element) => {
+          element.addEventListener('input', (event) => {
+            event.target.value.length !== 0
+              ? element.parentNode.querySelector('span').classList.add('filled')
+              : element.parentNode.querySelector('span').classList.remove('filled')
+          })
+        }
+
         this.elements.services.forEach((element) => serviceOptions(element))
         this.elements.budget.forEach((element) => budgetOptions(element))
         this.elements.delivery.forEach((element) => deliveryOptions(element))
-
-
-        /***
-         * Accordion
-         **/
-        const faqsItems = document.querySelectorAll('.contacts__faqs__list__item');
-
-        faqsItems.forEach((element) => {
-            element.querySelector('.contacts__faqs__list__item__title').addEventListener('click', () => {
-                element.classList.toggle('active')
-            })
-        })
+        this.elements.labels.forEach((element) => setLabelsActive(element))
 
     }
 }

@@ -107,10 +107,10 @@ class App {
       var xSet = GSAP.quickSetter(this.cursor, 'x', 'px');
       var ySet = GSAP.quickSetter(this.cursor, 'y', 'px');
 
-      window.addEventListener('mousemove', e => {
+      window.onmousemove = (e) => {
         mouse.x = e.pageX;
         mouse.y = e.clientY;
-      });
+      }
 
       GSAP.ticker.add((time, deltaTime) => {
         var delta = deltaTime * fpms;
@@ -122,7 +122,7 @@ class App {
         xSet(pos.x)
         ySet(pos.y)
         // ySet(pos.y - (window.pageYOffset + box.getBoundingClientRect().top))
-      });
+      })
     }
   }
 

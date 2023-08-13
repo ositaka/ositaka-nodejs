@@ -151,14 +151,14 @@ export default class Page {
 
         if (options.resize) {
           var resizeDelayTimeout = null;
-          window.addEventListener('resize', function () {
+          window.onresize = function() {
             if (resizeDelayTimeout !== null) {
               clearTimeout(resizeDelayTimeout);
             }
             resizeDelayTimeout = setTimeout(function () {
               init(elements);
             }, options.resizeDelay);
-          });
+          };
         }
       }
       window.videoSourceSet = videoSourceSet;
@@ -312,16 +312,16 @@ export default class Page {
       }, 600);
 
       mapEach(this.links, link => {
-        link.addEventListener('mouseenter', _ => {
+        link.onmouseenter = () => {
           this.cursor.style.height = hoverSize
           this.cursor.style.width = hoverSize
 
-        })
+        }
 
-        link.addEventListener('mouseleave', _ => {
+        link.onmouseleave = () => {
           this.cursor.style.height = initSize
           this.cursor.style.width = initSize
-        })
+        }
 
         link.addEventListener('click', _ => {
           this.cursor.style.height = initSize
@@ -331,24 +331,23 @@ export default class Page {
       })
 
       mapEach(this.linksProjects, link => {
-        link.addEventListener('mouseenter', _ => {
+        link.onmouseenter = () => {
           this.cursor.classList.add('cursor__hover')
           link.style.cursor = 'none'
 
           this.cursor.style.height = hoverSizeProjects
           this.cursor.style.width = hoverSizeProjects
-
           this.cursorText.style.display = 'block'
-        })
+        }
 
-        link.addEventListener('mouseleave', _ => {
+        link.onmouseleave = () => {
           this.cursor.classList.remove('cursor__hover')
 
           this.cursor.style.height = initSize
           this.cursor.style.width = initSize
 
           this.cursorText.style.display = 'none'
-        })
+        }
 
         link.addEventListener('click', _ => {
           this.cursor.classList.remove('cursor__hover')

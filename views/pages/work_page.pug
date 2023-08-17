@@ -45,8 +45,7 @@ block content
           if (section.slice_type === 'media')
             section.work_page__media
               figure.work_page__media__media
-                //- picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
-                picture(style=`background-color: ${section.primary.background_color}`)
+                picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
                   //- is video && is on 4g
                   if (section.primary.is_video === true && connection === '4g' || section.primary.is_video === true && connection === 'undefined')
                     video(preload="auto" playsinline loop muted disablepictureinpicture
@@ -72,7 +71,7 @@ block content
           if (section.slice_type === 'gallery')
             - var isFlipped = section.primary.flip_gallery === true
             
-            sectio(class=`work_page__gallery ${isFlipped ? 'flipped' : '' }`)
+            section(class=`work_page__gallery ${isFlipped ? 'flipped' : '' }`)
 
               - var total = section.items.length 
               - var totalDivided = Math.round(total / 2)
@@ -92,8 +91,7 @@ block content
                       | <div class="work_page__gallery__col">
 
                   figure.work_page__gallery__media
-                    //- picture(height=`${item.gallery_image.dimensions.height}` width=`${item.gallery_image.dimensions.width}` style=`background-color: ${item.background_color}`)
-                    picture(style=`background-color: ${item.background_color}`)
+                    picture(height=`${item.gallery_image.dimensions.height}` width=`${item.gallery_image.dimensions.width}` style=`background-color: ${item.background_color}`)
                       //- is video && is on 4g
                       if (item.is_video === true && (connection === '4g' || connection === 'undefined'))
                         video(preload="auto" playsinline loop muted disablepictureinpicture

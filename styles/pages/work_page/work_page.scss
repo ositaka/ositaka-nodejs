@@ -38,6 +38,13 @@
 // Parallax.
 .work_page__full-screen {
   margin-bottom: 34rem;
+
+  @include media('<phone') {
+
+    ~ .work_page__info {
+      margin-top: 24rem;
+  }
+  }
 }
 
 .work_page__full-screen__media {
@@ -51,6 +58,10 @@
 
   & img {
     min-height: 100vh;
+
+    @include media('<phone') {
+      min-height: unset;
+    }
   }
 }
 
@@ -64,6 +75,7 @@
   & ~ .work_page__info {
     margin-top: 30rem;
   }
+
   & ~ .work_page__gallery {
     margin-top: 40rem;
   }
@@ -81,6 +93,10 @@
     height: auto;
     margin-bottom: 1.5rem;
     width: 100%;
+    
+    & ~ .work_page__gallery {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -175,6 +191,10 @@
   @include media('<phone') {
     width: 88%;
     margin: 0 auto 24rem;
+
+    & + .work_page__full-screen {
+      margin-bottom: 1.5rem;
+    }
   }
 }
 

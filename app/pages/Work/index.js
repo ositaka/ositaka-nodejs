@@ -48,51 +48,6 @@ export default class Work extends Page {
 
             }, 0);
         }
-
-        function intersecting() {
-            if (Detection.isDesktop()) {
-                document.body.style.background = 'black'
-                document.body.style.color = 'white'
-                document.body.querySelector('.work__list').style.transition = 'opacity 0.3s ease-out'
-                document.body.querySelector('.work__list').style.opacity = '0'
-                document.body.querySelector('.overlay path').style.fill = 'white'
-                document.body.querySelector('.menu__wrapper').style.background = 'black'
-            } else {
-                document.documentElement.style.background = 'black'
-                document.documentElement.style.color = 'white'
-                document.body.querySelector('.work__list').style.transition = 'opacity 0.2s ease-out'
-                document.body.querySelector('.work__list').style.opacity = '0'
-            }
-        }
-
-        function notIntersecting() {
-            if (Detection.isDesktop()) {
-                document.body.style.background = 'white'
-                document.body.style.color = 'black'
-                document.body.querySelector('.work__list').style.transition = 'opacity 0.3s ease-out'
-                document.body.querySelector('.work__list').style.opacity = '1'
-                document.body.querySelector('.overlay path').style.fill = 'black'
-                document.body.querySelector('.menu__wrapper').style.background = 'white'
-            } else {
-                document.documentElement.style.background = 'white'
-                document.documentElement.style.color = 'black'
-                document.body.querySelector('.work__list').style.transition = 'opacity 0.2s ease-out'
-                document.body.querySelector('.work__list').style.opacity = '1'
-            }
-        }
-
-        const observer = new window.IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    intersecting()
-
-                } else {
-                    notIntersecting()
-                }
-            })
-        })
-
-        // observer.observe(this.elements.start)
     }
 
     update() {

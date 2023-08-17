@@ -28,8 +28,8 @@ block content
                 //- else
                 picture(height=`${item.work_image.dimensions.height}` width=`${item.work_image.dimensions.width}` style=`background-color: ${item.background_color}`)
                   if (typeof(item.work_image.phone) !== 'undefined')
-                    source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? item.work_image.phone.url : item.work_image.phone.url.replace('?auto=compress,format', '?q=30')}`)
-                    source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? item.work_image.url.replace('?auto=compress,format', '') : item.work_image.url.replace('?auto=compress,format', '?q=30&w=900')}`)
+                    source(media='(max-width: 768px)' srcset=`${item.work_image.phone.url}`)
+                    source(media='(min-width: 769px)' srcset=`${item.work_image.url}`)
                   img.work__list__item__media__image(alt=item.work_image.alt data-src=item.work_image.url.replace('?auto=compress,format', '') height=`${item.work_image.dimensions.height}` width=`${item.work_image.dimensions.width}`)
 
               .work__list__item__text

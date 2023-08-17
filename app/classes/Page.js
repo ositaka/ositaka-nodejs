@@ -246,7 +246,7 @@ export default class Page {
 
 
     // Videos
-    this.videos = mapEach(this.elements.videos, (element, index) => {
+    this.videos = mapEach(this.elements.videos, element => {
       return new Video({
         element
       })
@@ -296,69 +296,70 @@ export default class Page {
         window.scrollTo(2, 0)
       }
 
+      // Expanding cursor
+      if (Detection.isDesktop()) {
+        this.links = document.querySelectorAll('button, a.navigation__logo, .menu a, a:not(a.home__projects__item, a.work__list__item, a.services__projects__item)')
+        this.linksProjects = document.querySelectorAll('a.home__projects__item, a.work__list__item, a.services__projects__item')
+        this.cursor = document.querySelector('.cursor')
+        this.cursorText = document.querySelector('.cursor__text')
 
+        const initSize = '1.5rem'
+        const hoverSize = '5rem'
+        const hoverSizeProjects = '12rem'
 
-      this.links = document.querySelectorAll('button, a.navigation__logo, .menu a, a:not(a.home__projects__item, a.work__list__item, a.services__projects__item)')
-      this.linksProjects = document.querySelectorAll('a.home__projects__item, a.work__list__item, a.services__projects__item')
-      this.cursor = document.querySelector('.cursor')
-      this.cursorText = document.querySelector('.cursor__text')
+        setTimeout(() => {
+          this.cursorText.innerHTML = 'view'
+        }, 600);
 
-      const initSize = '1.5rem'
-      const hoverSize = '5rem'
-      const hoverSizeProjects = '12rem'
+        mapEach(this.links, link => {
+          link.onmouseenter = () => {
+            this.cursor.style.height = hoverSize
+            this.cursor.style.width = hoverSize
 
-      setTimeout(() => {
-        this.cursorText.innerHTML = 'view'
-      }, 600);
+          }
 
-      mapEach(this.links, link => {
-        link.onmouseenter = () => {
-          this.cursor.style.height = hoverSize
-          this.cursor.style.width = hoverSize
+          link.onmouseleave = () => {
+            this.cursor.style.height = initSize
+            this.cursor.style.width = initSize
+          }
 
-        }
-
-        link.onmouseleave = () => {
-          this.cursor.style.height = initSize
-          this.cursor.style.width = initSize
-        }
-
-        link.addEventListener('click', _ => {
-          this.cursor.style.height = initSize
-          this.cursor.style.width = initSize
-          this.cursorText.innerHTML = ''
+          link.addEventListener('click', _ => {
+            this.cursor.style.height = initSize
+            this.cursor.style.width = initSize
+            this.cursorText.innerHTML = ''
+          })
         })
-      })
 
-      mapEach(this.linksProjects, link => {
-        link.onmouseenter = () => {
-          this.cursor.classList.add('cursor__hover')
-          link.style.cursor = 'none'
+        mapEach(this.linksProjects, link => {
+          link.onmouseenter = () => {
+            this.cursor.classList.add('cursor__hover')
+            link.style.cursor = 'none'
 
-          this.cursor.style.height = hoverSizeProjects
-          this.cursor.style.width = hoverSizeProjects
-          this.cursorText.style.display = 'block'
-        }
+            this.cursor.style.height = hoverSizeProjects
+            this.cursor.style.width = hoverSizeProjects
+            this.cursorText.style.display = 'block'
+          }
 
-        link.onmouseleave = () => {
-          this.cursor.classList.remove('cursor__hover')
+          link.onmouseleave = () => {
+            this.cursor.classList.remove('cursor__hover')
 
-          this.cursor.style.height = initSize
-          this.cursor.style.width = initSize
+            this.cursor.style.height = initSize
+            this.cursor.style.width = initSize
 
-          this.cursorText.style.display = 'none'
-        }
+            this.cursorText.style.display = 'none'
+          }
 
-        link.addEventListener('click', _ => {
-          this.cursor.classList.remove('cursor__hover')
+          link.addEventListener('click', _ => {
+            this.cursor.classList.remove('cursor__hover')
 
-          this.cursor.style.height = initSize
-          this.cursor.style.width = initSize
+            this.cursor.style.height = initSize
+            this.cursor.style.width = initSize
 
-          this.cursorText.style.display = 'none'
-          this.cursorText.innerHTML = ''
+            this.cursorText.style.display = 'none'
+            this.cursorText.innerHTML = ''
+          })
         })
-      })
+      }
     })
   }
 

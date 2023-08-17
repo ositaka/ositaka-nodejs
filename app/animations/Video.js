@@ -10,11 +10,11 @@ export default class extends Animation {
 
   animateIn() {
     this.element.classList.add('loaded')
-    this.element?.play()
+    this.element.play()
   }
 
   animateOut() {
-    this.element?.pause()
+    this.element.pause()
   }
 
 }

@@ -33,15 +33,15 @@ export default class Navigation extends Component {
       this.elements.textClose.innerHTML = '<div data-animation="link"><span>close</span></div>'
       this.elements.textCursor.innerHTML = 'view'
       this.elements.textContacts.innerHTML = 'get in touch'
-      this.elements.textFollow.innerHTML = 'follow us on'
+      this.elements.textFollow.innerHTML = 'follow me on'
     }
 
     const changeTextPT = () => {
       this.elements.textClose.innerHTML = ''
       this.elements.textClose.innerHTML = '<div data-animation="link"><span>fechar</span></div>'
       this.elements.textCursor.innerHTML = 'ver'
-      this.elements.textContacts.innerHTML = 'entre em contacto'
-      this.elements.textFollow.innerHTML = 'siga-nos em'
+      this.elements.textContacts.innerHTML = 'entra em contacto'
+      this.elements.textFollow.innerHTML = 'siga-me no'
     }
 
     // set document lang attribue if click on lang

@@ -47,14 +47,6 @@
 }
 
 .langs {
-  // TEMP
-  // TEMP
-  // TEMP
-  // TEMP
-  // TEMP
-  // TEMP
-  pointer-events: none;
-
   color: white;
   mix-blend-mode: difference;
   position: absolute;
@@ -62,18 +54,6 @@
   text-align: center;
   top: 2.7rem;
   z-index: z('navigation');
-
-  @include media('<phone') {
-    // TEMP
-    // TEMP
-    // TEMP
-    // TEMP
-    // TEMP
-    // TEMP
-    // TEMP
-    display: none;
-    visibility: hidden;
-  }
 }
 
 .langs__list {

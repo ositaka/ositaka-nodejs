@@ -199,7 +199,7 @@ class App {
 
     }
     else {
-      this.onChange({ url: '/' });
+      this.onChange({ url: this.lang ==='en' ?  '/' : '/pt/' });
     }
   }
 

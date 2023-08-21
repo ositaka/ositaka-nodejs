@@ -42,22 +42,16 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "de
 
     link(href="main.css" rel="stylesheet")
 
-    link(rel="manifest" href="/site.webmanifest")
-    link(rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png")
-    link(rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png")
-    link(rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png")
-    link(rel="mask-icon" href="/safari-pinned-tab.svg" color="#3131f1")
+    link(rel="apple-touch-icon" sizes="192x192" href="/icon.png")
     meta(name="apple-mobile-web-app-title" content="OSITAKA")
     meta(name="application-name" content="OSITAKA")
-    meta(name="msapplication-TileColor" content="#3131f1")
-    meta(name="msapplication-TileImage" content="/mstile-144x144.png")
 
     meta(property="og:type" content="website")
     meta(property="og:title" content=meta.seo_title)
     meta(property="og:description" content=meta.seo_description)
     meta(property="og:image" content=meta.seo_image ? meta.seo_image.url : '')
     meta(property="og:url" content="https://ositaka.com")
-    meta(property="og:image" content="https://ositaka.com/og-card.jpg")
+    meta(property="og:image" content="https://ositaka.com/site-cover.png")
 
     meta(name="twitter:card" content="summary_large_image")
     meta(name="twitter:title" content=meta.seo_title)
@@ -70,13 +64,6 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "de
       document.cookie = `connection=; expires = Thu, 01 Jan 1970 00:00:00 GMT`;
       document.cookie = `connection=${navigator.connection?.effectiveType}`;
       
-      if (!window.location.hash) {
-        window.location = window.location + '#loaded';
-        window.location.reload();
-      } else {
-        history.pushState("", document.title, window.location.pathname)
-      }
-
   body
     include ./partials/preloader
     include ./partials/navigation
@@ -87,8 +74,6 @@ html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "de
     .cursor
       .cursor__text view
 
-    //- script(async, defer, src="https://static.cdn.prismic.io/prismic.js?new=true&repo=ositaka")
-    
     script.
       window.ASSETS = !{JSON.stringify(assets).replace(/<\//g, "<\\/")}
 

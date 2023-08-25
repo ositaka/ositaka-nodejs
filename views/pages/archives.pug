@@ -1,0 +1,29 @@
+extends ../base.pug
+
+block variables
+  - var template = 'archives'
+
+block content
+  .archives(data-background="#fff" data-color="#000")
+    .archives__wrapper
+
+      .archives__header
+        h2.text__body.archives__project(data-animation="title")=archives.data.brand_name
+        .archives__title
+          h1.title__h2(data-animation="title")=archives.data.title[0].text
+          h3.title__h5.title__h5-bold.archives__project__areas(data-animation="title")=archives.data.project_areas
+
+      .archives__body
+        each section in archives.data.body
+
+          if (section.slice_type === 'media')
+            section.archives__media
+              figure.archives__media__media
+                picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
+                  if (typeof(section.primary.image.phone) !== 'undefined')
+                    source(media='(max-width: 768px)' srcset=`${section.primary.image.phone.url}`)
+                    source(media='(min-width: 769px)' srcset=`${section.primary.image.url}`)
+                  img(alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+
+
+      include ../partials/footer

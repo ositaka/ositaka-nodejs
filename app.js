@@ -55,6 +55,7 @@ const handleLinkResolver = (doc) => {
 
   if (
     doc.type === 'about' ||
+    doc.type === 'archives' ||
     doc.type === 'contacts' ||
     doc.type === 'services' ||
     doc.type === 'work'
@@ -197,11 +198,14 @@ app.get('/:lang/:uid/', async (req, res) => {
   const defaults = await handleRequest(api, lang);
 
   const about = await api.getByUID('about', uid, { lang });
+  const archives = await api.getByUID('archives', uid, { lang });
   const contacts = await api.getByUID('contacts', uid, { lang });
   const services = await api.getByUID('services', uid, { lang });
   const work = await api.getByUID('work', uid, { lang });
 
   lang = langsReversed[lang]
+
+  console.log(api, 'archivesarchivesarchivesarchivesarchivesarchivesarchivesarchivesarchives')
 
   if (about) {
 
@@ -210,7 +214,6 @@ app.get('/:lang/:uid/', async (req, res) => {
 
     const { results: awards } = await api.query(Prismic.Predicates.at('document.type', 'awards'), { lang: langs[req.params.lang] })
 
-    console.log(about.data.about_intro[0])
     res.render('pages/about', {
       ...defaults,
       altLangs,
@@ -220,6 +223,20 @@ app.get('/:lang/:uid/', async (req, res) => {
       meta,
     });
   }
+
+  else if (archives) {
+    altLangs = archives.alternate_languages
+    meta = archives.data.seo[0]
+
+    res.render('pages/archives', {
+      ...defaults,
+      altLangs,
+      lang,
+      archives,
+      meta,
+    });
+  }
+
   else if (contacts) {
     altLangs = contacts.alternate_languages
     meta = contacts.data.seo[0]

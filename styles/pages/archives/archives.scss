@@ -1,0 +1,58 @@
+.archives {
+  @extend %page;
+
+  & footer {
+    display: none;
+  }
+}
+
+.archives__header {
+  margin: auto;
+  padding-top: 34rem;
+  padding-bottom: 16rem;
+  width: 134rem;
+
+  @include media('<phone') {
+    width: 88%;
+  }
+}
+
+.archives__title {
+  margin-right: 34rem;
+
+  @include media('<phone') {
+    margin-right: 0;
+  }
+}
+
+.archives__project__areas {
+  margin-top: 6rem;
+}
+
+.archives__body {
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.archives__media {
+  margin: auto;
+  margin-bottom: 8rem;
+  overflow: hidden;
+  width: 164rem;
+
+  & video {
+    width: 100%;
+  }
+
+  & img {
+    height: auto;
+    width: 100%;
+  }
+
+  @include media('<phone') {
+    height: auto;
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+}

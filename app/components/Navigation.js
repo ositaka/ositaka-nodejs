@@ -9,7 +9,6 @@ export default class Navigation extends Component {
         menuLinks: '.menu__item',
         navigation: '.navigation',
         textCursor: '.cursor__text',
-        textClose: '.button__close .button__close__text',
         textContacts: '.menu__contacts label',
         textFollow: '.menu__follow label',
       },
@@ -29,17 +28,11 @@ export default class Navigation extends Component {
     super.create()
 
     const changeTextEN = () => {
-      this.elements.textClose.innerHTML = ''
-      this.elements.textClose.innerHTML = '<div data-animation="link"><span>close</span></div>'
-      this.elements.textCursor.innerHTML = 'view'
       this.elements.textContacts.innerHTML = 'get in touch'
       this.elements.textFollow.innerHTML = 'follow me on'
     }
 
     const changeTextPT = () => {
-      this.elements.textClose.innerHTML = ''
-      this.elements.textClose.innerHTML = '<div data-animation="link"><span>fechar</span></div>'
-      this.elements.textCursor.innerHTML = 'ver'
       this.elements.textContacts.innerHTML = 'entra em contacto'
       this.elements.textFollow.innerHTML = 'siga-me no'
     }
@@ -65,8 +58,7 @@ export default class Navigation extends Component {
     const menuItems = menuWrap.querySelectorAll('.menu__item, .menu__nav label');
     const menuSecondary = menuWrap.querySelectorAll('.menu__follow *, .menu__contacts *');
 
-    const openMenuButton = document.querySelector('.button-menu');
-    const closeMenuButton = menuWrap.querySelector('.button__close');
+    const buttonMenu = document.querySelector('.button-menu');
 
     // big title elements
     const title = {
@@ -75,12 +67,14 @@ export default class Navigation extends Component {
     };
 
     let isAnimating = false;
+    let menuIsOpen = false;
 
     // opens the menu
     const openMenu = () => {
 
       if (isAnimating) return;
       isAnimating = true;
+
       GSAP.timeline({
       })
         .set(overlayPath, {
@@ -121,14 +115,19 @@ export default class Navigation extends Component {
           duration: 0.2,
           ease: 'power2.in',
           attr: { d: 'M 0 0 V 50 Q 50 0 100 50 V 0 z' },
-          onComplete: () => { // fix "doubles" fast-clicks on menu opening
-            isAnimating = false
-          }
         })
         .to(overlayPath, {
           duration: 0.8,
           ease: 'power4',
-          attr: { d: 'M 0 0 V 0 Q 50 0 100 0 V 0 z' }
+          attr: { d: 'M 0 0 V 0 Q 50 0 100 0 V 0 z' },
+          onComplete: () => { // fix "doubles" fast-clicks on menu opening
+            isAnimating = false
+            menuIsOpen = true
+            buttonMenu.style.pointerEvents = "all"
+            menuItems.forEach(item => {
+              item.style.pointerEvents = "all"
+            })
+          }
         })
         // menu items translate animation
         .to(menuItems, {
@@ -153,11 +152,21 @@ export default class Navigation extends Component {
 
     // closes the menu
     const closeMenu = () => {
+      buttonMenu.classList.remove('opened')
 
       if (isAnimating) return;
       isAnimating = true;
+
       GSAP.timeline({
-        onComplete: () => isAnimating = false
+        onComplete: () => {
+          isAnimating = false
+          menuIsOpen = false
+
+          buttonMenu.style.pointerEvents = "all"
+          menuItems.forEach(item => {
+            item.style.pointerEvents = "none"
+          })
+        }
       })
         .set(overlayPath, {
           attr: { d: 'M 0 0 V 0 Q 50 0 100 0 V 0 z' }
@@ -212,15 +221,18 @@ export default class Navigation extends Component {
           opacity: 0,
           stagger: -0.05
         }, 0)
+    }
 
+    const toggleMenu = () => {
+      !menuIsOpen ? openMenu() : closeMenu()
+      buttonMenu.style.pointerEvents = "none"
     }
 
     // click on menu button
-    openMenuButton.addEventListener('click', openMenu);
-    closeMenuButton.addEventListener('click', closeMenu);
+    buttonMenu.addEventListener('click', toggleMenu)
 
     menuItems.forEach(item => {
-      item.addEventListener('click', closeMenu);
+      item.addEventListener('click', closeMenu)
     })
   }
 

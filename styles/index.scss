@@ -17,7 +17,6 @@
 @import './base/base';
 @import './base/forms';
 
-@import './components/bubbles';
 @import './components/cursor';
 @import './components/preloader';
 
@@ -26,6 +25,7 @@
 @import './layout/footer';
 
 @import './pages/about/about';
+@import './pages/archives/archives';
 @import './pages/home/home';
 @import './pages/intro/intro';
 @import './pages/services/services';

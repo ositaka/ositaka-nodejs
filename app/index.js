@@ -12,6 +12,7 @@ import Preloader from 'components/Preloader';
 import Intro from 'pages/Intro';
 import Home from 'pages/Home';
 import About from 'pages/About';
+import Archives from 'pages/Archives';
 import Services from 'pages/Services';
 import Work from 'pages/Work';
 import WorkPage from 'pages/WorkPage';
@@ -82,6 +83,7 @@ class App {
       intro: new Intro(),
       home: new Home(),
       about: new About(),
+      archives: new Archives(),
       services: new Services(),
       work: new Work(),
       work_page: new WorkPage(),
@@ -165,7 +167,7 @@ class App {
       const langEN = div.querySelector('.langs #en') ? div.querySelector('.langs #en').href : '';
       const langPT = div.querySelector('.langs #pt') ? div.querySelector('.langs #pt').href : '';
       const menu = div.querySelector('.langs__list__link').innerHTML;
-      const menuLinks = Array.prototype.slice.call(div.querySelectorAll('.menu__item'));
+      // const menuLinks = Array.prototype.slice.call(div.querySelectorAll('.menu__item'));
       const siteurl = div.querySelector('.navigation__logo').href;
       const footerDiv = div.querySelector('.footer').innerHTML;
       const seo_title = div.querySelector('title').innerHTML;
@@ -174,12 +176,12 @@ class App {
       this.langEN = langEN;
       this.langPT = langPT;
       this.menu = menu;
-      this.menuLinks = menuLinks;
+      // this.menuLinks = menuLinks;
       this.siteurl = siteurl;
       this.footerDiv = footerDiv;
       this.seo_title = seo_title;
 
-      this.navigation.onChange(this.template, this.langEN, this.langPT, this.menu, this.menuLinks, this.siteurl, this.seo_title);
+      this.navigation.onChange(this.template, this.langEN, this.langPT, this.menu, /* this.menuLinks, */ this.siteurl, this.seo_title);
 
       // this.footer.onChange(this.footerDiv);
 
@@ -196,10 +198,9 @@ class App {
       this.page.show();
 
       this.addLinkListeners();
-
     }
     else {
-      this.onChange({ url: this.lang ==='en' ?  '/' : '/pt/' });
+      this.onChange({ url: this.lang === 'en' ? '/' : '/pt/' });
     }
   }
 
@@ -369,38 +370,99 @@ class App {
   }
 
   addLogoAnimation() {
+    this.logo = this.navigation.langs.siteurl
+    this.logoIsAnimating = false;
+
+    const hideLogo = () => {
+      if (this.logoIsAnimating) return
+      this.logoIsAnimating = true
+
+      GSAP.timeline().to(document.querySelectorAll('.navigation__logo span'), {
+        ease: 'expo.out',
+        duration: 0.25,
+        stagger: -0.075,
+        scale: 0,
+        x: '-100%',
+        opacity: '0',
+        onComplete: () => {
+          this.logoIsAnimating = false
+        }
+      })
+    }
+
+    const showLogo = () => {
+      if (this.logoIsAnimating) return
+      this.logoIsAnimating = true
+
+      GSAP.timeline().to(document.querySelectorAll('.navigation__logo span'), {
+        ease: 'expo.out',
+        duration: 0.5,
+        stagger: 0.075,
+        scale: 1,
+        x: '0%',
+        opacity: '1',
+        onComplete: () => {
+          this.logoIsAnimating = false
+        }
+      })
+    }
+
+    // mutation observer
+    const config = { attributes: true }
+
+    // Callback function to execute when mutations are observed
+    const callback = (mutationList) => {
+      for (const mutation of mutationList) {
+
+        if (mutation.target.classList.contains('is-open--scroll')) {
+          if (this.logo.classList.contains('was-shown')) return
+          showLogo()
+        }
+        else if (mutation.target.classList.contains('is-open')) {
+          if (this.logo.classList.contains('was-shown')) return
+          showLogo()
+        }
+        else {
+          hideLogo()
+        }
+      }
+    }
+
+    const observer = new MutationObserver(callback)
+    observer.observe(this.logo, config);
+
     if (Detection.isDesktop()) {
       window.addEventListener('onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll', () => {
-        if (this.page.scroll.current > 30) {
-          this.navigation.langs.siteurl.classList.remove('is-open')
-        } else {
-          this.navigation.langs.siteurl.classList.add('is-open')
+        setTimeout(() => {
+          if (this.page.scroll.current > window.innerHeight * 0.3) {
+            this.logo.classList.remove('is-open', 'is-open--scroll')
+          }
+          else {
+            this.logo.classList.add('is-open--scroll')
+            this.logo.classList.remove('was-shown')
+          }
+        }, 600)
+      })
+
+      this.logo.addEventListener('mouseenter', () => {
+        this.logo.classList.add('is-open')
+      })
+
+      this.logo.addEventListener('mouseleave', () => {
+        if (this.page.scroll.current > window.innerHeight / 3) {
+          this.logo.classList.remove('is-open')
         }
       })
+    }
 
-      this.navigation.langs.siteurl.addEventListener('mouseenter', () => {
-        this.navigation.langs.siteurl.classList.add('is-open')
-      })
-
-      this.navigation.langs.siteurl.addEventListener('mouseleave', () => {
-        if (this.page.scroll.current > 30) {
-          this.navigation.langs.siteurl.classList.remove('is-open')
-        }
-      })
-
-    } else {
-
+    else {
       window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 1) {
-          this.navigation.langs.siteurl.classList.remove('is-open')
-        } else {
-          this.navigation.langs.siteurl.classList.add('is-open')
-        }
+        window.pageYOffset > 1
+          ? this.logo.classList.remove('is-open')
+          : this.logo.classList.add('is-open')
       })
-
     }
   }
-
 }
 
 new App();

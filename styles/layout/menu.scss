@@ -9,35 +9,46 @@
   right: 3rem;
   top: 2.35rem;
   width: 6rem;
-  z-index: z('navigation');
+  z-index: z('overlay');
 
   @include media('<phone') {
     height: 10rem;
     width: 10rem;
   }
-}
 
-.button-menu svg {
-  transition: transform 0.5s ease;
-}
-
-.button-menu:hover svg {
-  transform: scale(1.1);
-}
-
-.frame--menu-open .button-menu {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.button-enter {
-  cursor: not-allowed;
-  margin-top: 4vh;
-  transition: transform 0.5s ease;
-}
-
-.button-enter:hover {
-  transform: translateX(15px) rotate(-40deg);
+  .line {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+    transition: stroke-dasharray 2.6s $ease-mc, stroke-dashoffset 2.6s $ease-mc;
+  }
+  .line1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+  }
+  .line2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 6;
+  }
+  .line3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+  }
+  &.opened .line1 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+  }
+  &.opened .line2 {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: -30;
+    stroke-width: 6;
+  }
+  &.opened .line3 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+  }
 }
 
 .menu__wrapper {
@@ -88,34 +99,6 @@
   position: relative;
   text-align: left;
   will-change: opacity, transform;
-
-  &::after {
-    background-color: black;
-    border-radius: 1rem;
-    content: '';
-    display: block;
-    height: 0.5rem;
-    position: relative;
-    top: -6rem;
-    transition: all 0.4s ease-in-out;
-    width: 0rem;
-  }
-
-  & span {
-    position: relative;
-    transition: letter-spacing 0.5s ease-in-out, margin 0.3s 0.1s ease-in-out;
-  }
-
-  // &:hover {
-  //   span {
-  //     letter-spacing: 0.5rem;
-  //     margin-left: 11rem;
-  //   }
-
-  //   &::after {
-  //     width: 8rem;
-  //   }
-  // }
 }
 
 .menu__content {
@@ -164,31 +147,6 @@
 .menu__follow a {
   display: block;
   position: relative;
-}
-
-.button__close {
-  cursor: pointer;
-  display: flex;
-  height: 6rem;
-  min-width: 6rem;
-  place-items: center;
-  position: absolute;
-  right: 3.2rem;
-  top: 2.35rem;
-  z-index: z('navigation');
-
-  & svg {
-    width: 6rem;
-  }
-
-  & span {
-    @extend %text-body;
-  }
-}
-
-.button__close:focus-visible,
-.button__close:hover {
-  stroke: var(--color-button__close-hover);
 }
 
 .menu__wrapper,

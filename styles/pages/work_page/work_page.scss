@@ -40,10 +40,9 @@
   margin-bottom: 34rem;
 
   @include media('<phone') {
-
     ~ .work_page__info {
       margin-top: 24rem;
-  }
+    }
   }
 }
 
@@ -93,7 +92,7 @@
     height: auto;
     margin-bottom: 1.5rem;
     width: 100%;
-    
+
     & ~ .work_page__gallery {
       margin-bottom: 0;
     }

@@ -14,7 +14,7 @@
   mix-blend-mode: difference;
   pointer-events: none;
   position: fixed;
-  transition: width 0.3s, height 0.3s;
+  transition: width 0.3s $ease-mc, height 0.3s $ease-mc;
   user-select: none;
   visibility: visible;
   width: 1.5rem;
@@ -28,7 +28,7 @@
 
   &__text {
     color: white;
-    display: none;
+    transition: opacity 0.2s $ease-mc, scale 0.2s $ease-mc;
   }
 }
 

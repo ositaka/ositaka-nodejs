@@ -41,6 +41,8 @@ export default class Page {
       videos: 'video',
     }
 
+    this.lang = document.documentElement.lang
+
     this.id = id
 
     this.transformPrefix = Prefix('transform')
@@ -78,7 +80,7 @@ export default class Page {
 
     setTimeout(() => {
       this.cursor = document.querySelector('.cursor')
-      this.cursorText = document.querySelector('.cursor__text');
+      this.cursorText = document.querySelector('.cursor__text')
       this.cursor.style.height = '1.5rem'
       this.cursor.style.width = '1.5rem'
       this.cursor.style.transitionDuration = '0.6s'
@@ -151,7 +153,7 @@ export default class Page {
 
         if (options.resize) {
           var resizeDelayTimeout = null;
-          window.onresize = function() {
+          window.onresize = function () {
             if (resizeDelayTimeout !== null) {
               clearTimeout(resizeDelayTimeout);
             }
@@ -302,20 +304,21 @@ export default class Page {
         this.linksProjects = document.querySelectorAll('a.home__projects__item, a.work__list__item, a.services__projects__item')
         this.cursor = document.querySelector('.cursor')
         this.cursorText = document.querySelector('.cursor__text')
+        this.cursorText.innerHTML = ""
 
         const initSize = '1.5rem'
-        const hoverSize = '5rem'
-        const hoverSizeProjects = '12rem'
+        const hoverSize = '12rem'
+        const hoverSizeProjects = '16rem'
 
         setTimeout(() => {
-          this.cursorText.innerHTML = 'view'
-        }, 600);
+          this.cursorText.innerHTML = document.documentElement.lang === "en" ? "view" : "ver"
+          this.cursorText.style.scale = '0'
+        }, 1200);
 
         mapEach(this.links, link => {
           link.onmouseenter = () => {
             this.cursor.style.height = hoverSize
             this.cursor.style.width = hoverSize
-
           }
 
           link.onmouseleave = () => {
@@ -335,18 +338,22 @@ export default class Page {
             this.cursor.classList.add('cursor__hover')
             link.style.cursor = 'none'
 
+            this.cursorText.innerHTML = document.documentElement.lang === "en" ? "view" : "ver"
             this.cursor.style.height = hoverSizeProjects
             this.cursor.style.width = hoverSizeProjects
-            this.cursorText.style.display = 'block'
+            this.cursorText.style.scale = '1'
+            this.cursorText.style.opacity = '1'
           }
 
           link.onmouseleave = () => {
             this.cursor.classList.remove('cursor__hover')
+            this.cursorText.innerHTML = ''
 
             this.cursor.style.height = initSize
             this.cursor.style.width = initSize
 
-            this.cursorText.style.display = 'none'
+            this.cursorText.style.scale = '0'
+            this.cursorText.style.opacity = '0'
           }
 
           link.addEventListener('click', _ => {
@@ -355,7 +362,8 @@ export default class Page {
             this.cursor.style.height = initSize
             this.cursor.style.width = initSize
 
-            this.cursorText.style.display = 'none'
+            this.cursorText.style.scale = '0'
+            this.cursorText.style.opacity = '0'
             this.cursorText.innerHTML = ''
           })
         })

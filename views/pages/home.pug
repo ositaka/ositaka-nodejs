@@ -11,18 +11,18 @@ block content
       section.home__hero
         h1.title__h1.home__hero__title(data-animation="title")=home.data.title[0].text
         figure.home__hero__media
-          picture(height=`${home.data.video[0].video_preview.dimensions.height}` width=`${home.data.video[0].video_preview.dimensions.width}` style=`background-color: ${home.data.video[0].background_color}`)
-            if (connection === '4g' || connection === 'undefined') 
-              video(preload="auto" playsinline loop muted disablepictureinpicture
-                srcset=`
-                  ${home.data.video[0].video_mobile.url} 768w, 
-                  ${home.data.video[0].video_desktop.url} 769w
-                `)
-            else
-              if (typeof(home.data.video[0].video_preview.phone) !== 'undefined')
-                source(media='(max-width: 768px)' srcset=`${home.data.video[0].video_preview.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
-                source(media='(min-width: 769px)' srcset=`${home.data.video[0].video_preview.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
-              img(alt=home.data.video[0].video_preview.alt data-src=home.data.video[0].video_preview.url height=`${home.data.video[0].video_preview.dimensions.height}` width=`${home.data.video[0].video_preview.dimensions.width}`)
+          picture(style=`background-color: ${home.data.video[0].background_color}`)
+            //- if (connection === '4g' || connection === 'undefined') 
+            video(preload="auto" playsinline loop muted disablepictureinpicture
+              srcset=`
+                ${home.data.video[0].video_mobile.url} 768w, 
+                ${home.data.video[0].video_desktop.url} 769w
+              `)
+            //- else
+            //-   if (typeof(home.data.video[0].video_preview.phone) !== 'undefined')
+            //-     source(media='(max-width: 768px)' srcset=`${home.data.video[0].video_preview.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+            //-     source(media='(min-width: 769px)' srcset=`${home.data.video[0].video_preview.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+            //-   img(alt=home.data.video[0].video_preview.alt data-src=home.data.video[0].video_preview.url height=`${home.data.video[0].video_preview.dimensions.height}` width=`${home.data.video[0].video_preview.dimensions.width}`)
 
       section.home__intro
         h2.title__h3(data-animation="title")=home.data.intro

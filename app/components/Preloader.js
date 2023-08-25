@@ -10,7 +10,9 @@ export default class Preloader extends Component {
       elements: {
         title: '.preloader__text',
         number: '.preloader__number',
-        numberText: '.preloader__number__text'
+        numberText: '.preloader__number__text',
+        logo: '.navigation__logo',
+        triangle: '.navigation__logo-triangle',
       }
     })
 
@@ -95,7 +97,16 @@ export default class Preloader extends Component {
         duration: 2.5,
         ease: 'expo.out',
         transform: 'translateY(-100%)',
+
+        onComplete: () => {
+          this.elements.triangle.classList.remove('is-on-preloader')
+
+          setTimeout(() => {
+            this.elements.logo.classList.add('is-open')
+          }, 1000)
+        }
       }, '-=1')
+
 
       // this.animateOut.to(this.element, {
       //   autoAlpha: 0,

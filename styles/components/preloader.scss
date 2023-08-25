@@ -2,10 +2,13 @@
   @extend %center;
   @extend %cover;
 
-  background: $color-text;
+  background-color: $color-text;
+  background-image: url('/shared/intro.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: $color-background;
   text-align: center;
-
   z-index: z('preloader');
 
   @include media('<phone') {
@@ -20,8 +23,8 @@
 }
 
 .preloader__text {
-  font-size: 0;
-  max-width: 66rem;
+  top: 22dvh;
+  position: relative;
 
   span {
     display: inline-block;

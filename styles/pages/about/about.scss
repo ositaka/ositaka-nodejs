@@ -99,21 +99,6 @@
   }
 }
 
-.about__creators__bubble {
-  position: relative;
-  top: -70rem;
-  right: 60rem;
-
-  & .bubble {
-    max-width: 130%;
-
-    @include media('<phone') {
-      max-width: unset;
-      width: 180%;
-    }
-  }
-}
-
 .about__creators__title {
   margin-bottom: 32rem;
   text-align: center;

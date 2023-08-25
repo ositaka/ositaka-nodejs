@@ -16,10 +16,6 @@
   @include media('<phone') {
     padding: 6rem;
   }
-
-  // @include media('>phone', '<=tablet') {
-  //   padding: 6rem;
-  // }
 }
 
 %container-large {

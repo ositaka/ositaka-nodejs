@@ -321,7 +321,6 @@ class App {
     each(links, link => {
       const isLocal = link.href.indexOf(window.location.origin) > -1
       const isOnPage = link.href.indexOf('#') > 0
-
       const isNotEmail = link.href.indexOf('mailto') === -1
       const isNotPhone = link.href.indexOf('tel') === -1
 
@@ -343,6 +342,7 @@ class App {
             this.cursor.style.width = '60rem'
             this.cursor.style.transition = '1.5s cubic-bezier(0.19, 1, 0.22, 1)';
           }, 100);
+
           setTimeout(() => {
             this.cursor.style.height = initSize
             this.cursor.style.width = initSize
@@ -446,18 +446,20 @@ class App {
 
       this.logo.addEventListener('mouseenter', () => {
         this.logo.classList.add('is-open')
+        this.logo.classList.remove('was-shown')
       })
 
       this.logo.addEventListener('mouseleave', () => {
         if (this.page.scroll.current > window.innerHeight / 3) {
           this.logo.classList.remove('is-open')
+          this.logo.classList.add('was-shown')
         }
       })
     }
 
     else {
       window.addEventListener('scroll', () => {
-        window.pageYOffset > 1
+        window.scrollY > 1
           ? this.logo.classList.remove('is-open')
           : this.logo.classList.add('is-open')
       })

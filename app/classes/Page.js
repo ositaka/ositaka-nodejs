@@ -433,6 +433,7 @@ export default class Page {
     this.scroll.target += speed
 
     if (!this.elements.wrapper) return
+
     window.requestAnimationFrame(_ => {
       this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
     })
@@ -445,11 +446,20 @@ export default class Page {
    * Loop.
    */
   update() {
-    if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance()) {
-      this.scroll.target = this.scroll.target // 
-    } else {
+
+    // Desktop scroll
+    if (!Detection.isPhone() || !Detection.isTablet() || !Detection.isLowPerformance()) {
       this.scroll.target = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.target)
       this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, 0.1)
+
+      this.rotateTriangle()
+    }
+
+    // Touch scroll
+    if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance()) {
+      window.onscroll = () => {
+        this.rotateTriangle()
+      }
     }
 
     if (this.scroll.current < 0.01) {
@@ -494,6 +504,21 @@ export default class Page {
         this.elements.fixed.style[this.transformPrefix] = `translate3d(0, ${this.scroll.current}px, 0)`
       }
     }
+
+  }
+
+  rotateTriangle() {
+    let triangle = document.querySelector('.navigation__logo-triangle')
+
+    if (!triangle.classList.contains('is-on-navigation')) return
+
+    if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance()) {
+      triangle.style.rotate = `${Number(window.scrollY / 3 + 90)}deg`
+    }
+    else {
+      triangle.style.rotate = `${Number(this.scroll.current / 3 + 90)}deg`
+    }
+    triangle.style.transition = `rotate 0s`
   }
 
   /**

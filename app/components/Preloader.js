@@ -103,6 +103,7 @@ export default class Preloader extends Component {
 
           setTimeout(() => {
             this.elements.logo.classList.add('is-open')
+            this.elements.triangle.classList.add('is-on-navigation')
           }, 1000)
         }
       }, '-=1')

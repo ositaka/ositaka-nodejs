@@ -9,7 +9,7 @@
   right: 3rem;
   top: 2.35rem;
   width: 6rem;
-  z-index: z('overlay');
+  z-index: z('navigation');
 
   @include media('<phone') {
     height: 10rem;

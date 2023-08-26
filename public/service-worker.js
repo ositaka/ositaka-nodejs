@@ -149,7 +149,7 @@ define(['./workbox-37481be9'], (function (workbox) { 'use strict';
     "revision": "27364a2dc18a866e7b2b5ef2b5ded870"
   }, {
     "url": "main.css",
-    "revision": "2daef8d06f40acaba9e4ed13db6f4cf5"
+    "revision": "1bc28de126e4449d98cf2b8835026e9d"
   }, {
     "url": "menu-icon-close.svg",
     "revision": "9dc5c8b386feea586c9bd50f29182131"

@@ -24,13 +24,13 @@
     display: block;
     left: 0.5rem;
     margin-right: 3rem;
-    margin-top: 1rem;
     min-width: 2rem;
     position: absolute;
     rotate: 90deg;
     scale: 2.6;
     top: 1rem;
     transform: translate3d(0%, 0%, 0);
+    transform-origin: 39% 50%;
     transition: all 1s $ease-mc;
     z-index: z('triangle');
 

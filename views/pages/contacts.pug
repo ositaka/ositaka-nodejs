@@ -4,7 +4,7 @@ block variables
   - var template = 'contacts'
 
 block content
-  .contacts(background=`${colors.background || "white"}` color=`${colors.text || "black"}`)
+  .contacts(background=`${colors.background}` color=`${colors.text}`)
     .contacts__wrapper
       .contacts__header
         h1.title__h1.contacts__title(data-animation="title")!=contacts.data.title.replace(/\n/g, '<br>')

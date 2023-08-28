@@ -232,6 +232,8 @@ app.get('/:lang/:uid/', async (req, res) => {
     colors = archives.data.colors[0]
     meta = archives.data.seo[0]
 
+    console.log(colors)
+
     res.render('pages/archives', {
       ...defaults,
       archives,

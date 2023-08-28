@@ -4,7 +4,7 @@ block variables
   - var template = 'work'
 
 block content
-  .work(background=`${colors.background || "white"}` color=`${colors.text || "black"}`)
+  .work(background=`${colors.background}` color=`${colors.text}`)
     .work__wrapper
       .work__hero
         h1.sr-only=work.data.title

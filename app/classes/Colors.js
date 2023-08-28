@@ -5,7 +5,7 @@ class Colors {
     backgroundColor,
     color
   }) {
-    GSAP.to(document.documentElement, {
+    GSAP.to(document.getElementById('content'), {
       background: backgroundColor,
       color: color,
       duration: 1.5

@@ -4,7 +4,7 @@ block variables
   - var template = 'intro'
 
 block content
-  .intro(data-background="#fff" data-color="#000")
+  .intro(background=`${colors.background || "white"}` color=`${colors.text || "black"}`)
     .intro__wrapper
       .intro__titles
         //- each collection, index in collections

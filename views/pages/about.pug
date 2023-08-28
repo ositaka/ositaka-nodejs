@@ -4,7 +4,7 @@ block variables
   - var template = 'about'
 
 block content
-  .about(data-background="#fff" data-color="#000")
+  .about(background=`${colors.background || "white"}` color=`${colors.text || "black"}`)
     .about__wrapper
 
       section.about__hero

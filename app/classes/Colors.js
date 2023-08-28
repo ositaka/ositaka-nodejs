@@ -1,13 +1,13 @@
 import GSAP from 'gsap'
 
 class Colors {
-  change ({
+  change({
     backgroundColor,
     color
   }) {
     GSAP.to(document.documentElement, {
       background: backgroundColor,
-      color,
+      color: color,
       duration: 1.5
     })
   }

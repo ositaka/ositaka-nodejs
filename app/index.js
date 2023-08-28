@@ -370,6 +370,7 @@ class App {
   }
 
   addLogoAnimation() {
+    this.content = document.getElementById('content')
     this.logo = this.navigation.langs.siteurl
     this.logoIsAnimating = false;
 
@@ -415,13 +416,23 @@ class App {
       for (const mutation of mutationList) {
 
         if (mutation.target.classList.contains('is-open--scroll')) {
-          if (this.logo.classList.contains('was-shown')) return
+          if (
+            this.logo.classList.contains('was-shown') ||
+            this.content.dataset.template === "work"
+          ) return
+
           showLogo()
         }
+
         else if (mutation.target.classList.contains('is-open')) {
-          if (this.logo.classList.contains('was-shown')) return
+          if (
+            this.logo.classList.contains('was-shown') ||
+            this.content.dataset.template === "work"
+          ) return
+
           showLogo()
         }
+
         else {
           hideLogo()
         }

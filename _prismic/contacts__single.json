@@ -6,6 +6,26 @@
         "label": "UID"
       }
     },
+    "colors": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "background": {
+            "type": "Color",
+            "config": {
+              "label": "Background"
+            }
+          },
+          "text": {
+            "type": "Color",
+            "config": {
+              "label": "Text"
+            }
+          }
+        },
+        "label": "colors"
+      }
+    },
     "title": {
       "type": "Text",
       "config": {
@@ -196,7 +216,7 @@
           "faq_text": {
             "type": "StructuredText",
             "config": {
-              "multi": "paragraph, preformatted, strong, em, hyperlink, list-item, o-list-item",
+              "single": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item",
               "label": "FAQ Text",
               "placeholder": "You can type multiple paragraphs."
             }

@@ -6,6 +6,26 @@
         "label": "UID"
       }
     },
+    "colors": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "background": {
+            "type": "Color",
+            "config": {
+              "label": "Background"
+            }
+          },
+          "text": {
+            "type": "Color",
+            "config": {
+              "label": "Text"
+            }
+          }
+        },
+        "label": "colors"
+      }
+    },
     "title": {
       "type": "Text",
       "config": {
@@ -41,6 +61,15 @@
                 }
               ],
               "label": "Work Image"
+            }
+          },
+          "published": {
+            "type": "Boolean",
+            "config": {
+              "placeholder_false": "False",
+              "placeholder_true": "True",
+              "default_value": true,
+              "label": "Published"
             }
           },
           "work_link": {

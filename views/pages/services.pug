@@ -5,7 +5,7 @@ block variables
 
 
 block content
-  .services(data-background="#fff" data-color="#000")
+  .services(background=`${colors.background || "white"}` color=`${colors.text || "black"}`)
     .services__wrapper
 
       section.services__hero

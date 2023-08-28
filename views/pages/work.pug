@@ -4,18 +4,18 @@ block variables
   - var template = 'work'
 
 block content
-  .work(data-background="#fff" data-color="#000")
+  .work(background=`${colors.background || "white"}` color=`${colors.text || "black"}`)
     .work__wrapper
       .work__hero
         h1.sr-only=work.data.title
       
       .work__list
-        - var total = work.data.works.length 
+        - var total = publishedItems.length 
         - var totalDivided = Math.round(total / 2)
           
         | <div class="work__list__col">
         - var count = 0;
-          each item in work.data.works
+          each item in publishedItems
             if count === totalDivided
               | </div>
               | <div class="work__list__col">

@@ -6,6 +6,26 @@
         "label": "UID"
       }
     },
+    "colors": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "background": {
+            "type": "Color",
+            "config": {
+              "label": "Background"
+            }
+          },
+          "text": {
+            "type": "Color",
+            "config": {
+              "label": "Text"
+            }
+          }
+        },
+        "label": "colors"
+      }
+    },
     "parent_page": {
       "type": "Link",
       "config": {

@@ -13,8 +13,8 @@ html {
   @extend %cover;
   @extend %transition-bg__mobile;
 
-  background: $color-background;
-  color: $color-text;
+  // background: $color-background;
+  // color: $color-text;
   font-size: calc(100vw / 1920 * 10);
   line-height: 1;
   -webkit-font-smoothing: antialiased;
@@ -43,8 +43,6 @@ body {
 
   .desktop & {
     @extend %transition-bg__desktop;
-
-    background: $color-background;
   }
 }
 

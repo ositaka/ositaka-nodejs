@@ -6,6 +6,26 @@
         "label": "UID"
       }
     },
+    "colors": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "background": {
+            "type": "Color",
+            "config": {
+              "label": "Background"
+            }
+          },
+          "text": {
+            "type": "Color",
+            "config": {
+              "label": "Text"
+            }
+          }
+        },
+        "label": "colors"
+      }
+    },
     "title": {
       "type": "StructuredText",
       "config": {
@@ -144,6 +164,25 @@
           }
         },
         "label": "Featured Projects"
+      }
+    },
+    "about_title": {
+      "type": "Text",
+      "config": {
+        "label": "About Title"
+      }
+    },
+    "about_link": {
+      "type": "Link",
+      "config": {
+        "label": "About Link",
+        "select": null
+      }
+    },
+    "about_button": {
+      "type": "Text",
+      "config": {
+        "label": "About Button"
       }
     }
   },

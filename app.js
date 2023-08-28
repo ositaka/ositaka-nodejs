@@ -162,6 +162,7 @@ app.get('/:lang/', async (req, res) => {
 
   if (home) {
     altLangs = home.alternate_languages
+    colors = home.data.colors[0]
     meta = home.data.seo[0]
 
     const { results: globals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang })
@@ -171,10 +172,11 @@ app.get('/:lang/', async (req, res) => {
     res.render('pages/home', {
       ...defaults,
       altLangs,
+      colors,
+      home,
       globals,
       lang,
       meta,
-      home,
     });
   }
 
@@ -208,37 +210,41 @@ app.get('/:lang/:uid/', async (req, res) => {
   console.log(api, 'archivesarchivesarchivesarchivesarchivesarchivesarchivesarchivesarchives')
 
   if (about) {
-
     altLangs = about.alternate_languages
+    colors = about.data.colors[0]
     meta = about.data.seo[0]
 
     const { results: awards } = await api.query(Prismic.Predicates.at('document.type', 'awards'), { lang: langs[req.params.lang] })
 
     res.render('pages/about', {
       ...defaults,
-      altLangs,
-      lang,
       about,
+      altLangs,
       awards,
+      colors,
+      lang,
       meta,
     });
   }
 
   else if (archives) {
     altLangs = archives.alternate_languages
+    colors = archives.data.colors[0]
     meta = archives.data.seo[0]
 
     res.render('pages/archives', {
       ...defaults,
-      altLangs,
-      lang,
       archives,
+      altLangs,
+      colors,
+      lang,
       meta,
     });
   }
 
   else if (contacts) {
     altLangs = contacts.alternate_languages
+    colors = contacts.data.colors[0]
     meta = contacts.data.seo[0]
 
     const { results: globals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
@@ -246,20 +252,23 @@ app.get('/:lang/:uid/', async (req, res) => {
     res.render('pages/contacts', {
       ...defaults,
       altLangs,
+      colors,
+      contacts,
+      globals,
       lang,
       meta,
-      globals,
-      contacts,
     });
   }
 
   else if (services) {
     altLangs = services.alternate_languages
+    colors = services.data.colors[0]
     meta = services.data.seo[0]
 
     res.render('pages/services', {
       ...defaults,
       altLangs,
+      colors,
       lang,
       meta,
       services,
@@ -268,13 +277,17 @@ app.get('/:lang/:uid/', async (req, res) => {
 
   else if (work) {
     altLangs = work.alternate_languages
+    colors = work.data.colors[0]
     meta = work.data.seo[0]
+    let publishedItems = work.data.works.filter(item => item.published !== false)
 
     res.render('pages/work', {
       ...defaults,
       altLangs,
+      colors,
       lang,
       meta,
+      publishedItems,
       work,
     });
   }
@@ -295,28 +308,27 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
   }
 
   const api = await initApi(req);
+  const _404 = await api.getSingle('404', { lang });
   const defaults = await handleRequest(api, lang);
   const uid = req.params.uid;
-
-  const _404 = await api.getSingle('404', { lang });
   const work_page = await api.getByUID('work_page', uid, { lang });
 
   lang = langsReversed[lang]
 
   if (work_page) {
     altLangs = work_page.alternate_languages
+    colors = work_page.data.colors[0]
     meta = work_page.data.seo[0]
 
-    // console.log(work_page.data.body[0].primary.image.phone !== 'undefined')
-
+    const { results: globals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
     const { results: parent_en } = await api.query(Prismic.Predicates.at('document.type', 'work_page'), { lang: "en-gb" })
     const { results: parent_pt } = await api.query(Prismic.Predicates.at('document.type', 'work_page'), { lang: "pt-pt" })
-    const { results: globals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
 
     res.render('pages/work_page', {
       ...defaults,
       _404,
       altLangs,
+      colors,
       globals,
       lang,
       meta,

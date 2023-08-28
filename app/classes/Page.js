@@ -54,6 +54,8 @@ export default class Page {
     this.element = document.querySelector(this.selector)
     this.elements = {}
 
+    console.log(this.element, 'page')
+
     this.scroll = {
       current: 0,
       target: 0,
@@ -271,10 +273,11 @@ export default class Page {
   show(animation) {
     return new Promise(resolve => {
       ColorsManager.change({
-        backgroundColor: this.element.getAttribute('data-background'),
-        color: this.element.getAttribute('data-color')
+        backgroundColor: this.element.getAttribute('background'),
+        color: this.element.getAttribute('color')
       })
 
+      console.log(this.element.getAttribute('background'))
       if (animation) {
         this.animationIn = animation
       } else {
@@ -311,7 +314,6 @@ export default class Page {
         const hoverSizeProjects = '16rem'
 
         setTimeout(() => {
-          this.cursorText.innerHTML = document.documentElement.lang === "en" ? "view" : "ver"
           this.cursorText.style.scale = '0'
         }, 1200);
 

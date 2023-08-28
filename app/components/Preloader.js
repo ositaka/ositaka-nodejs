@@ -82,7 +82,17 @@ export default class Preloader extends Component {
         duration: 2.2,
         ease: 'expo.out',
         stagger: 0.1,
-        y: '100%'
+        y: '100%',
+
+        // Move triangle animation
+        onComplete: () => {
+          this.elements.triangle.classList.remove('is-on-preloader')
+
+          setTimeout(() => {
+            this.elements.logo.classList.add('is-open')
+            this.elements.triangle.classList.add('is-on-navigation')
+          }, 1000)
+        }
       })
 
       this.animateOut.to(this.elements.numberText, {
@@ -96,16 +106,7 @@ export default class Preloader extends Component {
       this.animateOut.to(this.element, {
         duration: 2.5,
         ease: 'expo.out',
-        transform: 'translateY(-100%)',
-
-        onComplete: () => {
-          this.elements.triangle.classList.remove('is-on-preloader')
-
-          setTimeout(() => {
-            this.elements.logo.classList.add('is-open')
-            this.elements.triangle.classList.add('is-on-navigation')
-          }, 1000)
-        }
+        transform: 'translateY(-100%)'
       }, '-=1')
 
 

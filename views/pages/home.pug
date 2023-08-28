@@ -5,7 +5,7 @@ block variables
 
 
 block content
-  .home(data-background="#fff" data-color="#000")
+  .home(background=`${colors.background || "white"}` color=`${colors.text || "black"}`)
     .home__wrapper
 
       section.home__hero

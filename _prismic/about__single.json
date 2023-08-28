@@ -6,24 +6,30 @@
         "label": "UID"
       }
     },
+    "colors": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "background": {
+            "type": "Color",
+            "config": {
+              "label": "Background"
+            }
+          },
+          "text": {
+            "type": "Color",
+            "config": {
+              "label": "Text"
+            }
+          }
+        },
+        "label": "colors"
+      }
+    },
     "hero_title": {
       "type": "Text",
       "config": {
         "label": "Hero Title"
-      }
-    },
-    "words": {
-      "type": "Group",
-      "config": {
-        "fields": {
-          "word": {
-            "type": "Text",
-            "config": {
-              "label": "Word"
-            }
-          }
-        },
-        "label": "Words"
       }
     },
     "image": {
@@ -57,8 +63,10 @@
             }
           },
           "text": {
-            "type": "Text",
+            "type": "StructuredText",
             "config": {
+              "multi": "strong,em,hyperlink",
+              "allowTargetBlank": true,
               "label": "Text"
             }
           },
@@ -85,54 +93,6 @@
       "type": "Text",
       "config": {
         "label": "Team Title"
-      }
-    },
-    "creators": {
-      "type": "Group",
-      "config": {
-        "fields": {
-          "photo": {
-            "type": "Image",
-            "config": {
-              "constraint": {},
-              "thumbnails": [
-                {
-                  "name": "phone",
-                  "width": 480,
-                  "height": null
-                }
-              ],
-              "label": "Photo"
-            }
-          },
-          "name": {
-            "type": "Text",
-            "config": {
-              "label": "Name"
-            }
-          },
-          "role": {
-            "type": "Text",
-            "config": {
-              "label": "role"
-            }
-          },
-          "bio": {
-            "type": "StructuredText",
-            "config": {
-              "multi": "paragraph,strong,em,hyperlink",
-              "allowTargetBlank": true,
-              "label": "Bio"
-            }
-          },
-          "background_color": {
-            "type": "Color",
-            "config": {
-              "label": "Background Color"
-            }
-          }
-        },
-        "label": "Creators"
       }
     },
     "image_sections": {
@@ -167,80 +127,6 @@
           }
         },
         "label": "Image Sections"
-      }
-    },
-    "quotes": {
-      "type": "Group",
-      "config": {
-        "fields": {
-          "text": {
-            "type": "Text",
-            "config": {
-              "label": "Text"
-            }
-          },
-          "author": {
-            "type": "Text",
-            "config": {
-              "label": "Author"
-            }
-          }
-        },
-        "label": "Quotes"
-      }
-    },
-    "projects_title": {
-      "type": "Text",
-      "config": {
-        "label": "Projects Title"
-      }
-    },
-    "projects": {
-      "type": "Group",
-      "config": {
-        "fields": {
-          "project_image": {
-            "type": "Image",
-            "config": {
-              "constraint": {},
-              "thumbnails": [
-                {
-                  "name": "phone",
-                  "width": 480,
-                  "height": null
-                }
-              ],
-              "label": "Project Image"
-            }
-          },
-          "project": {
-            "type": "Link",
-            "config": {
-              "select": "document",
-              "customtypes": ["work_page"],
-              "label": "Project"
-            }
-          },
-          "brand": {
-            "type": "Text",
-            "config": {
-              "label": "Brand"
-            }
-          },
-          "title": {
-            "type": "Text",
-            "config": {
-              "label": "Title"
-            }
-          },
-          "background_color": {
-            "type": "Color",
-            "config": {
-              "label": "Background Color"
-            }
-          }
-        },
-        "label": "Projects"
       }
     }
   },

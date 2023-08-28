@@ -4,7 +4,7 @@ block variables
   - var template = 'archives'
 
 block content
-  .archives(data-background="#fff" data-color="#000")
+  .archives(background=`${colors.background || "white"}` color=`${colors.text || "black"}`)
     .archives__wrapper
 
       .archives__header

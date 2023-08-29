@@ -189,7 +189,7 @@
   width: 49.2%;
 
   @include media('<phone') {
-    background: white;
+    background: var(--color-text);
     margin-left: -3rem;
     margin-right: -3rem;
     width: calc(100% + 6rem);

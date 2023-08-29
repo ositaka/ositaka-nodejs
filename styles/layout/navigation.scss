@@ -1,5 +1,5 @@
 .navigation {
-  color: white;
+  color: var(--color-text);
   height: auto;
   mix-blend-mode: difference;
   position: fixed;
@@ -19,6 +19,10 @@
   position: absolute;
   top: 3.3rem;
   width: auto;
+
+  & svg path {
+    fill: var(--color-text);
+  }
 
   &-triangle {
     display: block;
@@ -41,6 +45,15 @@
       rotate: 810deg;
       transform: translate3d(-20%, 3%, 0);
     }
+
+    @include media('<phone') {
+      scale: 1.4;
+      left: 1.5rem;
+
+      &.is-on-preloader {
+        scale: 8;
+      }
+    }
   }
 
   & span {
@@ -53,6 +66,13 @@
       max-height: 1.9rem;
       display: block;
       margin-top: 1rem;
+
+      @include media('<phone') {
+        width: 2.4rem;
+        height: 2.4rem;
+        max-width: 2.4rem;
+        max-height: 2.4rem;
+      }
     }
   }
 
@@ -64,13 +84,17 @@
   }
 
   @include media('<phone') {
-    left: 5rem;
-    top: 5rem;
+    left: 3rem;
+    top: 3rem;
+
+    &-lettering {
+      margin-left: 9rem;
+    }
   }
 }
 
 .langs {
-  color: white;
+  color: var(--color-text);
   mix-blend-mode: difference;
   position: absolute;
   right: 10.9rem;
@@ -87,5 +111,10 @@
   & .langs__list__item a {
     font-size: 1.8rem;
     margin-right: 2rem;
+
+    @include media('<phone') {
+      font-size: 3.2rem;
+      display: none;
+    }
   }
 }

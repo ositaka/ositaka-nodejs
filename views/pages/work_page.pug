@@ -125,19 +125,9 @@ block content
               else
                 .work_page__info__big
                   h3.title__h2.work_page__info__title(data-animation="title")!=section.primary.info_title.replace(/\n/g, '<br>')
-
-
+                  
 
       .work_page__next
-        //- Arrow
-        //- if !isDesktop
-        //- .work__list__item__icon
-        //-   svg(viewbox='0 0 32 32' width="32" height="32" data-animation="arrow")
-        //-     path(d='M17,25.61h0A15.19,15.19,0,0,1,26.57,16h0' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" fill="none")
-        //-     path(d='M26.57,16h0A15.19,15.19,0,0,1,17,6.39h0' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" fill="none")
-        //-     line(x1='5.43' y1='16' x2='26.57' y2='16' stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px")
-
-
         a.work_page__next__link(href=`/${lang}/${work_page.data.parent_page.uid}/${nextProject}/` data-animation="title")=globals[0].data.next
       
       include ../partials/footer

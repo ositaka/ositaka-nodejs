@@ -19,7 +19,7 @@
 .contacts__form {
   @extend %container;
 
-  color: black;
+  color: var(--color-background);
   margin-bottom: 20rem;
 
   & form > div {
@@ -38,7 +38,7 @@ ul.contacts__form__options {
   & li {
     @extend %text-body;
 
-    border: 1px solid #c4c4c4;
+    border: 1px solid var(--color-background);
     border-radius: 1rem;
     cursor: pointer;
     display: inline-block;

@@ -274,9 +274,9 @@
 
 .work_page__next__link {
   font-size: 30vw;
-  color: white;
+  color: var(--color-text);
   line-height: 1;
-  -webkit-text-stroke: 2px black;
+  -webkit-text-stroke: 2px var(--color-background);
 }
 
 svg[data-animation='arrow'] {

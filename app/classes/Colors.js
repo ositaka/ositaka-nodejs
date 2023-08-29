@@ -10,6 +10,10 @@ class Colors {
       color: color,
       duration: 1.5
     })
+
+    document.documentElement.style.setProperty('--set-color-text', color);
+    document.documentElement.style.setProperty('--set-color-background', backgroundColor);
+
   }
 }
 

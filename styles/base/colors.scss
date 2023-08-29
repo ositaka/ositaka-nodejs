@@ -1,0 +1,9 @@
+:root {
+  //
+  // "--set-color-text" and "(--set-color-background"
+  // are being generated from /app/Classes/Colors.js
+  //
+
+  --color-text: var(--set-color-text, white);
+  --color-background: var(--set-color-background, black);
+}

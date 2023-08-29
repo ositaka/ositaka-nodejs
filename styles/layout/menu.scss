@@ -18,7 +18,7 @@
 
   .line {
     fill: none;
-    stroke: white;
+    stroke: var(--color-text);
     stroke-width: 6;
     transition: stroke-dasharray 2.6s $ease-mc, stroke-dashoffset 2.6s $ease-mc;
   }
@@ -52,7 +52,7 @@
 }
 
 .menu__wrapper {
-  background: #f7f7f7;
+  background: var(--color-background);
   display: grid;
   grid-area: 1 / 1 / 2 / 2;
   grid-template-columns: 100%;
@@ -75,10 +75,15 @@
   pointer-events: none;
   position: relative;
   width: 100%;
+
+  & path {
+    fill: var(--color-text);
+  }
 }
 
 .menu {
   align-items: center;
+  color: var(--color-text);
   display: flex;
   flex-direction: column;
   grid-area: 1 / 1 / 2 / 2;

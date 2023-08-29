@@ -77,8 +77,6 @@ export default class Home extends Page {
       //     item.style.backgroundColor = "transparent"
       //   })
       // }
-
-      console.log('you should review the Home.js file on line 81')
     }
 
     function notIntersecting() {
@@ -91,7 +89,6 @@ export default class Home extends Page {
       //   document.documentElement.style.background = 'white'
       //   document.documentElement.style.color = 'black'
       // }
-      console.log('you should review the Home.js file on line 90')
     }
 
     const observer = new window.IntersectionObserver(entries => {

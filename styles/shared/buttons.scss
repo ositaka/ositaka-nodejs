@@ -3,7 +3,7 @@ a.button__text {
   text-decoration: underline;
 }
 
-.has-arrow { 
+.has-arrow {
   svg {
     position: relative;
     top: -0.5rem;
@@ -22,4 +22,9 @@ a.button__text {
 button {
   font: inherit;
   font-weight: 500;
+}
+
+.arrow-button path,
+.arrow-button line {
+  stroke: var(--color-text);
 }

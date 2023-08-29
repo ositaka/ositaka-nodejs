@@ -344,7 +344,7 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
       } else false
     })
 
-    nextProject = allProjects[matchedItemIndex + 1] ?? allProjects[0]
+    nextProject = allProjects[matchedItemIndex + 1] || allProjects[0]
     nextProject = nextProject.work_link.uid
 
     res.render('pages/work_page', {

@@ -5,7 +5,7 @@
 
 .desktop .cursor {
   align-items: center;
-  background: white;
+  background: var(--color-text);
   border-radius: 80%;
   backface-visibility: hidden;
   display: flex;
@@ -22,19 +22,12 @@
   z-index: z('cursor');
 
   &__hover {
-    background: black;
+    background: var(--color-text);
     mix-blend-mode: normal;
   }
 
   &__text {
-    color: white;
+    color: var(--color-background);
     transition: opacity 0.2s $ease-mc, scale 0.2s $ease-mc;
   }
-}
-
-.box {
-  height: 80vh;
-  margin: 10vh;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 2;
 }

@@ -97,9 +97,6 @@ define(['./workbox-37481be9'], (function (workbox) { 'use strict';
     "url": ".DS_Store",
     "revision": "53d2c9c9917cdc0b284fe9b833d4bd20"
   }, {
-    "url": "a8f42ecbed05b438435ab1d9bd6be9f1.png",
-    "revision": "b54699f0b90f5705130bb0e86f40186c"
-  }, {
     "url": "android-chrome-192x192.png",
     "revision": "dd512c1aae7acaef6a0baba62b3551b5"
   }, {
@@ -149,13 +146,7 @@ define(['./workbox-37481be9'], (function (workbox) { 'use strict';
     "revision": "27364a2dc18a866e7b2b5ef2b5ded870"
   }, {
     "url": "main.css",
-    "revision": "8b6d08a0a4b235cf457da622946bec09"
-  }, {
-    "url": "menu-icon-close.svg",
-    "revision": "9dc5c8b386feea586c9bd50f29182131"
-  }, {
-    "url": "menu-icon.svg",
-    "revision": "b84c7c38a20d2d1f8e2a6e80fcd08278"
+    "revision": "2ca2636d3953c07695f5bd58ddec23b2"
   }, {
     "url": "mstile-144x144.png",
     "revision": "5deb917e66f185378b05f3ca9f769849"

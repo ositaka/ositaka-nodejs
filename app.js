@@ -315,6 +315,8 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
   const uid = req.params.uid;
   const work_page = await api.getByUID('work_page', uid, { lang });
 
+
+
   lang = langsReversed[lang]
 
   if (work_page) {
@@ -326,6 +328,25 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
     const { results: parent_en } = await api.query(Prismic.Predicates.at('document.type', 'work_page'), { lang: "en-gb" })
     const { results: parent_pt } = await api.query(Prismic.Predicates.at('document.type', 'work_page'), { lang: "pt-pt" })
 
+    // Get Next Project link
+    const { results: projects } = await api.query(Prismic.Predicates.at('document.type', 'work'), { lang: langs[req.params.lang] })
+    const allProjects = projects[0].data.works.filter(item => item.published !== false)
+    const currentProject = work_page.uid;
+
+    let matchedItem
+    let matchedItemIndex
+    let nextProject
+
+    allProjects.map((item, index) => {
+      if (item.work_link.uid === currentProject) {
+        matchedItem = item
+        matchedItemIndex = index
+      } else false
+    })
+
+    nextProject = allProjects[matchedItemIndex + 1] ?? allProjects[0]
+    nextProject = nextProject.work_link.uid
+
     res.render('pages/work_page', {
       ...defaults,
       _404,
@@ -334,6 +355,7 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
       globals,
       lang,
       meta,
+      nextProject,
       parent_en,
       parent_pt,
       work_page,

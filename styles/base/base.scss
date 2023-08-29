@@ -77,7 +77,6 @@ figure {
 
 picture {
   display: block;
-  scale: 1.01; // fixes figma semi-transparent pixel
 }
 
 img,
@@ -85,7 +84,11 @@ video {
   opacity: 0;
   transition: opacity 2.6s 0.1s $ease-mc, scale 3.6s 0.2s $ease-out-expo;
   vertical-align: middle;
-  scale: 1.2 1.4 1;
+  scale: 1.1 1.2 1;
+
+  @include media('<phone') {
+    scale: 1.2 1.4 1;
+  }
 
   &.loaded {
     opacity: 1;

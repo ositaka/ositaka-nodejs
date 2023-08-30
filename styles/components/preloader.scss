@@ -2,12 +2,12 @@
   @extend %center;
   @extend %cover;
 
-  background-color: $color-text;
+  background-color: var(--color-text);
   // background-image: url('/shared/intro.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: $color-background;
+  color: var(--color-background);
   text-align: center;
   z-index: z('preloader');
 

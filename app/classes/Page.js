@@ -281,7 +281,6 @@ export default class Page {
         color: this.element.getAttribute('color')
       })
 
-      console.log(this.element.getAttribute('background'))
       if (animation) {
         this.animationIn = animation
       } else {
@@ -410,8 +409,6 @@ export default class Page {
   }
 
   onTouchDown(event) {
-    console.log(event)
-    console.log(Detection.isTouch(), 'touch')
     if (!Detection.isPhone() || !Detection.isTablet() || !Detection.isLowPerformance() || !Detection.isTouch()) return
 
     this.isDown = true

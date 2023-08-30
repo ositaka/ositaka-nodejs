@@ -8,24 +8,30 @@
 
 .work_page__header {
   margin: auto;
-  padding-top: 34rem;
-  padding-bottom: 16rem;
+  padding-top: 36rem;
+  padding-bottom: 18rem;
+  text-align: center;
   width: 134rem;
 
   @include media('<phone') {
-    width: 88%;
+    text-align: left;
+    width: 86%;
   }
 }
 
 .work_page__title {
-  margin-right: 34rem;
+  margin-left: 28rem;
+  margin-right: 28rem;
+  margin-top: 3rem;
 
   @include media('<phone') {
-    margin-right: 0;
+    margin-right: 6rem;
+    margin-left: 0;
   }
 }
 
 .work_page__project__areas {
+  display: none;
   margin-top: 6rem;
 }
 
@@ -177,7 +183,7 @@
   text-align: center;
 
   @include media('<phone') {
-    max-width: 80%;
+    max-width: 86%;
   }
 }
 
@@ -188,7 +194,7 @@
   width: 134rem;
 
   @include media('<phone') {
-    width: 88%;
+    width: 86%;
     margin: 0 auto 24rem;
 
     & + .work_page__full-screen {
@@ -205,11 +211,11 @@
   & .work_page__info__title {
     width: 60rem;
     margin-right: 12rem;
-    font-size: 3.4rem;
+    font-size: 4.2rem;
     font-weight: 600;
 
     @include media('<phone') {
-      width: 88%;
+      width: 86%;
     }
   }
 
@@ -237,7 +243,7 @@
     }
 
     @include media('<phone') {
-      width: 88%;
+      width: 86%;
     }
   }
 

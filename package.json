@@ -5,7 +5,7 @@
     "backend:build": "node app.js",
     "backend:development": "nodemon app.js",
     "frontend:build": "webpack --progress --config webpack.config.build.js",
-    "frontend:development": "webpack serve --progress --config webpack.config.development.js",
+    "frontend:development": "webpack serve --host 0.0.0.0 --progress --config webpack.config.development.js",
     "start": "concurrently --kill-others \"yarn run backend:development\" \"yarn run frontend:development\"",
     "production": "node app.js"
   },

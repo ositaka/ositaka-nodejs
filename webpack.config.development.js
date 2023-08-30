@@ -9,6 +9,7 @@ module.exports = merge(config, {
   devtool: 'inline-source-map',
 
   devServer: {
+    host: '0.0.0.0',
     writeToDisk: true
   },
 

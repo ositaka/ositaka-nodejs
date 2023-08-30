@@ -10,33 +10,43 @@ class Detection {
   }
 
   isTablet() {
-    if (!this.TabletChecked) {
-      this.TabletChecked = true
+    if (!this.isTabletChecked) {
+      this.isTabletChecked = true
 
-      this.TabletCheck = document.documentElement.classList.contains('tablet')
+      this.isTabletCheck = document.documentElement.classList.contains('tablet')
     }
 
-    return this.TabletCheck
+    return this.isTabletCheck
   }
 
   isDesktop() {
-    if (!this.DesktopChecked) {
-      this.DesktopChecked = true
+    if (!this.isDesktopChecked) {
+      this.isDesktopChecked = true
 
-      this.DesktopCheck = document.documentElement.classList.contains('desktop')
+      this.isDesktopCheck = document.documentElement.classList.contains('desktop')
     }
 
-    return this.DesktopCheck
+    return this.isDesktopCheck
   }
 
   isLowPerformance() {
-    if (!this.LowPerformanceChecked) {
-      this.LowPerformanceChecked = true
+    if (!this.isLowPerformanceChecked) {
+      this.isLowPerformanceChecked = true
 
-      this.LowPerformanceCheck = document.documentElement.classList.contains('low-performance')
+      this.isLowPerformanceCheck = document.documentElement.classList.contains('low-performance')
     }
 
-    return this.LowPerformanceCheck
+    return this.isLowPerformanceCheck
+  }
+
+  isTouch() {
+    if (!this.isTouchChecked) {
+      this.isTouchChecked = true
+
+      this.isTouchCheck = navigator.maxTouchPoints > 0
+    }
+
+    return this.isTouchCheck
   }
 
   // is60fps() {

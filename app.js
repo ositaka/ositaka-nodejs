@@ -445,5 +445,13 @@ app.post('/message-sent', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+  var ip = require("ip").address();
+
+  console.log(`
+  --------------------------------------
+  App listening at http://localhost:${port}
+  --------------------------------------
+  Local IP: http://${ip}:${port}
+  --------------------------------------
+  `);
 });

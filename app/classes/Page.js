@@ -49,12 +49,15 @@ export default class Page {
   }
 
   create() {
+    if (Detection.isTouch()) {
+      document.documentElement.classList.remove('desktop')
+      document.documentElement.classList.add('touch')
+    }
+
     this.animations = []
 
     this.element = document.querySelector(this.selector)
     this.elements = {}
-
-    console.log(this.element, 'page')
 
     this.scroll = {
       current: 0,
@@ -62,6 +65,7 @@ export default class Page {
       last: 0,
       limit: 0
     }
+
 
     each(this.selectorChildren, (entry, key) => {
       if (entry instanceof window.HTMLElement || entry instanceof window.NodeList || Array.isArray(entry)) {
@@ -297,7 +301,7 @@ export default class Page {
         resolve()
       })
 
-      if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance()) {
+      if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance() || Detection.isTouch()) {
         window.scrollTo(2, 0)
       }
 
@@ -406,7 +410,9 @@ export default class Page {
   }
 
   onTouchDown(event) {
-    if (!Detection.isPhone() || !Detection.isTablet() || !Detection.isLowPerformance()) return
+    console.log(event)
+    console.log(Detection.isTouch(), 'touch')
+    if (!Detection.isPhone() || !Detection.isTablet() || !Detection.isLowPerformance() || !Detection.isTouch()) return
 
     this.isDown = true
 
@@ -415,7 +421,7 @@ export default class Page {
   }
 
   onTouchMove(event) {
-    if (!Detection.isPhone() || !Detection.isTablet() || Detection.isLowPerformance() || !this.isDown) return
+    if (!Detection.isPhone() || !Detection.isTablet() || !Detection.isLowPerformance() || !Detection.isTouch() || !this.isDown) return
 
     const y = event.touches ? event.touches[0].clientY : event.clientY
     const distance = (this.start - y) * 3
@@ -424,7 +430,7 @@ export default class Page {
   }
 
   onTouchUp(event) {
-    if (!Detection.isPhone() || !Detection.isTablet() || !Detection.isLowPerformance()) return
+    if (!Detection.isPhone() || !Detection.isTablet() || !Detection.isLowPerformance() || !Detection.isTouch()) return
 
     this.isDown = false
   }
@@ -450,7 +456,7 @@ export default class Page {
   update() {
 
     // Desktop scroll
-    if (!Detection.isPhone() || !Detection.isTablet() || !Detection.isLowPerformance()) {
+    if (!Detection.isPhone() || !Detection.isTablet() || !Detection.isLowPerformance() || !Detection.isTouch()) {
       this.scroll.target = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.target)
       this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, 0.1)
 
@@ -458,7 +464,7 @@ export default class Page {
     }
 
     // Touch scroll
-    if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance()) {
+    if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance() || Detection.isTouch()) {
       window.onscroll = () => {
         this.rotateTriangle()
       }
@@ -514,7 +520,7 @@ export default class Page {
 
     if (!triangle.classList.contains('is-on-navigation')) return
 
-    if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance()) {
+    if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance() || Detection.isTouch()) {
       triangle.style.rotate = `${Number(window.scrollY / 3 + 90)}deg`
     }
     else {

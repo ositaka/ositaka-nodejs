@@ -23,14 +23,14 @@ block content
             a.work__list__item(href=`/${lang}/${work.uid}/${item.work_link.uid}`)
               figure.work__list__item__media
                 //- if (item.is_video === true)
-                //-   video(preload="auto" playsinline autoplay loop muted disablepictureinpicture)
+                //-   video(preload="auto" playsinline autoplay loop muted disablepictureinpicture disableremoteplayback)
                 //-     source(src=`${item.gallery_video.url}` type="video/mp4")
                 //- else
                 picture(height=`${item.work_image.dimensions.height}` width=`${item.work_image.dimensions.width}` style=`background-color: ${item.background_color}`)
                   if (typeof(item.work_image.phone) !== 'undefined')
                     source(media='(max-width: 768px)' srcset=`${item.work_image.phone.url}`)
                     source(media='(min-width: 769px)' srcset=`${item.work_image.url}`)
-                  img.work__list__item__media__image(alt=item.work_image.alt data-src=item.work_image.url.replace('?auto=compress,format', '') height=`${item.work_image.dimensions.height}` width=`${item.work_image.dimensions.width}`)
+                  img.work__list__item__media__image(alt=item.work_image.alt data-src=item.work_image.url height=`${item.work_image.dimensions.height}` width=`${item.work_image.dimensions.width}`)
 
               .work__list__item__text
                 h2.title__h6.work__list__item__text__title(data-animation="title")=item.work_title

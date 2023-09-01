@@ -1,12 +1,20 @@
 .footer {
-  margin-top: 0;
-  height: 46rem;
+  padding: 0;
+  height: 50vw;
   width: 100%;
   z-index: z('footer');
 }
 
 .footer__wrapper {
-  @extend %container;
+  padding: 20vw 0 3vw;
+}
 
-  text-align: center;
+.footer__arrow svg {
+  height: 6vw;
+  width: 6vw;
+}
+
+.footer__credits {
+  margin-top: 6vw;
+  margin-left: 3vw;
 }

@@ -13,9 +13,9 @@ block content
         figure.about__hero__media
           picture(height=`${about.data.image.dimensions.height}` width=`${about.data.image.dimensions.width}` style=`background-color: ${about.data.background_color_top_image}`)
             if (typeof(about.data.image.phone) !== 'undefined')
-              source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? about.data.image.phone.url : about.data.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
-              source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? about.data.image.url.replace('?auto=compress,format', '') : about.data.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
-            img.about__hero__media__image(alt=about.data.image.alt data-src=about.data.image.url.replace('?auto=compress,format', '') height=`${about.data.image.dimensions.height}` width=`${about.data.image.dimensions.width}`)
+              source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? about.data.image.phone.url : about.data.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+              source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? about.data.image.url : about.data.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+            img.about__hero__media__image(alt=about.data.image.alt data-src=about.data.image.url height=`${about.data.image.dimensions.height}` width=`${about.data.image.dimensions.width}`)
 
       section.about__intro__text
         h2.title__h4.about__intro__text__title(data-animation="title")=about.data.about_intro[0].title
@@ -34,9 +34,9 @@ block content
           figure.about__image__section__media
             picture(height=`${section.section_image.dimensions.height}` width=`${section.section_image.dimensions.width}` style=`background-color: ${section.background_color}`)
               if (typeof(section.section_image.phone) !== 'undefined')
-                source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.section_image.phone.url : section.section_image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
-                source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.section_image.url.replace('?auto=compress,format', '') : section.section_image.url.replace('?auto=compress,format', '?q=30&w=900&auto=compress,format')}`)
-              img.about__image__section__media__image(alt=section.section_image.alt data-src=section.section_image.url.replace('?auto=compress,format', '') height=`${section.section_image.dimensions.height}` width=`${section.section_image.dimensions.width}`)
+                source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? section.section_image.phone.url : section.section_image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? section.section_image.url : section.section_image.url.replace('?auto=compress,format', '?q=30&w=900&auto=compress,format')}`)
+              img.about__image__section__media__image(alt=section.section_image.alt data-src=section.section_image.url height=`${section.section_image.dimensions.height}` width=`${section.section_image.dimensions.width}`)
           .about__image__section__copy
             h1.title__h3(data-animation="title")=section.text
 
@@ -49,13 +49,6 @@ block content
               h3.about__awards__list__item__column(data-animation="title")=award.award_label
               h3.about__awards__list__item__column(data-animation="chain")=award.award_date
               h3.about__awards__list__item__column(data-animation="chain")=award.award_project_title
-
-      section.start__project
-        .start__project__wrapper
-      //-     h2.title__h2(data-animation="chain") Have you a new project?
-      //-     a.button__text(data-animation="link" href="/en/contact")
-      //-       span Let us know everything
-
 
       include ../partials/footer
       

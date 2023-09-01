@@ -26,6 +26,7 @@
 
   &-triangle {
     display: block;
+    filter: none;
     left: 0.5rem;
     margin-right: 3rem;
     min-width: 2rem;
@@ -33,25 +34,33 @@
     rotate: 90deg;
     scale: 2.6;
     top: 1rem;
+    transform: unset !important;
     transform: translate3d(0%, 0%, 0);
     transform-origin: 39% 50%;
     transition: all 1s $ease-mc;
     z-index: z('triangle');
 
-    &.is-on-preloader {
-      top: calc(50dvh - 6rem);
-      left: calc(50dvw - 6rem);
-      scale: 20;
-      rotate: 810deg;
-      transform: translate3d(-20%, 3%, 0);
-    }
-
     @include media('<phone') {
       scale: 1.4;
       left: 1.5rem;
+    }
 
+    @media (prefers-reduced-motion: reduce) {
+      rotate: 90deg !important;
+      transition: none;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
       &.is-on-preloader {
-        scale: 8;
+        top: calc(30dvh - 6rem);
+        left: calc(50dvw - 6rem);
+        scale: 20;
+        rotate: 810deg;
+        transform: translate3d(-20%, 3%, 0);
+
+        @include media('<phone') {
+          scale: 8;
+        }
       }
     }
   }

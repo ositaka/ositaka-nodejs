@@ -31,7 +31,7 @@ export default class WorkPage extends Page {
     if (Detection.isDesktop()) {
       const scroll = this.scroll
       const wrapper = this.elements.wrapper
-      const height = innerHeight * 1.35
+      const height = innerHeight * 0.75
       const defaultTransition = wrapper.style.transition
 
       scroll.current = height

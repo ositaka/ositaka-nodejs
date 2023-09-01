@@ -2,20 +2,22 @@ input,
 textarea {
   @extend %text-body;
 
+  background: transparent;
   border: none;
-  border-bottom: 0.2rem solid $color-text;
-  color: $color-text;
+  border-bottom: 0.2rem solid var(--color-text);
+  color: var(--color-text);
   display: block;
   font: inherit;
   letter-spacing: 0.1rem;
   line-height: 1.6;
   outline: none;
   padding: 2rem 0;
-  transition: border 300ms ease;
+  transition: border 300ms ease, margin 300ms ease;
   width: 100%;
 
   &:focus-within {
-    border-bottom: 0.2rem solid red;
+    border-bottom: 0.4rem solid var(--color-text);
+    margin-bottom: -0.2rem;
   }
 
   &[type='submit'] {

@@ -4,18 +4,35 @@ a.button__text {
 }
 
 .has-arrow {
+  border: 1px solid var(--color-text);
+  border-radius: 10vw;
+  display: inline-flex;
+  padding: 2vw 3vw;
+  place-items: center;
+
   svg {
+    height: 2vw;
     position: relative;
-    top: -0.5rem;
-    margin-left: 2rem;
+    margin-left: 1vw;
     transform: translateX(0);
     transition: transform 1.4s $ease-mc;
     transition-delay: 0.3s;
+    width: 2vw;
   }
 
   &:hover svg {
     transform: translateX(2rem);
     transition-delay: 0;
+  }
+
+  @include media('<phone') {
+    padding: 4vw 8vw;
+
+    svg {
+      height: 8vw;
+      margin-left: 4vw;
+      width: 8vw;
+    }
   }
 }
 

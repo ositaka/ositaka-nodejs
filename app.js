@@ -139,11 +139,10 @@ const handleRequest = async (api, lang, req) => {
 };
 
 app.get('/offline', async (req, res) => {
-  res.sendFile('/offline.html');
+  res.sendFile('offline.html', { root: path.join(__dirname) });
 })
 
 app.get('/', async (req, res) => {
-
   res.redirect('/en/')
 })
 
@@ -324,6 +323,8 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
     colors = work_page.data.colors[0]
     meta = work_page.data.seo[0]
 
+    console.log(JSON.stringify(work_page.data.body))
+
     const { results: globals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
     const { results: parent_en } = await api.query(Prismic.Predicates.at('document.type', 'work_page'), { lang: "en-gb" })
     const { results: parent_pt } = await api.query(Prismic.Predicates.at('document.type', 'work_page'), { lang: "pt-pt" })
@@ -390,7 +391,6 @@ app.post('/message-sent', (req, res) => {
       <h3>Contact Details</h3>
       <ul>  
         <li>Name: ${req.body.name}</li>
-        <li>Company: ${req.body.company}</li>
         <li>Email: <a href="mailto:${req.body.email}">${req.body.email}</a></li>
         <li>Phone: <a href="tel:${req.body.phone}">${req.body.phone}<a/></li>
       </ul>

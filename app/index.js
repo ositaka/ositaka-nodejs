@@ -299,7 +299,7 @@ class App {
         isOnline: true
       }));
 
-      window.alert('You are back online. Congratulations!');
+      // window.alert('You are back online. Congratulations!');
     });
 
     // isOnline = false;

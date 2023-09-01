@@ -8,6 +8,10 @@
   &.in-view span span {
     transform: translateY(0%) rotateY(0deg) rotateZ(0deg) skewX(0deg);
     transition: transform 1.4s $ease-mc;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 }
 
@@ -39,7 +43,7 @@
 /**
  * Marquue
 **/
-.marquee__list {
+.marquee {
   overflow: hidden;
   white-space: nowrap;
   width: 100vw;
@@ -54,14 +58,14 @@
   }
 }
 
-.marquee__list__content {
+.marquee__content {
   animation: marquee 32s linear infinite;
   animation-delay: -16s; // half-time
   display: inline-block;
   will-change: transform;
 }
 
-.marquee__list__content__copy {
+.marquee__content__copy {
   animation: marquee__copy 32s linear infinite;
 }
 

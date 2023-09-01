@@ -19,27 +19,28 @@ block content
           if (section.slice_type === 'full_screen')
             section.work_page__full-screen
               figure.work_page__full-screen__media
-                picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
+                picture(style=`background-color: ${section.primary.background_color}`)
                   //- is video && is on 4g
-                  if (section.primary.is_video === true && (connection === '4g' || connection === 'undefined')) 
-                    video(preload="auto" playsinline loop muted disablepictureinpicture
+                  if (section.primary.is_video === true && (connection === '4g' || connection === '5g' || connection === 'undefined')) 
+                    video(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback
                       srcset=`
                         ${section.primary.video_mobile.url} 768w, 
                         ${section.primary.video_desktop.url} 769w
-                      ` style=`background-color: ${section.primary.background_color}`)
+                      ` style=`background-color: ${section.primary.background_color}`
+                      )
 
                   //- is video && is not on 4g: show image
                   else if (section.primary.is_video === true && connection !== '4g' && typeof(section.primary.image.phone) !== 'undefined')
                     source(media='(max-width: 768px)' srcset=`${section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
                     source(media='(min-width: 769px)' srcset=`${section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
-                    img(alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+                    img(loading="lazy" alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
                   
                   //- is image
                   else
                     if (typeof(section.primary.image.phone) !== 'undefined')
-                      source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.primary.image.phone.url : section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
-                      source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.primary.image.url.replace('?auto=compress,format', '') : section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
-                    img(alt=section.primary.image.alt data-src=section.primary.image.url.replace('?auto=compress,format', '') height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+                      source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? section.primary.image.phone.url : section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                      source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? section.primary.image.url : section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+                    img(loading="lazy" alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
 
 
           if (section.slice_type === 'media')
@@ -47,8 +48,8 @@ block content
               figure.work_page__media__media
                 picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
                   //- is video && is on 4g
-                  if (section.primary.is_video === true && connection === '4g' || section.primary.is_video === true && connection === 'undefined')
-                    video(preload="auto" playsinline loop muted disablepictureinpicture
+                  if (section.primary.is_video === true && connection === '4g' || connection === '5g' || section.primary.is_video === true && connection === 'undefined')
+                    video(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback
                       srcset=`
                         ${section.primary.video_mobile.url} 768w, 
                         ${section.primary.video_desktop.url} 1769w
@@ -58,14 +59,14 @@ block content
                   else if (section.primary.is_video === true && connection !== '4g' && typeof(section.primary.image.phone) !== 'undefined')
                     source(media='(max-width: 768px)' srcset=`${section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
                     source(media='(min-width: 769px)' srcset=`${section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
-                    img(alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+                    img(loading="lazy" alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
                   
                   //- is image
                   else
                     if (typeof(section.primary.image.phone) !== 'undefined')
-                      source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.primary.image.phone.url : section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
-                      source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? section.primary.image.url.replace('?auto=compress,format', '') : section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
-                    img(alt=section.primary.image.alt data-src=section.primary.image.url.replace('?auto=compress,format', '') height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+                      source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? section.primary.image.phone.url : section.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                      source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? section.primary.image.url : section.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+                    img(loading="lazy" alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
 
 
           if (section.slice_type === 'gallery')
@@ -93,19 +94,19 @@ block content
                   figure.work_page__gallery__media
                     picture(height=`${item.gallery_image.dimensions.height}` width=`${item.gallery_image.dimensions.width}` style=`background-color: ${item.background_color}`)
                       //- is video && is on 4g
-                      if (item.is_video === true && (connection === '4g' || connection === 'undefined'))
-                        video(preload="auto" playsinline loop muted disablepictureinpicture
+                      if (item.is_video === true && (connection === '4g' || connection === '5g' || connection === 'undefined'))
+                        video(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback
                           srcset=`
                             ${item.gallery_video.url} 768w, 
                             ${item.gallery_video.url} 769w`)
 
                       //- is video && is not on 4g: show image
                       else if (item.is_video === true && connection !== '4g' && typeof(item.gallery_image) !== 'undefined')
-                        img(alt=item.gallery_image.alt data-src=`${connection === '4g' || connection === 'undefined' ? item.gallery_image.url.replace('?auto=compress,format', '') : item.gallery_image.url.replace('?auto=compress,format', '?q=30&w=480&auto=compress,format')}` height=`${item.gallery_image.dimensions.height}` width=`${item.gallery_image.dimensions.width}`)
+                        img(loading="lazy" alt=item.gallery_image.alt data-src=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? item.gallery_image.url : item.gallery_image.url.replace('?auto=compress,format', '?q=30&w=480&auto=compress,format')}` height=`${item.gallery_image.dimensions.height}` width=`${item.gallery_image.dimensions.width}`)
                       
                       //- is image
                       else
-                        img.work_page__gallery__media__gallery_image(alt=item.gallery_image.alt data-src=`${connection === '4g' || connection === 'undefined' ? item.gallery_image.url.replace('?auto=compress,format', '') : item.gallery_image.url.replace('?auto=compress,format', '?q=30&w=600&auto=compress,format')}` width=`${item.gallery_image.dimensions.width}` height=`${item.gallery_image.dimensions.height}`)
+                        img.work_page__gallery__media__gallery_image(alt=item.gallery_image.alt data-src=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? item.gallery_image.url : item.gallery_image.url.replace('?auto=compress,format', '?q=30&w=600&auto=compress,format')}` width=`${item.gallery_image.dimensions.width}` height=`${item.gallery_image.dimensions.height}`)
 
                   if (item.gallery_image_caption)
                     p.text__body-small.work_page__gallery__media__caption(data-animation="title")=item.gallery_image_caption
@@ -121,6 +122,11 @@ block content
                 .work_page__info__small
                   h3.title__h4.work_page__info__title(data-animation="title")!=section.primary.info_title.replace(/\n/g, '<br>')
                   .work_page__info__description(data-animation="paragraph")!=PrismicDOM.RichText.asHtml(section.primary.info_description).replace(/\n/g, '<br>')
+
+                    each link in section.items 
+                      a.work_page__info__link(href=`${link.link_url}` target="_blank" rel="nofollow noopener")
+                        div(data-animation="link")
+                          span=link.link_title
 
               else
                 .work_page__info__big

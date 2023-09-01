@@ -1,5 +1,19 @@
 .contacts {
   @extend %page;
+
+  & .footer {
+    height: 36vw;
+    display: flex;
+
+    &__wrapper {
+      position: relative;
+      top: -10vw;
+    }
+
+    .marquee {
+      display: none;
+    }
+  }
 }
 
 .contacts__title {
@@ -19,7 +33,7 @@
 .contacts__form {
   @extend %container;
 
-  color: var(--color-background);
+  color: var(--color-text);
   margin-bottom: 20rem;
 
   & form > div {
@@ -27,7 +41,7 @@
   }
 
   & button {
-    margin-top: 3rem;
+    margin-top: 6rem;
   }
 }
 
@@ -38,7 +52,7 @@ ul.contacts__form__options {
   & li {
     @extend %text-body;
 
-    border: 1px solid var(--color-background);
+    border: 1px solid var(--color-text);
     border-radius: 1rem;
     cursor: pointer;
     display: inline-block;
@@ -49,9 +63,9 @@ ul.contacts__form__options {
     transition: all 1.5s $ease-mc;
 
     &.selected {
-      background-color: $color-text;
-      border: 1px solid $color-text;
-      color: $color-background;
+      background-color: var(--color-text);
+      border: 1px solid var(--color-text);
+      color: var(--color-background);
     }
 
     & input {

@@ -39,9 +39,9 @@ block content
             label
               span=contacts.data.form[0].name
               input.field#name(type='text' name='name' required)
-            label
-              span=contacts.data.form[0].company
-              input.field#company(type='text' name='company')
+            //- label
+            //-   span=contacts.data.form[0].company
+            //-   input.field#company(type='text' name='company')
             label
               span=contacts.data.form[0].email
               input.field#email(type='email' name='email' required)
@@ -50,7 +50,7 @@ block content
               input.field#phone(type='tel' name='phone' required)
             label
               span=contacts.data.form[0].message
-              textarea.field#message(name='message' required rows='4')
+              textarea.field#message(name='message' required rows='6')
           button.has-arrow(type='submit')
             div(data-animation="link")
               span=contacts.data.form[0].button

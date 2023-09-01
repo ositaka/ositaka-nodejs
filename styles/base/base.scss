@@ -47,7 +47,7 @@ body {
 }
 
 ::placeholder {
-  color: $color-text;
+  color: var(--color-text);
 }
 
 a {
@@ -79,6 +79,12 @@ picture {
   display: block;
 }
 
+picture,
+video {
+  width: 100%;
+  height: auto;
+}
+
 img,
 video {
   opacity: 0;
@@ -93,6 +99,10 @@ video {
   &.loaded {
     opacity: 1;
     scale: 1 1 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }
 

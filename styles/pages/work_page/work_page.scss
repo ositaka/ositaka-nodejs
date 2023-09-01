@@ -233,18 +233,21 @@
     }
 
     & a {
-      font-weight: bold;
-      text-decoration: underline;
+      font-weight: 500;
 
       &[target='_blank'] {
         display: inline-block;
-        margin-top: 2.4rem;
       }
     }
 
     @include media('<phone') {
       width: 86%;
     }
+  }
+
+  .work_page__info__link {
+    margin-top: 3rem;
+    margin-right: 6rem;
   }
 
   @include media('<phone') {
@@ -282,7 +285,6 @@
   font-size: 30vw;
   color: var(--color-text);
   line-height: 1;
-  -webkit-text-stroke: 2px var(--color-background);
 }
 
 svg[data-animation='arrow'] {

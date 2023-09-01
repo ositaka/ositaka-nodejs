@@ -380,14 +380,13 @@ export default class Page {
     return new Promise(resolve => {
       this.destroy()
 
-
       this.animationOut = GSAP.timeline()
 
       this.animationOut.to(this.element, {
         autoAlpha: 0,
-        duration: 0.2,
+        duration: 1.2,
         ease: 'expo.out',
-        transform: 'translateY(10%)',
+        transform: `${Detection.isDesktop() ? 'translateY(-10%) scale(0.8)' : 'translateY(10%)'}`,
         onComplete: resolve
       })
     })

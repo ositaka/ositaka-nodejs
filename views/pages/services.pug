@@ -18,8 +18,8 @@ block content
               figure.services__item__media
                 picture(height=`${service.primary.image.dimensions.height}` width=`${service.primary.image.dimensions.width}` style=`background-color: ${service.primary.background_color}`)
                   //- is video && is on 4g
-                  if (service.primary.is_video === true && connection === '4g' || connection === 'undefined') 
-                    video(preload="auto" playsinline loop muted disablepictureinpicture
+                  if (service.primary.is_video === true && connection === '4g' || connection === '5g' || connection === 'undefined') 
+                    video(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback
                       srcset=`
                         ${service.primary.video_mobile.url} 768w, 
                         ${service.primary.video_desktop.url} 769w`)
@@ -27,9 +27,9 @@ block content
                   //- is image
                   else
                     if (typeof(service.primary.image.phone) !== 'undefined')
-                      source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === 'undefined' ? service.primary.image.phone.url : service.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
-                      source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === 'undefined' ? service.primary.image.url.replace('?auto=compress,format', '') : service.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
-                    img.services__item__media__image(alt=service.primary.image.alt data-src=service.primary.image.url.replace('?auto=compress,format', '') height=`${service.primary.image.dimensions.height}` width=`${service.primary.image.dimensions.width}`)
+                      source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? service.primary.image.phone.url : service.primary.image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
+                      source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? service.primary.image.url : service.primary.image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
+                    img.services__item__media__image(alt=service.primary.image.alt data-src=service.primary.image.url height=`${service.primary.image.dimensions.height}` width=`${service.primary.image.dimensions.width}`)
 
               .services__item__content
                 h2.title__h1.services__item__content__title(data-animation="title")=service.primary.service_title[0].text
@@ -50,7 +50,7 @@ block content
                             img.services__projects__item__media__image(
                               alt=project.project_image.alt
                               data-src=`
-                                ${connection === '4g' || connection === 'undefined' ?
+                                ${connection === '4g' || connection === '5g' || connection === 'undefined' ?
                                   project.project_image.url.replace('?auto=compress,format', isPhone ? '?w=480' : '?w=900' )
                                 :
                                   project.project_image.url.replace('?auto=compress,format', isPhone ? '?q=30&w=360&auto=compress,format' : '?q=30&w=600&auto=compress,format')}`
@@ -68,5 +68,4 @@ block content
         a.home__about__button(href=`/en/about/` data-animation="link")
           span Learn more about us
 
-      include ../partials/start-project
       include ../partials/footer

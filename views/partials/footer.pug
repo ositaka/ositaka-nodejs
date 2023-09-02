@@ -3,16 +3,14 @@ footer.footer
 
     .marquee
       .marquee__content
-        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="title")=`${lang === "en" ? 'Got a new Project?' : 'Tem um projeto novo?'} `
-        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="title")=`${lang === "en" ? 'Let\'s talk!' : 'Vamos conversar!'} `
+        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="chain")=`${lang === "en" ? 'Got a new project?' : 'Tem um projeto novo?'} `
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
-        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="title")=`${lang === "en" ? 'Got a new Project?' : 'Tem um projeto novo?'} `
-        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="title")=`${lang === "en" ? 'Let\'s talk!' : 'Vamos conversar!'} `
+        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="chain")=`${lang === "en" ? 'Let\'s talk!' : 'Vamos conversar!'} `
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
@@ -21,22 +19,20 @@ footer.footer
           include ../partials/arrow
           
       .marquee__content.marquee__content__copy
-        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="title")=`${lang === "en" ? 'Got a new Project?' : 'Tem um projeto novo?'} `
-        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="title")=`${lang === "en" ? 'Let\'s talk!' : 'Vamos conversar!'} `
+        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="chain")=`${lang === "en" ? 'Got a new project?' : 'Tem um projeto novo?'} `
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
-        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="title")=`${lang === "en" ? 'Got a new Project?' : 'Tem um projeto novo?'} `
-        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="title")=`${lang === "en" ? 'Let\'s talk!' : 'Vamos conversar!'} `
+        a.title__h1(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}` data-animation="chain")=`${lang === "en" ? 'Let\'s talk!' : 'Vamos conversar!'} `
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
         a.footer__arrow(href=`/${lang === "en" ? 'en/contact/' : 'pt/contacto/'}`)
           include ../partials/arrow
-    
+
     .footer__credits
       p.text__body.text__body-small(data-animation="chain")=`© 2009-${new Date().getFullYear().toString().substr(-2)}`

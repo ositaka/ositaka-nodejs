@@ -9,9 +9,18 @@
   padding: 20vw 0 3vw;
 }
 
-.footer__arrow svg {
-  height: 6vw;
-  width: 6vw;
+a.footer__arrow {
+  display: inline-block;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: relative;
+  top: 2rem;
+  opacity: 0.4;
+
+  & svg {
+    height: 6vw;
+    width: 6vw;
+  }
 }
 
 .footer__credits {

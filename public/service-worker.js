@@ -146,7 +146,7 @@ define(['./workbox-37481be9'], (function (workbox) { 'use strict';
     "revision": "27364a2dc18a866e7b2b5ef2b5ded870"
   }, {
     "url": "main.css",
-    "revision": "ee360f0b0f4a2f579f891bbfd310622e"
+    "revision": "6d4cde7cdc90e9c7951d755e9b85d350"
   }, {
     "url": "mstile-144x144.png",
     "revision": "5deb917e66f185378b05f3ca9f769849"

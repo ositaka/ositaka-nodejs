@@ -55,18 +55,24 @@
   & a {
     padding-left: 3rem;
     padding-right: 3rem;
+    display: inline-flex;
+  }
+
+  & span {
+    margin-left: 1rem;
   }
 }
 
 .marquee__content {
-  animation: marquee 32s linear infinite;
-  animation-delay: -16s; // half-time
+  animation: marquee 12s linear infinite;
+  animation-delay: -6s; // half-time
   display: inline-block;
   will-change: transform;
+  padding-right: 6rem;
 }
 
 .marquee__content__copy {
-  animation: marquee__copy 32s linear infinite;
+  animation: marquee__copy 12s linear infinite;
 }
 
 @keyframes marquee {

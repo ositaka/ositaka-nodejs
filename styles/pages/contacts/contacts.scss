@@ -59,8 +59,10 @@ ul.contacts__form__options {
     font-weight: bold;
     margin-bottom: 4rem;
     margin-right: 4rem;
+    outline: 0px solid var(--color-text);
+    outline-offset: -3px;
     padding: 2rem 4rem;
-    transition: all 1.5s $ease-mc;
+    transition: border 1.5s $ease-mc, color 1.5s $ease-mc, outline 300ms ease;
 
     &.selected {
       background-color: var(--color-text);
@@ -70,6 +72,12 @@ ul.contacts__form__options {
 
     & input {
       display: none;
+    }
+
+    &:hover,
+    &:focus-within {
+      outline-width: 3px;
+      outline-offset: -3px;
     }
 
     @include media('<phone') {

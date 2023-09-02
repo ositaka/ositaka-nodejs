@@ -20,8 +20,8 @@
 }
 
 .work_page__title {
-  margin-left: 28rem;
-  margin-right: 28rem;
+  margin-left: 24rem;
+  margin-right: 24rem;
   margin-top: 3rem;
 
   @include media('<phone') {
@@ -232,22 +232,19 @@
       }
     }
 
-    & a {
-      font-weight: 500;
+    & a[target='_blank'] {
+      display: inline-block;
+    }
 
-      &[target='_blank'] {
-        display: inline-block;
-      }
+    .work_page__info__link {
+      margin-top: 3rem;
+      margin-right: 6rem;
+      font-weight: bold;
     }
 
     @include media('<phone') {
       width: 86%;
     }
-  }
-
-  .work_page__info__link {
-    margin-top: 3rem;
-    margin-right: 6rem;
   }
 
   @include media('<phone') {

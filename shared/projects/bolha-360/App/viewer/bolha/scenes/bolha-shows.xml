@@ -1,0 +1,462 @@
+﻿<!--
+	BOLHA 360
+	https://bolha.pt/360/
+-->
+<krpano onstart="checksceneparameter();">
+	<action name="checksceneparameter">
+	if(panorama == 1, loadscene(scene_bolha-shows-01));
+	if(panorama == 2, loadscene(scene2));
+	...
+	if(panorama === null, loadscene(scene_bolha-zen-01));
+	</action>
+
+	<include url="contextmenu.xml" />
+
+	<plugin name="gyro" devices="html5" keep="true"
+		url="%SWFPATH%/plugins/gyro2.js"
+        enabled="true"
+        camroll="true"
+        friction="0.0"
+        touch_mode="full"
+        sensor_mode="1"
+        softstart="0.5"
+        autocalibration="false"
+        onavailable=""
+        onunavailable=""
+        onenable=""
+        ondisable=""
+	/>
+
+
+	<!-- load the soundinterface plugin -->
+	<plugin name="soundinterface"
+			url.flash="%SWFPATH%/plugins/soundinterface.swf"
+			url.html5="%SWFPATH%/plugins/soundinterface.js"
+			rootpath=""
+			preload="true"
+			keep="true"
+			/>
+	<!--
+		do_crop_animation(framewidth, frameheight, framerate)
+		- animation by changing the image cropping
+		- parameters:
+		  - framewidth - the width from one frame in pixels
+		  - frameheight - the height from one frame in pixels
+		  - framerate - the animation frame rate in 'frames per second'
+		- the image can be a vertical or horizontal (or both) image-strip / sprite-sheet
+		- the action will loop automatically through all frames from left to right and top to bottom
+	-->
+	<action name="do_crop_animation" scope="local" args="framewidth, frameheight, framerate">
+		<!-- define local variables -->
+		calc(local.xframes, (caller.imagewidth /framewidth) BOR 0);
+		calc(local.frames, xframes * ((caller.imageheight / frameheight) BOR 0));
+		def(local.frame, integer, 0);
+		
+		<!-- set the first frame -->
+		calc(caller.crop, '0|0|' + framewidth + '|' + frameheight);
+		
+		<!-- do the animation -->
+		setinterval(calc('crop_anim_' + caller.name), calc(1.0 / framerate),
+			if(caller.loaded,
+				inc(frame);
+				if(frame GE frames, if(caller.onlastframe !== null, callwith(caller, onlastframe() ) ); set(frame,0); );
+				mod(xpos, frame, xframes);
+				div(ypos, frame, xframes);
+				Math.floor(ypos);
+				mul(xpos, framewidth);
+				mul(ypos, frameheight);
+				calc(caller.crop, xpos + '|' + ypos + '|' + framewidth + '|' + frameheight);
+			  ,
+				<!-- stop the interval when the hotspot gets removed -->
+				clearinterval(calc('crop_anim_' + caller.name));
+			);
+		);
+	</action>
+	
+	
+	<!-- hotspot styles -->
+	<style name="arrowspot" url="arrow.gif" distorted="true" />
+	<style name="zoomspot"   url="zoomicon.png" distorted="true" />
+
+	<!-- iPhone X Safe-Area support: -->
+	<display safearea="off" />
+	<events name="safearea_events" keep="true"
+	        onresize="if(display.safearea_inset, calc(layer[thumbs].width, 100 - display.safearea_inset.l); );"
+	        onxmlcomplete="delayedcall(1,events[safearea_events].onresize());"
+	        />
+	
+	<!-- logo -->
+	<plugin name="logo"
+	        url="logo.png"
+	        keep="true"
+	        enabled="true"
+	        align="leftttop"
+	        x="20" y="20"
+	        scale.mobile="0.5"
+	        />
+
+	<!-- loading information -->
+	<plugin name="loading"
+	        url="skin/loading.png"
+	        scale="0.5"
+	        keep="true"
+	        align="center"
+	        enabled="false"
+	        visible="false"
+	        />
+
+	<events onxmlcomplete="set(plugin[loading].visible,true);"
+	        onloadcomplete="set(plugin[loading].visible,false);;"
+	        />
+
+	<!-- Combobox -->
+	<include url="%SWFPATH%/plugins/combobox.xml" />
+
+	<action name="comboboxexamples" autorun="onstart">
+		loadscene(0);
+	</action>
+
+
+	<!-- mixed static/dynamic example - add items dynamically -->
+	<combobox name="cbscenes" design="vtour" align="leftbottom" x="10" y="10" onloaded="add_scene_items();" />
+	<action name="add_scene_items" scope="local">
+		for(set(i,0), i LT scene.count, inc(i),
+			caller.additem(calc('[img src=[dq]' + scene[get(i)].thumburl +  '[dq] style=[dq]border:1px solid rgba(255,255,255,0.5);width:48px;height:32px;vertical-align:middle;margin-right:8px;[dq]/] '+scene[get(i)].title), calc('loadscene('+i+',null,MERGE,BLEND(0.5))') );
+		);
+	</action>
+
+	<!-- static example -->
+	<combobox name="cbsettings" design="vtour" align="righttop" x="10" y="10" onchange="selectItemByName(0);">
+		<item name="item0" caption="VIEW" />
+		<item name="item3" caption="Normal"        onclick="cm_normal_view();" />
+		<item name="item4" caption="Fisheye"       onclick="cm_fisheye_view();" />
+		<item name="item5" caption="Stereographic" onclick="cm_stereographic_view();" />
+		<item name="item6" caption="Architectural" onclick="cm_architectural_view();" />
+		<item name="item7" caption="Pannini"       onclick="cm_pannini_view();" />
+		<item name="item8" caption="Little Planet" onclick="cm_littleplanet_view();" />
+	</combobox>
+
+
+	<!-- include a contextmenu with projections from an other example -->
+	<include url="../animated-hotspots/contextmenu.xml" />
+	
+	
+	
+		<!-- use the panos/scenes from the bolha example -->
+	<scene name="scene_bolha-shows-01" title="BOLHA - Shows" thumburl="../scenes-bolha/panos/bolha-shows/01.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" />
+		<preview url="../scenes-bolha/panos/bolha-shows/01.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-shows/01.tiles/pano_%s.jpg" />
+		</image>
+
+		<hotspot name="spot6" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="0"   atv="-12" scale="1" zoom="true" />
+
+		<hotspot name="video" url="360.png" scale="0.5" ath="-125" atv="4" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/01/video.xml',_blank);" />
+		<!--
+		<hotspot name="spot_bolha-02" style="arrowspot" ath="-125"   atv="4"  scale="0.3" />
+		<hotspot name="spot_bolha-03" style="arrowspot" ath="80.5"  atv="3"   scale="0.6" />
+		-->
+		
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, 'https://krpano.com/panos/xmas/ding_dong_merrily_on_high.mp3|https://krpano.com/panos/xmas/ding_dong_merrily_on_high.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="0.5" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+	</scene>
+
+	<!-- BOLHA ZEN -->
+
+	<scene name="scene_bolha-zen-01" title="Bolha - Zen" thumburl="../scenes-bolha/panos/bolha-zen/01.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-zen/01.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-zen/01.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/100653_1148115-lq.mp3|%SWFPATH%/bolha/scenes/audio/100653_1148115-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		<hotspot onclick="loadscene(scene_bolha-zen-02,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="0"   atv="-12" scale="1" zoom="true" />
+		<hotspot name="video" url="360.png" scale="1" ath="-125" atv="-20" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/05/video.xml',_self);" />
+
+	</scene>
+
+	<scene name="scene_bolha-zen-02" title="Bolha - Zen" thumburl="../scenes-bolha/panos/bolha-zen/02.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-zen/02.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-zen/02.tiles/pano_%s.jpg" />
+		</image>
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/115272_200876-lq.mp3|%SWFPATH%/bolha/scenes/audio/115272_200876-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-zen-05,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="0"   atv="-12" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-zen-01,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="160"   atv="-12" scale="1" zoom="true" />
+		<hotspot name="video" url="360.png" scale="1" ath="-125" atv="-20" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/02/video.xml',_blank);" />
+	</scene>
+
+	<!--<scene name="scene_bolha-zen-03" title="Bolha - Zen" thumburl="../scenes-bolha/panos/bolha-zen/03.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-zen/03.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-zen/03.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot onclick="loadscene(scene_bolha-zen-03,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="0"   atv="-12" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-zen-05,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="160"   atv="-12" scale="1" zoom="true" />
+	</scene>
+
+	<scene name="scene_bolha-zen-04" title="Bolha - Zen" thumburl="../scenes-bolha/panos/bolha-zen/04.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-zen/04.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-zen/04.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot onclick="loadscene(scene_bolha-zen-04,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="0"   atv="-12" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-zen-02,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="160"   atv="-12" scale="1" zoom="true" />
+
+	</scene>-->
+
+	<scene name="scene_bolha-zen-05" title="Bolha - Zen" thumburl="../scenes-bolha/panos/bolha-zen/05.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-zen/05.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-zen/05.tiles/pano_%s.jpg" />
+		</image>
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/135447_1672196-lq.mp3|%SWFPATH%/bolha/scenes/audio/135447_1672196-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		<hotspot onclick="loadscene(scene_bolha-sacred-01,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="0"   atv="-12" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-zen-01,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="160"   atv="-12" scale="1" zoom="true" />
+
+	</scene>
+
+
+	<!-- BOLHA SACRED -->
+	
+	<scene name="scene_bolha-sacred-01" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/01.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/01.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/01.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, 'https://freesound.org/data/previews/47/47989_553671-lq.mp3|https://freesound.org/data/previews/47/47989_553671-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="0.5" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+	</scene>
+
+	<scene name="scene_bolha-sacred-02" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/02.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/02.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/02.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-sacred-03" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/03.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/03.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/03.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-sacred-04" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/04.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/04.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/04.tiles/pano_%s.jpg" />
+		</image>
+
+		<hotspot name="video" url="360.png" scale="1" ath="-125" atv="-20" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/01/video.xml',_blank);" />
+	</scene>
+
+	<scene name="scene_bolha-sacred-05" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/05.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/05.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/05.tiles/pano_%s.jpg" />
+		</image>
+
+		<hotspot name="video" url="360.png" scale="1" ath="-125" atv="-20" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/04/video.xml',_blank);" />
+	</scene>
+
+	<scene name="scene_bolha-sacred-06" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/06.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/06.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/06.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-sacred-07" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/07.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/07.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/07.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-sacred-08" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/08.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/08.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/08.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-sacred-09" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/09.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/09.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/09.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-sacred-10" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/10.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/10.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/10.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+
+	<!-- BOLHA LIFESTYLE -->
+	
+	<scene name="scene_bolha-lifestyle-01" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/01.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/01.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/01.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, 'https://freesound.org/data/previews/47/47989_553671-lq.mp3|https://freesound.org/data/previews/47/47989_553671-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="0.5" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-02" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/02.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/02.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/02.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-03" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/03.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/03.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/03.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-04" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/04.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/04.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/04.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-05" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/05.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/05.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/05.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-06" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/06.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/06.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/06.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-07" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/07.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/07.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/07.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-08" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/08.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/08.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/08.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-09" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/09.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/09.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/09.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-10" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/10.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="110" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/10.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/10.tiles/pano_%s.jpg" />
+		</image>
+	</scene>
+
+
+
+
+</krpano>

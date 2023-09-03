@@ -1,0 +1,1650 @@
+/* 	
+	******************************
+		GO FAST WAY
+	******************************
+		V. 1 // 2015
+	******************************
+*/
+
+
+/* 	****************
+		FONTS
+	**************** */
+@font-face {
+	font-family: 'Montserrat-Hairline';
+	src:	url('../fonts/montserrat-hairline-webfont.eot'); 
+	src:	url('../fonts/montserrat-hairline-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+			url('../fonts/montserrat-hairline-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+			url('../fonts/montserrat-hairline-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+			url('../fonts/montserrat-hairline-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+			url('../fonts/montserrat-hairline-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat-Light';
+	src:	url('../fonts/montserrat-light-webfont.eot'); 
+	src:	url('../fonts/montserrat-light-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+			url('../fonts/montserrat-light-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+			url('../fonts/montserrat-light-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+			url('../fonts/montserrat-light-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+			url('../fonts/montserrat-light-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat-Regular';
+	src:	url('../fonts/montserrat-regular-webfont.eot'); 
+	src:	url('../fonts/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+			url('../fonts/montserrat-regular-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+			url('../fonts/montserrat-regular-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+			url('../fonts/montserrat-regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+			url('../fonts/montserrat-regular-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat-Bold';
+	src:	url('../fonts/montserrat-bold-webfont.eot'); 
+	src:	url('../fonts/montserrat-bold-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+			url('../fonts/montserrat-bold-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+			url('../fonts/montserrat-bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+			url('../fonts/montserrat-bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+			url('../fonts/montserrat-bold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat-Black';
+	src:	url('../fonts/montserrat-black-webfont.eot'); 
+	src:	url('../fonts/montserrat-black-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+			url('../fonts/montserrat-black-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+			url('../fonts/montserrat-black-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+			url('../fonts/montserrat-black-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+			url('../fonts/montserrat-black-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/* 	****************
+		STRUCTURE
+	**************** */
+	
+html,
+body {
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;    
+}
+
+body > .container {
+	padding-bottom: 20px;
+}
+
+body > .container div[class*='col-'] {
+	padding:  0 10px;
+}
+
+.row {
+	margin:  0 -10px;
+}
+
+.navbar,
+.navbar-brand {
+	height: 70px;
+}
+
+nav.navbar#header {
+	position: fixed;
+	margin: 0px;
+}
+
+.navbar-brand,
+.navbar-nav > li > a {
+	line-height: 40px;
+}
+
+.navbar-right {
+	margin-right: 0!important;
+}
+
+.navbar-nav > li > a.btn-avatar,
+.navbar-nav > li > a img.avatar {
+	width: 70px;
+	height: 70px;
+	padding: 0px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.navbar-nav > li > a.btn-avatar label {
+	position: relative;
+	top: -35px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 10px;
+	line-height: 12px;
+	cursor: pointer;
+}
+
+.navbar-form {
+	margin: 0px;
+	padding: 0px;
+}
+
+.navbar-form input.form-control {
+	width: 272px;
+	height: 70px;
+	padding: 12px 20px;
+	border-radius: 0;
+}
+
+.navbar-toggle {
+	padding: 18px 10px;
+}
+
+.nav-tabs > li > a {
+	margin: 0px;
+	border: none!important;
+}
+
+nav.navbar#header ul.dropdown-menu {
+	padding: 36px 0 0 0;
+	width: 340px;
+}
+
+nav.navbar#header ul.dropdown-menu h3 {
+	position: absolute;
+	top: 0;
+	display: block;
+	width: 340px;
+	padding: 12px 20px;
+}
+
+nav.navbar#header ul.dropdown-menu[role="menu-user"],
+nav.navbar#header ul.dropdown-menu[role="menu-user"] h3 {
+	width: 174px;
+}
+
+nav.navbar#header ul.dropdown-menu .scrollpanel {
+	padding-bottom: 0px;
+	background: #e9eef2;
+}
+
+nav.navbar#header ul.dropdown-menu > li > a {
+	padding: 10px 15px;
+}
+
+nav.navbar#header ul.dropdown-menu.big {
+	background: #e9eef2;
+}
+
+nav.navbar#header ul.dropdown-menu.big li {
+	padding: 20px;
+	background: #e9eef2;
+}
+
+nav.navbar#header ul.dropdown-menu.big li:hover,
+nav.navbar#header ul.dropdown-menu.big li:focus {
+	background: #d6dde3;
+}
+
+nav.navbar#header ul.dropdown-menu.big li:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+nav.navbar#header ul.dropdown-menu.big li .left{
+	float: left;
+	width: 75%;
+}
+
+nav.navbar#header ul.dropdown-menu.big li .right{
+	float: right;
+	width: 25%;
+	text-align: right;
+}
+
+nav.navbar#header ul.dropdown-menu.big li h4 {
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+	font-size: 13px;
+	color: #01b2b2;
+}
+
+nav.navbar#header ul.dropdown-menu.big li p.notification-desc {
+	margin: 4px 0 0;
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+	font-size: 13px;
+	color: #555c62;
+}
+
+nav.navbar#header ul.dropdown-menu.big li span.notification-date {
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+	font-size: 12px;
+	color: #8e9aa3;
+}
+
+.box {
+	margin-bottom: 20px;
+}
+
+h2.title {
+	display: block;
+	text-align: left;
+	padding: 25px 0;
+}
+
+span.badge {
+	min-width: 17px;
+	padding: 4px;
+}
+
+span.video-duration {
+	margin-top: -7px;
+	margin-left: 20px;
+}
+
+ul.main-video-info,
+ul.nav-tabs,
+ul.access-list,
+ul.related-items-clients {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+span.video-duration {
+	float: right;
+}
+
+a.btn-edit,
+a.btn-upload,
+a.btn-remove {
+	display: block;
+	padding: 12px;
+	text-align: center;
+}
+
+a.btn-status,
+#main-content a.btn-icon-edit {
+	float: right;
+	display: block;
+	position: relative;
+}
+
+#main-content a.btn-status,
+#main-content a.btn-icon-edit {
+	top: -50px;
+	width: 50px;
+	height: 50px;
+	margin-bottom: -50px;
+}
+
+#extras a.btn-icon-edit {
+	top: -6px;
+	width: 30px;
+	height: 30px;
+	margin-bottom: -30px;
+}
+
+#main-content {
+	margin-top: 105px;
+	margin-right: -10px;
+}
+
+#main-content {
+	margin-bottom: 30px;
+}
+
+#main-content .box {
+	margin-bottom: 0;
+}
+
+#main-content h3 {
+	line-height: 10px;
+	overflow: hidden;
+	height: 50px;
+	padding-right: 55px!important;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#main-details hr {
+	margin: 0 20px;
+}
+
+#main-details a.btn-remove {
+	float: left;
+	width: 40%;
+}
+
+#main-details a.btn-edit {
+	float: right;
+	width: 60%;
+}
+
+#main-content h3,
+#main-video h5,
+#main-video ul.main-video-info,
+#main-details h4,
+#main-details form,
+#extras .tab-content {
+	padding: 20px;
+}
+
+#main-video ul.main-video-info {
+	padding-top: 0px;
+	padding-bottom: 15px;
+}
+
+#extras .nav-tabs > li > a {
+	width: 50px;
+	height: 50px;
+	border-radius: 0px;
+}
+
+#extras span.badge {
+	position: relative;
+	top: -5px;
+	right: -10px;
+}
+
+#my-spots {
+	margin: 0;
+	background-color: #2e3134	
+}
+
+#my-spots h2.title {
+	float: left;
+	color: #00cccc;
+}
+
+#my-spots #filter {
+	float: right; 
+	position: relative; 
+	right: 0; 
+	padding: 15px 0;
+	color: #555c62; 
+	font-size: 15px;
+	text-transform: uppercase; 
+}
+
+#my-spots .combobox {
+	margin-left: 10px;
+	padding: 6px 200px 6px 3px; 
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2e3134; 
+	background: #00cccc; 
+	border-radius: 3px;
+}
+
+
+/* Carousel */
+.carousel {
+	overflow: hidden;
+}
+
+.carousel .box {
+	margin-bottom: 0px;
+	min-height: 380px;
+}
+
+.carousel h3,
+.carousel h4,
+.carousel ul.related-items-clients {
+	padding: 15px;
+}
+
+.carousel a.btn-status{
+	top: -45px;
+	width: 45px;
+	height: 45px;
+	margin-bottom: -45px;
+}
+
+.carousel span.video-duration {
+	margin-left: 10px;
+}
+
+.carousel .carousel-controls {
+	display: block;
+	height: 70px;
+}
+
+.carousel .carousel-control {
+	bottom: 22px;
+}
+
+.carousel .carousel-indicators {
+	bottom: 14px;
+}
+
+.carousel .carousel-indicators li {
+	width: 10px;
+	height: 10px;
+	margin: 2px;
+	background-color: #9aa5ae;
+	border: none;
+}
+
+.carousel .carousel-indicators li.active {
+	background-color: #eb5657;
+}
+
+.carousel a.left,
+.carousel a.right,
+.carousel a.first,
+.carousel a.last {
+	position: absolute;
+	top: auto;
+	float: left;
+	display: block;
+	width: 30px;
+	height: 30px;
+}
+
+.carousel a.left{
+	left: 40px;
+}
+
+.carousel a.right {
+	right: 40px;
+}
+
+.carousel a.first {
+	left: 0px;
+}
+
+.carousel a.last {
+	float: right;
+	position: relative;
+	top: 18px;
+}
+
+@media (max-width:991px) {	
+	body .scrollpanel {
+		height: 372px;
+	}
+}
+
+@media (max-width:1199px) {	
+	body .scrollpanel {
+		height: 411px;
+	}
+}
+
+@media (min-width:1200px){
+	.navbar-form input.form-control {
+		width: 405px;
+	}
+	
+	body .scrollpanel {
+		height: 466px;
+	}
+}
+
+body .scrollpanel.sp-host {
+	padding-bottom: 20px;
+}
+
+#extras .scrollpanel.sp-host {
+	margin: -20px;
+	padding: 20px;
+}
+
+body .scrollpanel .sp-scrollbar {
+	width: 10px;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+body .scrollpanel .sp-scrollbar .sp-thumb {
+	background-color: #00cccc;
+}
+
+.modal-open > nav {
+	margin-right: 17px;
+}
+
+.modal.in .modal-dialog {
+	margin-top: 200px;
+}
+
+/* User's Form */
+#user-form {
+	margin-top: 105px;
+}
+
+#user-form .user-form-box {
+	margin-bottom: 20px;
+	padding: 20px 20px 32px 20px;
+	background: white;
+}
+
+#user-form .left {
+	padding-right: 40px;
+}
+
+#user-form .right {
+	padding-left: 40px;
+}
+
+#user-form h2.title {
+	margin-left: 20px;
+	padding: 15px 0;
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 22px;
+}
+
+#user-form h3 {
+	margin: 16px 0 15px 10px;
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+}
+
+#user-form .input-group {
+	display: block;
+}
+
+.required:after {
+	content: '*';
+	float: right;
+	display: block;
+	position: relative;
+	top: -47px;
+	z-index: 2;
+	width: 10px;
+	height: 30px;
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 36px;
+	color: #e95557;
+}
+
+#user-form img#cover {
+	display: block;
+	max-width: 100%;
+	background: #e9eef2;
+	border-radius: 5px;
+}
+
+#user-form label {
+	float: right;
+	position: relative;
+	top: 20px;
+	z-index: 20000;
+	opacity: 0;
+}
+
+#user-form input,
+#user-form bheckbox,
+#user-form textarea {
+	margin: 0;
+	padding: 0 0 25px 0;
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	color: #6e797b;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #00cccc;
+	box-shadow: none;
+}
+
+#user-form input {
+	height: 32px;
+}
+
+#user-form textarea {
+	height: 100px;
+	resize: none;
+}
+
+#user-form select {
+	height: 40px;
+	margin: 15px 0;
+	padding-left: 8px;
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	color: #6e797b;
+	border: none;
+	border-bottom: 1px solid #00cccc;
+	box-shadow: none;
+	border: 1px solid #dfe4e9;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: white;
+	background-image: url(../img/icons/select_normal.svg);
+	background-position: right center;
+	background-repeat: no-repeat;
+}
+
+#user-form .checkbox {
+	padding-top: 20px;
+	padding-bottom: 22px;
+	padding-left: 20px;
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+	font-size: 14px;
+	color: #00cccc;
+	font-weight: normal;
+	box-shadow: none;
+	background-color: white;
+	border-radius: 0;
+	border-bottom: 1px solid #00cccc;
+}
+
+#user-form .checkbox input {
+	margin-top: -6px;
+	margin-left: -20px;
+}
+
+
+#user-form select:hover,
+#user-form select:focus {
+	background-color: #f0f0f0;
+	background-image: url(../img/icons/select_hover.svg);
+}
+
+#user-form select span.arrow {
+	display: block;
+	background: red;
+}
+
+#user-form input:focus,
+#user-form checkbox:focus,
+#user-form textarea:focus {
+	border-bottom: 1px solid #eb5657;
+}
+
+
+.btn,
+.btn-file {
+    position: relative;
+    overflow: hidden;
+	display: block;
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+	font-size: 15px;
+	color: white;
+	background: #00cccc;
+	text-transform: uppercase;
+}
+
+.btn:hover,
+.btn:focus,
+.btn-file:hover,
+.btn-file:focus {
+	color: white;
+	background: #0db2ad;
+}
+
+.btn-file {
+	width: 172px;
+	margin: 16px auto 30px;
+}
+
+.btn-submit {
+	margin-left: 20px;
+	margin-bottom: 40px;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+
+/* 	****************
+		TYPOGRAPHY
+	**************** */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0px;
+}
+
+nav.navbar#header ul.dropdown-menu h3 {
+	font-family: 'Montserrat-Bold', Fallback, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+nav.navbar#header ul.dropdown-menu > li > a {
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+.navbar-form input.form-control,
+.navbar-form input.form-control::-webkit-input-placeholder {
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 20px;
+	font-weight: normal;
+	text-transform: uppercase:
+}
+
+h2.title {
+	font-family: 'Montserrat-Bold', Fallback, sans-serif;
+	font-size: 18px;
+	text-transform: uppercase;
+}
+
+span.badge {
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+	font-size: 9px;
+	font-weight: normal;
+}
+
+span.badge#add-video {
+	font-family: 'Montserrat-Black', Fallback, sans-serif;
+	padding: 0px;
+	font-size: 16px;
+	color: #eb5657;
+	background: #3e4347;
+}
+
+span.video-duration {
+	font-family: 'Montserrat-Hairline', Fallback, sans-serif;
+}
+
+span.video-duration::after {
+	content: '"';
+}
+
+#main-video h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+#main-video h5 {
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+#main-video ul.main-video-info {
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 13px;
+}
+
+#main-details h3,
+#main-details h4 {
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+}
+
+#main-details h3 {
+	font-size: 16px;
+}
+
+#main-details h4 {
+	font-size: 24px;
+}
+
+#main-details .video-duration {
+	font-size: 48px;
+}
+
+#main-details form > label {
+	font-family: 'Montserrat-Hairline', Fallback, sans-serif;
+	font-size: 11px;
+	text-transform: uppercase;
+}
+
+#main-details form > p {
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+	font-size: 16px;
+}
+
+#extras h5,
+#user-form h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+#extras h6 {
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+#extras form > label {
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+	font-size: 15px;
+	font-weight: normal;
+}
+
+#extras form > ul.access-list {
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+	font-size: 16px;
+}
+
+.carousel h3 {
+	font-size: 12px;
+}
+
+.carousel h4 {
+	font-size: 16px;
+}
+
+.carousel .video-duration {
+	font-size: 33px;
+}
+
+.carousel ul.related-items-clients {
+	font-size: 12px;
+}
+
+a {
+	text-decoration: none!important;
+}
+
+a.btn-edit,
+a.btn-upload,
+a.btn-remove {
+	font-family: 'Montserrat-Light', Fallback, sans-serif;
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+#user-form input:focus,
+#user-form select:focus,
+#user-form checkbox:focus,
+#user-form textarea:focus {
+	font-family: 'Montserrat-Regular', Fallback, sans-serif;
+}
+
+
+
+/* 	****************
+		COLORS
+	**************** */
+
+html,
+body {
+	background-color: #e9eef2;
+}
+
+nav.navbar#header {
+	background-color: #34383b;
+}
+
+.navbar-collapse {
+	background-color: #34383b;
+}
+
+nav.navbar#header ul.dropdown-menu {
+	background-color: #2e3134;
+	border: none;
+}
+
+nav.navbar#header ul.dropdown-menu h3 {
+	color: #555c62;
+	background: #00cccc;
+	display: block;
+}
+
+nav.navbar#header ul.dropdown-menu > li > a {
+	color: white;
+	opacity: .75;
+}
+
+nav.navbar#header ul.dropdown-menu > li > a:hover,
+nav.navbar#header ul.dropdown-menu > li > a:focus {
+	background-color: #4f565b;
+	opacity: 1;
+}
+
+nav.navbar#header ul.dropdown-menu > li.divider {
+	background-color: #555c62;
+}
+
+.navbar-nav > li > a.btn-avatar label {
+	color: #00cccc;
+}
+
+.navbar-nav > li > a.btn-avatar label:hover,
+.navbar-nav > li > a.btn-avatar label:focus {
+	color: #0db2ad;
+}
+
+.navbar-form {
+	background-color: #3e4347;
+	border: none;
+	box-shadow: none;
+}
+
+.navbar-form input.form-control {
+	color: white;
+	background-color: #3e4347;
+	border: none;
+	box-shadow: none;
+}
+
+.navbar-form input.form-control,
+.navbar-form input.form-control::-webkit-input-placeholder {
+	color: white;
+}
+
+.navbar-form input.form-control:hover,
+.navbar-form input.form-control:hover::-webkit-input-placeholder,
+.navbar-form input.form-control:focus,
+.navbar-form input.form-control:focus::-webkit-input-placeholder,
+.navbar-form input.form-control:active {
+	opacity: 1;
+}
+
+.nav-tabs > li > a {
+	color: #68747a;
+}
+
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+	color: #00cccc;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+	color: #00cccc;
+}
+
+.box {
+	background-color: white;
+}
+
+#latest-updates {
+	background-color: #d6dde3;
+}
+
+.footer {
+	background-color: #f3f6f8;
+}
+
+h2.title {
+	color: #555c62;
+}
+
+#main-video h3,
+#main-details h3,
+.carousel h3 {
+	color: white;
+}
+
+#main-video h3,
+.carousel h3 {
+	background-color: #eb5657;
+}
+
+#main-video h5 {
+	color: #00cccc;
+}
+
+#main-video ul.main-video-info {
+	color: #34383b;
+}
+
+#main-details h3 {
+	background-color: #00cccc;
+}
+
+#main-details h4,
+.carousel h4 {
+	color: #00cccc;
+}
+
+#extras ul.nav-tabs {
+	background-color: #d6dde3;
+}
+
+#extras h5,
+#extras form > label,
+#user-form h3 {
+	color: #00cccc;
+}
+
+#extras h6 {
+	color: #68747a;
+}
+
+span.video-duration {
+	color: #34383b;
+}
+
+a.btn-edit,
+a.btn-upload,
+a.btn-remove {
+	color: white;
+}
+
+a.btn-edit,
+a.btn-upload {
+	background-color: #00cccc;
+}
+
+a.btn-edit:hover,
+a.btn-edit:focus,
+a.btn-upload:hover,
+a.btn-upload:focus {
+	background-color: #0db2ad;
+}
+
+a.btn-remove {
+	background-color: #eb5657;
+}
+
+a.btn-remove:hover,
+a.btn-remove:focus {
+	background-color: #c84648;
+}
+
+a.btn-status {
+	background-color: #c64748;
+}
+
+a.btn-status:hover,
+a.btn-status:focus {
+	background-color: #0db2ad;
+}
+
+a.btn-status.approved,
+a.btn-status.approved:hover,
+a.btn-status.approved:focus {
+	background-color: #00cccc;
+}
+
+span.badge {
+	background-color: #eb5657;
+}
+
+.row.bg-light {
+	margin: 0;
+	background-color: #e9eef2;
+}
+
+.row.bg-dark {
+	margin: 0;
+	background-color: #d6dde3;
+}
+
+.carousel .carousel-indicators li:hover,
+.carousel .carousel-indicators li:focus {
+	background: #7a838a;
+	border: #7a838a;
+}
+
+.modal-footer button {
+	color: white;
+	background-color: #00cccc;
+	border: none;
+}
+
+.modal-footer button:hover,
+.modal-footer button:focus {
+	background-color: #0db2ad;
+}
+
+
+
+/* 	****************
+		ICONS
+	*************** */
+	
+a.navbar-brand#logo { 
+	content: '';
+	width: 191px;
+	height: 70px;
+	margin: 0 50px 0 0;
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="191px" height="70px" viewBox="0 0 386.848 69.958" enable-background="new 0 0 386.848 69.958" xml:space="preserve"> <g> <path fill="#EB5658" d="M111.338,0C92.02,0,76.359,15.661,76.359,34.979s15.661,34.979,34.979,34.979 c19.318,0,34.979-15.661,34.979-34.979S130.656,0,111.338,0 M129.252,36.968L104.113,51.18c-1.935,1.094-3.518,0.17-3.518-2.054 V20.832c0-2.223,1.583-3.147,3.518-2.053l25.139,14.211C131.187,34.084,131.187,35.874,129.252,36.968"/> <path fill="#EB5658" d="M49.78,45.738c0,2.223-1.819,4.042-4.042,4.042H24.219c-2.223,0-4.042-1.819-4.042-4.042V24.22 c0-2.223,1.819-4.042,4.042-4.042h17.927h3.592h20.899C61.06,8.268,49,0,34.979,0C15.66,0,0,15.661,0,34.979 s15.66,34.979,34.979,34.979c19.318,0,34.979-15.661,34.979-34.979H49.78V45.738z"/> <polygon fill="#FFFFFF" points="177.877,25.514 177.877,32.863 192.121,32.863 192.121,39.214 177.877,39.214 177.877,50.918 169.802,50.918 169.802,19.163 193.346,19.163 193.346,25.514 "/> <path fill="#FFFFFF" d="M201.962,45.066l-2.313,5.852h-8.302l13.701-31.755h8.301l13.383,31.755h-8.619l-2.269-5.852H201.962z M208.948,27.192l-4.628,11.75h9.164L208.948,27.192z"/> <path fill="#FFFFFF" d="M254.264,22.338l-3.04,6.306c-3.356-1.951-7.575-3.312-10.161-3.312c-2.087,0-3.493,0.771-3.493,2.314 c0,5.489,16.785,2.359,16.785,13.836c0,6.351-5.626,9.708-12.702,9.708c-5.308,0-10.752-1.996-14.517-5.081l3.13-6.215 c3.267,2.857,8.166,4.763,11.477,4.763c2.541,0,4.128-0.952,4.128-2.767c0-5.625-16.784-2.269-16.784-13.519 c0-5.852,5.034-9.573,12.656-9.573C246.324,18.799,250.996,20.207,254.264,22.338"/> <polygon fill="#FFFFFF" points="273.449,25.65 273.449,50.918 265.374,50.918 265.374,25.65 255.893,25.65 255.893,19.118 283.021,19.118 283.021,25.65 "/> <polygon fill="#FFFFFF" points="316.949,50.918 308.375,24.153 299.711,50.918 295.991,50.918 285.376,19.163 289.277,19.163 297.987,46.699 306.606,19.209 310.235,19.163 318.945,46.699 327.564,19.163 331.33,19.163 320.669,50.918 "/> <path fill="#FFFFFF" d="M336.724,42.889l-3.539,8.029h-3.855l14.243-31.755h3.767l14.199,31.755h-3.947l-3.538-8.029H336.724z M345.343,23.291l-7.077,16.104h14.244L345.343,23.291z"/> <polygon fill="#FFFFFF" points="374.78,50.918 371.197,50.918 371.197,40.167 358.903,19.163 362.668,19.163 372.966,35.721 383.128,19.163 386.848,19.163 374.78,40.031 "/> </g> </svg> '); 
+	/* Fallback */ background-image: url('../img/icons/logo.svg'); 
+	background-size: 100%; 
+	background-repeat: no-repeat; 
+	background-position: center; 
+}
+
+/* Menu */
+#menu a.btn-icon,
+#menu button.btn-icon {
+	content: '';
+	width: 70px;
+	height: 70px;
+}
+
+#menu button.btn-icon {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	float: right;
+	background-color: #3e4347;
+	border: none;
+	box-shadow: none;
+	outline: none;
+}
+
+/*
+#menu a.btn-icon:hover,
+#menu a.btn-icon:focus ,
+#menu button.btn-icon:hover,
+#menu button.btn-icon:focus {
+	background-color: #2e3134;
+}
+*/
+
+#menu .navbar-nav>.open>a,
+#menu .navbar-nav>.open>a:focus,
+#menu .navbar-nav>.open>a:hover {
+	background-color: #00cccc;
+}
+
+#menu a.btn-icon span.badge {
+	position: relative;
+	top: -2px;
+	left: 30px;
+	
+}
+
+#menu a.btn-icon#menu-search {
+	background-color: #3e4347;
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <g> <path fill="#EB5758" d="M36.458,26.404H18.541c-0.576,0-1.041,0.466-1.041,1.041c0,0.576,0.465,1.042,1.041,1.042h17.917 c0.576,0,1.042-0.466,1.042-1.042C37.5,26.87,37.034,26.404,36.458,26.404"/> <path fill="#EB5758" d="M36.458,33.959H18.541c-0.576,0-1.041,0.466-1.041,1.042c0,0.575,0.465,1.041,1.041,1.041h17.917 c0.576,0,1.042-0.466,1.042-1.041C37.5,34.425,37.034,33.959,36.458,33.959"/> <path fill="#EB5758" d="M36.458,41.512H18.541c-0.576,0-1.041,0.467-1.041,1.043c0,0.574,0.465,1.041,1.041,1.041h17.917 c0.576,0,1.042-0.467,1.042-1.041C37.5,41.979,37.034,41.512,36.458,41.512"/> </g> <g> <path fill="#717A81" d="M47.462,38.615l-3.838-6.68C43.328,31.421,43.578,31,44.179,31h7.642c0.601,0,0.851,0.421,0.555,0.936 l-3.838,6.68C48.241,39.129,47.758,39.129,47.462,38.615"/> </g> </svg> ');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-search-menu_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-search:hover,
+#menu a.btn-icon#menu-search:focus {
+	background-color: #2e3134;
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <g> <path fill="#EB5758" d="M36.457,26.404H18.541c-0.576,0-1.041,0.466-1.041,1.041c0,0.576,0.465,1.042,1.041,1.042h17.917 c0.576,0,1.043-0.466,1.043-1.042C37.5,26.87,37.033,26.404,36.457,26.404"/> <path fill="#EB5758" d="M36.457,33.959H18.541c-0.576,0-1.041,0.466-1.041,1.042c0,0.575,0.465,1.041,1.041,1.041h17.917 c0.576,0,1.043-0.466,1.043-1.041C37.5,34.425,37.033,33.959,36.457,33.959"/> <path fill="#EB5758" d="M36.457,41.512H18.541c-0.576,0-1.041,0.467-1.041,1.043c0,0.574,0.465,1.041,1.041,1.041h17.917 c0.576,0,1.043-0.467,1.043-1.041C37.5,41.979,37.033,41.512,36.457,41.512"/> </g> <g> <path fill="#3F4347" d="M47.462,38.615l-3.838-6.68C43.328,31.421,43.578,31,44.179,31h7.642c0.601,0,0.851,0.421,0.555,0.936 l-3.838,6.68C48.241,39.129,47.758,39.129,47.462,38.615"/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-search-menu_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu button.btn-icon#menu-search-go {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <path fill="#F1605F" d="M34.979,17.479c-9.665,0-17.5,7.835-17.5,17.5s7.835,17.5,17.5,17.5c9.664,0,17.5-7.835,17.5-17.5 S44.644,17.479,34.979,17.479z M43.942,35.974l-12.578,7.11c-0.968,0.548-1.76,0.085-1.76-1.027V27.901 c0-1.112,0.792-1.575,1.76-1.027l12.578,7.109C44.91,34.531,44.91,35.427,43.942,35.974z"/> </svg>');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-search-go_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu button.btn-icon#menu-search-go:hover,
+#menu button.btn-icon#menu-search-go:focus {
+	background-color: #3e4347;
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <path fill="#C74748" d="M34.979,17.479c-9.665,0-17.5,7.835-17.5,17.5s7.835,17.5,17.5,17.5c9.664,0,17.499-7.835,17.499-17.5 S44.644,17.479,34.979,17.479z M43.941,35.974l-12.577,7.11c-0.968,0.548-1.76,0.085-1.76-1.027V27.901 c0-1.112,0.792-1.575,1.76-1.027l12.577,7.109C44.91,34.531,44.91,35.427,43.941,35.974z"/> </svg> ');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-search-go_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-add {
+	background-color: #2e3134;
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <path fill="#EA5757" d="M34.996,17.5c-9.647,0-17.496,7.851-17.496,17.503c0,9.647,7.849,17.497,17.496,17.497 c9.653,0,17.505-7.85,17.505-17.497C52.5,25.351,44.648,17.5,34.996,17.5z M34.996,51.283c-8.976,0-16.279-7.303-16.279-16.28 c0-8.98,7.303-16.286,16.279-16.286c8.981,0,16.289,7.306,16.289,16.286C51.284,43.98,43.977,51.283,34.996,51.283z"/> <path fill="#EA5757" d="M42.193,27.827h-14.38c-0.278,0-0.52,0.1-0.721,0.304c-0.202,0.201-0.302,0.44-0.302,0.719v11.637 c0,0.278,0.1,0.521,0.302,0.723c0.202,0.201,0.443,0.301,0.721,0.301h14.38c0.28,0,0.52-0.1,0.718-0.301 c0.2-0.202,0.299-0.444,0.299-0.723V28.85c0-0.278-0.099-0.518-0.299-0.719C42.713,27.927,42.474,27.827,42.193,27.827z M29.925,30.962c0.268-0.268,0.598-0.4,0.989-0.4c0.374,0,0.695,0.133,0.963,0.4c0.267,0.267,0.399,0.598,0.399,0.989 c0,0.374-0.133,0.695-0.399,0.962c-0.268,0.268-0.589,0.4-0.963,0.4c-0.391,0-0.722-0.133-0.989-0.4 c-0.267-0.267-0.4-0.588-0.4-0.962C29.525,31.56,29.658,31.229,29.925,30.962z M40.474,38.776H29.525v-0.936l2.468-3.208 l1.674,1.391l3.153-4.786l3.653,3.779V38.776z"/> </svg> ');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-add_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-add:hover,
+#menu a.btn-icon#menu-add:focus {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <path fill="#C74748" d="M34.996,17.5c-9.647,0-17.496,7.851-17.496,17.503c0,9.647,7.849,17.497,17.496,17.497 c9.653,0,17.504-7.85,17.504-17.497C52.5,25.351,44.648,17.5,34.996,17.5z M34.996,51.283c-8.976,0-16.279-7.303-16.279-16.28 c0-8.98,7.303-16.286,16.279-16.286c8.981,0,16.289,7.306,16.289,16.286C51.284,43.98,43.977,51.283,34.996,51.283z"/> <path fill="#C74748" d="M42.193,27.827h-14.38c-0.278,0-0.52,0.1-0.721,0.304c-0.202,0.201-0.302,0.44-0.302,0.719v11.637 c0,0.278,0.1,0.521,0.302,0.723c0.202,0.201,0.443,0.301,0.721,0.301h14.38c0.28,0,0.52-0.1,0.718-0.301 c0.2-0.202,0.299-0.444,0.299-0.723V28.85c0-0.278-0.099-0.518-0.299-0.719C42.713,27.927,42.474,27.827,42.193,27.827z M29.925,30.962c0.268-0.268,0.598-0.4,0.989-0.4c0.374,0,0.695,0.133,0.963,0.4c0.267,0.267,0.399,0.598,0.399,0.989 c0,0.374-0.133,0.695-0.399,0.962c-0.268,0.268-0.589,0.4-0.963,0.4c-0.391,0-0.722-0.133-0.989-0.4 c-0.267-0.267-0.4-0.588-0.4-0.962C29.525,31.56,29.658,31.229,29.925,30.962z M40.475,38.776H29.525v-0.936l2.468-3.208 l1.674,1.391l3.152-4.786l3.654,3.779V38.776z"/> </svg>');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-add_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-messages { 
+	display: none;
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <g> <path fill="#555D63" d="M34.996,17.501c-9.647,0-17.496,7.85-17.496,17.502c0,9.647,7.849,17.497,17.496,17.497 c9.652,0,17.504-7.85,17.504-17.497C52.5,25.351,44.648,17.501,34.996,17.501 M34.996,51.283c-8.976,0-16.279-7.304-16.279-16.28 c0-8.98,7.303-16.286,16.279-16.286c8.981,0,16.288,7.306,16.288,16.286C51.284,43.979,43.977,51.283,34.996,51.283"/> <path fill="#555D63" d="M34.987,37.64c0.316,0,0.618-0.043,0.907-0.134c0.288-0.088,0.565-0.205,0.829-0.346 c0.266-0.141,0.522-0.303,0.77-0.482c0.248-0.182,0.489-0.368,0.727-0.559c0.72-0.575,1.445-1.139,2.176-1.688 c0.731-0.551,1.47-1.102,2.212-1.655c0.058-0.046,0.117-0.09,0.178-0.135c0.061-0.042,0.119-0.093,0.177-0.151v7.821 c0,0.27-0.096,0.504-0.289,0.699c-0.194,0.196-0.425,0.294-0.696,0.294H28.031c-0.271,0-0.504-0.098-0.699-0.294 c-0.196-0.195-0.293-0.43-0.293-0.699v-7.821c0.057,0.059,0.116,0.109,0.177,0.151c0.06,0.045,0.119,0.089,0.177,0.135 c0.744,0.554,1.481,1.104,2.212,1.655c0.731,0.55,1.457,1.113,2.177,1.688c0.225,0.179,0.461,0.359,0.708,0.541 s0.504,0.345,0.77,0.491c0.264,0.146,0.542,0.267,0.834,0.354C34.383,37.597,34.681,37.64,34.987,37.64 M34.987,35.662 c-0.179,0-0.372-0.051-0.579-0.152c-0.207-0.1-0.411-0.222-0.609-0.362c-0.199-0.142-0.393-0.289-0.583-0.445 c-0.19-0.155-0.358-0.284-0.502-0.388c-0.697-0.531-1.386-1.055-2.069-1.572c-0.682-0.52-1.378-1.045-2.087-1.581 c-0.132-0.104-0.286-0.244-0.462-0.42c-0.176-0.177-0.34-0.37-0.492-0.583c-0.153-0.214-0.282-0.429-0.389-0.649 c-0.107-0.219-0.161-0.417-0.161-0.596c0-0.236,0.104-0.441,0.311-0.618c0.208-0.175,0.43-0.264,0.666-0.264h13.946 c0.236,0,0.456,0.089,0.661,0.264c0.204,0.177,0.307,0.382,0.307,0.618c0,0.179-0.053,0.377-0.159,0.596 c-0.107,0.221-0.236,0.436-0.389,0.649c-0.152,0.213-0.317,0.406-0.493,0.583c-0.175,0.176-0.329,0.315-0.461,0.42 c-0.709,0.529-1.405,1.054-2.086,1.575c-0.683,0.521-1.374,1.047-2.07,1.578c-0.144,0.104-0.31,0.232-0.497,0.388 c-0.187,0.156-0.381,0.304-0.583,0.445c-0.201,0.141-0.406,0.263-0.613,0.362c-0.208,0.102-0.397,0.152-0.57,0.152h-0.018H34.987z" /> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-message_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-messages:hover,
+#menu a.btn-icon#menu-messages:focus {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <g> <path fill="#717A81" d="M34.996,17.501c-9.647,0-17.496,7.85-17.496,17.502c0,9.647,7.849,17.497,17.496,17.497 c9.652,0,17.504-7.85,17.504-17.497C52.5,25.351,44.648,17.501,34.996,17.501 M34.996,51.283c-8.976,0-16.279-7.304-16.279-16.28 c0-8.98,7.303-16.286,16.279-16.286c8.98,0,16.288,7.306,16.288,16.286C51.284,43.979,43.977,51.283,34.996,51.283"/> <path fill="#717A81" d="M34.987,37.64c0.316,0,0.618-0.043,0.907-0.134c0.288-0.088,0.565-0.205,0.829-0.346 c0.266-0.141,0.522-0.303,0.77-0.482c0.248-0.182,0.49-0.368,0.727-0.559c0.721-0.575,1.445-1.139,2.177-1.688 c0.731-0.551,1.47-1.102,2.212-1.655c0.058-0.046,0.117-0.09,0.178-0.135c0.061-0.042,0.119-0.093,0.178-0.151v7.821 c0,0.27-0.097,0.504-0.289,0.699c-0.194,0.196-0.426,0.294-0.697,0.294H28.031c-0.271,0-0.504-0.098-0.699-0.294 c-0.196-0.195-0.293-0.43-0.293-0.699v-7.821c0.057,0.059,0.116,0.109,0.177,0.151c0.06,0.045,0.119,0.089,0.177,0.135 c0.744,0.554,1.481,1.104,2.212,1.655c0.731,0.55,1.457,1.113,2.177,1.688c0.225,0.179,0.461,0.359,0.708,0.541 s0.504,0.345,0.77,0.491c0.264,0.146,0.542,0.267,0.834,0.354C34.383,37.597,34.681,37.64,34.987,37.64 M34.987,35.662 c-0.179,0-0.372-0.051-0.579-0.152c-0.207-0.1-0.411-0.222-0.609-0.362c-0.199-0.142-0.393-0.289-0.583-0.445 c-0.19-0.155-0.358-0.284-0.502-0.388c-0.697-0.531-1.386-1.055-2.069-1.572c-0.682-0.52-1.378-1.045-2.087-1.581 c-0.132-0.104-0.286-0.244-0.462-0.42c-0.176-0.177-0.34-0.37-0.492-0.583c-0.153-0.214-0.282-0.429-0.389-0.649 c-0.107-0.219-0.161-0.417-0.161-0.596c0-0.236,0.104-0.441,0.311-0.618c0.208-0.175,0.43-0.264,0.666-0.264h13.945 c0.236,0,0.457,0.089,0.661,0.264c0.204,0.177,0.307,0.382,0.307,0.618c0,0.179-0.053,0.377-0.159,0.596 c-0.107,0.221-0.236,0.436-0.389,0.649c-0.152,0.213-0.318,0.406-0.493,0.583c-0.175,0.176-0.329,0.315-0.462,0.42 c-0.709,0.529-1.404,1.054-2.086,1.575c-0.684,0.521-1.373,1.047-2.07,1.578c-0.144,0.104-0.311,0.232-0.497,0.388 c-0.187,0.156-0.381,0.304-0.583,0.445c-0.201,0.141-0.406,0.263-0.613,0.362c-0.208,0.102-0.397,0.152-0.57,0.152h-0.018H34.987z" /> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-message_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-notifications {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <g> <path fill="#555D63" d="M34.996,17.501c-9.646,0-17.496,7.85-17.496,17.502c0,9.646,7.849,17.496,17.496,17.496 c9.652,0,17.504-7.85,17.504-17.496C52.5,25.351,44.648,17.501,34.996,17.501z M34.996,51.282c-8.976,0-16.279-7.303-16.279-16.279 c0-8.98,7.303-16.287,16.279-16.287c8.981,0,16.288,7.307,16.288,16.287C51.284,43.979,43.977,51.282,34.996,51.282z"/> <path fill="#555D63" d="M35,44.655c1.375,0,2.49-1.113,2.49-2.49h-4.981C32.509,43.542,33.624,44.655,35,44.655z"/> <path fill="#555D63" d="M36.909,28.829v-1.576c0-1.053-0.856-1.908-1.91-1.908c-1.053,0-1.909,0.855-1.909,1.908v1.576 c-2.201,0.787-3.486,2.887-3.778,5.354l-1.208,7.336h13.793l-1.209-7.336C40.348,31.716,39.11,29.616,36.909,28.829z M35.706,28.542c-0.232-0.027-0.466-0.047-0.706-0.047c-0.24,0-0.474,0.02-0.706,0.047v-1.289c0-0.387,0.316-0.703,0.705-0.703 c0.39,0,0.706,0.316,0.706,0.703V28.542z"/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-notification_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-notifications:hover,
+#menu a.btn-icon#menu-notifications:focus {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <g> <path fill="#717A81" d="M34.996,17.501c-9.646,0-17.496,7.85-17.496,17.502c0,9.646,7.849,17.496,17.496,17.496 c9.653,0,17.504-7.85,17.504-17.496C52.5,25.351,44.648,17.501,34.996,17.501 M34.996,51.282c-8.976,0-16.279-7.303-16.279-16.279 c0-8.98,7.303-16.287,16.279-16.287c8.981,0,16.288,7.307,16.288,16.287C51.283,43.979,43.977,51.282,34.996,51.282"/> <path fill="#717A81" d="M37.49,42.165c0,1.377-1.115,2.49-2.49,2.49c-1.376,0-2.491-1.113-2.491-2.49H37.49z"/> <path fill="#717A81" d="M36.909,28.829v-1.576c0-1.053-0.856-1.908-1.91-1.908c-1.053,0-1.909,0.855-1.909,1.908v1.576 c-2.201,0.787-3.486,2.887-3.778,5.354l-1.208,7.336h13.793l-1.209-7.336C40.348,31.716,39.109,29.616,36.909,28.829 M34.294,28.542v-1.289c0-0.387,0.316-0.703,0.705-0.703c0.39,0,0.706,0.316,0.706,0.703v1.289 c-0.232-0.027-0.466-0.047-0.706-0.047C34.76,28.495,34.526,28.515,34.294,28.542"/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-notification_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-invites {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <path fill="#555D63" d="M34.762,27.816c2.339,0,4.242,1.902,4.242,4.24c0,2.341-1.903,4.243-4.242,4.243 c-2.338,0-4.241-1.902-4.241-4.243C30.521,29.719,32.423,27.816,34.762,27.816"/> <path fill="#555D63" d="M43.57,19.758c-0.08-0.045-0.154-0.098-0.235-0.143c-0.116-0.063-0.24-0.112-0.358-0.173 c-2.395-1.233-5.102-1.942-7.975-1.942H35h-0.002c-9.648,0-17.499,7.849-17.499,17.496V35v0.004c0,6.534,3.606,12.233,8.93,15.237 c0.079,0.046,0.155,0.099,0.235,0.144c0.116,0.063,0.241,0.112,0.357,0.174c2.395,1.232,5.102,1.941,7.976,1.941H35h0.001 c9.647,0,17.498-7.849,17.498-17.496V35v-0.004C52.5,28.463,48.894,22.765,43.57,19.758 M35,51.284c-3.118,0-6.023-0.897-8.5-2.422 c-4.66-2.869-7.782-8-7.783-13.862C18.718,26.021,26.022,18.718,35,18.717c3.117,0,6.021,0.896,8.5,2.422 c4.659,2.868,7.782,8,7.784,13.861C51.282,43.979,43.979,51.282,35,51.284"/> <path fill="#555D63" d="M42.782,42.427c0-2.596-3.418-4.627-7.781-4.627c-4.364,0-7.782,2.031-7.782,4.627 c0,0.187,0.104,0.342,0.251,0.432c1.918,1.946,4.581,3.159,7.53,3.159c2.955,0,5.623-1.215,7.542-3.168 C42.683,42.759,42.782,42.607,42.782,42.427"/> </svg>');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-invite_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-invites:hover,
+#menu a.btn-icon#menu-invites:focus {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <path fill="#717A81" d="M34.762,27.816c2.34,0,4.242,1.902,4.242,4.24c0,2.341-1.902,4.243-4.242,4.243 c-2.338,0-4.241-1.902-4.241-4.243C30.521,29.719,32.424,27.816,34.762,27.816"/> <path fill="#717A81" d="M43.57,19.758c-0.08-0.045-0.154-0.098-0.236-0.143c-0.115-0.063-0.238-0.112-0.357-0.173 c-2.395-1.233-5.102-1.942-7.975-1.942H35h-0.002c-9.647,0-17.498,7.849-17.498,17.496V35v0.004c0,6.534,3.606,12.233,8.93,15.237 c0.079,0.046,0.154,0.099,0.235,0.144c0.116,0.063,0.241,0.112,0.357,0.174c2.396,1.232,5.103,1.941,7.976,1.941H35h0.002 c9.646,0,17.498-7.849,17.498-17.496V35v-0.004C52.5,28.463,48.893,22.765,43.57,19.758 M35,51.284c-3.117,0-6.022-0.897-8.5-2.422 c-4.659-2.869-7.782-8-7.783-13.862C18.719,26.021,26.022,18.718,35,18.717c3.117,0,6.021,0.896,8.5,2.422 c4.66,2.868,7.781,8,7.783,13.861C51.281,43.979,43.979,51.282,35,51.284"/> <path fill="#717A81" d="M42.781,42.427c0-2.596-3.418-4.627-7.781-4.627s-7.781,2.031-7.781,4.627c0,0.187,0.104,0.342,0.252,0.432 c1.918,1.946,4.58,3.159,7.529,3.159c2.955,0,5.623-1.215,7.543-3.168C42.682,42.759,42.781,42.607,42.781,42.427"/> </svg>');	
+	/* Fallback */ background-image: url('../img/icons/menu-icon-invite_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-transfers {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <g> <path fill="#555D63" d="M34.995,17.5c-9.646,0-17.495,7.85-17.495,17.502c0,9.648,7.849,17.498,17.495,17.498 c9.652,0,17.505-7.85,17.505-17.498C52.5,25.35,44.647,17.5,34.995,17.5z M34.995,51.283c-8.976,0-16.279-7.303-16.279-16.281 c0-8.98,7.303-16.285,16.279-16.285c8.981,0,16.288,7.305,16.288,16.285C51.283,43.98,43.977,51.283,34.995,51.283z"/> <path fill="#555D63" d="M42.581,29.525l-6.341-3.586c-0.488-0.275-0.887-0.043-0.887,0.52v2.304h-5.154 c-1.826,0-3.311,1.484-3.311,3.31v2.898h2.529v-2.898c0-0.431,0.351-0.78,0.782-0.78h5.154v2.304c0,0.561,0.399,0.793,0.887,0.518 l6.341-3.584C43.069,30.252,43.069,29.801,42.581,29.525z"/> <path fill="#555D63" d="M40.187,37.928c0,0.431-0.351,0.78-0.782,0.78h-5.018v-2.302c0-0.563-0.399-0.795-0.888-0.52l-6.341,3.584 c-0.488,0.277-0.488,0.729,0,1.006l6.341,3.584c0.488,0.275,0.888,0.041,0.888-0.52v-2.304h5.018c1.826,0,3.311-1.484,3.311-3.31 v-2.957h-2.529V37.928z"/> </g> </svg> ');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-transfers_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#menu a.btn-icon#menu-transfers:hover,
+#menu a.btn-icon#menu-transfers:focus {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="70px" viewBox="0 0 70 70" enable-background="new 0 0 70 70" xml:space="preserve"> <g> <path fill="#717A81" d="M34.995,17.5c-9.646,0-17.495,7.85-17.495,17.502c0,9.648,7.849,17.498,17.495,17.498 c9.652,0,17.505-7.85,17.505-17.498C52.5,25.35,44.647,17.5,34.995,17.5z M34.995,51.283c-8.976,0-16.279-7.303-16.279-16.281 c0-8.98,7.303-16.285,16.279-16.285c8.981,0,16.288,7.305,16.288,16.285C51.283,43.98,43.977,51.283,34.995,51.283z"/> <path fill="#717A81" d="M42.581,29.525l-6.341-3.586c-0.488-0.275-0.887-0.043-0.887,0.52v2.304h-5.154 c-1.826,0-3.311,1.484-3.311,3.31v2.898h2.529v-2.898c0-0.431,0.351-0.78,0.782-0.78h5.154v2.304c0,0.561,0.399,0.793,0.887,0.518 l6.341-3.584C43.069,30.252,43.069,29.801,42.581,29.525z"/> <path fill="#717A81" d="M40.188,37.928c0,0.431-0.352,0.78-0.782,0.78h-5.018v-2.302c0-0.563-0.399-0.795-0.888-0.52l-6.341,3.584 c-0.488,0.277-0.488,0.729,0,1.006l6.341,3.584c0.488,0.275,0.888,0.041,0.888-0.52v-2.304h5.018c1.825,0,3.312-1.484,3.312-3.31 v-2.957h-2.529V37.928z"/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/menu-icon-transfers_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+a.btn-upload::after {
+	content: '';
+	float: right;
+	width: 22px;
+	height: 14px;
+	margin-left: -22px;
+	margin-top: 1px;
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22px" height="14px" viewBox="0 0 27.091 17.376" enable-background="new 0 0 27.091 17.376" xml:space="preserve"> <g> <path fill="#FFFFFF" d="M26.13,9.768c-0.532,0-0.962,0.431-0.962,0.961v4.724H1.923v-4.724c0-0.53-0.43-0.961-0.962-0.961 C0.429,9.768,0,10.199,0,10.729v5.686c0,0.532,0.429,0.962,0.961,0.962H26.13c0.531,0,0.962-0.43,0.962-0.962v-5.686 C27.092,10.199,26.661,9.768,26.13,9.768"/> <path fill="#FFFFFF" d="M14.281,0.537l5.26,9.303c0.404,0.716,0.063,1.302-0.761,1.302H8.311c-0.823,0-1.165-0.586-0.76-1.302 l5.259-9.303C13.215-0.179,13.877-0.179,14.281,0.537"/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/btn-upload.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+a.btn-collapse {
+	display: block;
+	width: 60px;
+	height: 30px;
+	margin: auto;
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="60px" height="30px" viewBox="0 0 60 30" enable-background="new 0 0 60 30" xml:space="preserve"> <g> <path fill="#D6DDE3" d="M42.498,9.244H17.5c-0.386,0-0.697,0.312-0.697,0.697c0,0.386,0.311,0.698,0.697,0.698h24.998 c0.387,0,0.699-0.312,0.699-0.698C43.197,9.556,42.885,9.244,42.498,9.244"/> <path fill="#D6DDE3" d="M42.498,14.303H17.5c-0.386,0-0.697,0.312-0.697,0.698c0,0.385,0.311,0.697,0.697,0.697h24.998 c0.387,0,0.699-0.312,0.699-0.697C43.197,14.615,42.885,14.303,42.498,14.303"/> <path fill="#D6DDE3" d="M42.498,19.36H17.5c-0.386,0-0.697,0.313-0.697,0.698c0,0.385,0.311,0.697,0.697,0.697h24.998 c0.387,0,0.699-0.313,0.699-0.697C43.197,19.673,42.885,19.36,42.498,19.36"/> </g> </svg>'); 
+	/* Fallback */ background-image: url('../img/icons/btn-collapse_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+a.btn-collapse:hover,
+a.btn-collapse:focus {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="60px" height="30px" viewBox="0 0 60 30" enable-background="new 0 0 60 30" xml:space="preserve"> <g> <path fill="#707980" d="M42.498,9.244H17.5c-0.386,0-0.697,0.312-0.697,0.697c0,0.386,0.311,0.698,0.697,0.698h24.998 c0.387,0,0.699-0.312,0.699-0.698C43.197,9.556,42.885,9.244,42.498,9.244"/> <path fill="#707980" d="M42.498,14.303H17.5c-0.386,0-0.697,0.312-0.697,0.698c0,0.385,0.311,0.697,0.697,0.697h24.998 c0.387,0,0.699-0.312,0.699-0.697C43.197,14.615,42.885,14.303,42.498,14.303"/> <path fill="#707980" d="M42.498,19.36H17.5c-0.386,0-0.697,0.313-0.697,0.698c0,0.385,0.311,0.697,0.697,0.697h24.998 c0.387,0,0.699-0.313,0.699-0.697C43.197,19.673,42.885,19.36,42.498,19.36"/> </g> </svg>'); 
+	/* Fallback */ background-image: url('../img/icons/btn-collapse_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#main-video a.btn-status {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 36 36" enable-background="new 0 0 36 36" xml:space="preserve"> <g> <path fill="#EB5657" d="M17,27c-4.963,0-9-4.037-9-9s4.037-9,9-9c1.682,0,3.321,0.467,4.742,1.35 c0.249,0.154,0.325,0.48,0.171,0.729c-0.155,0.249-0.481,0.325-0.729,0.17c-1.254-0.779-2.7-1.19-4.184-1.19 c-4.379,0-7.941,3.563-7.941,7.941s3.563,7.941,7.941,7.941s7.941-3.563,7.941-7.941c0-0.88-0.143-1.745-0.425-2.568 c-0.094-0.277,0.054-0.578,0.33-0.672c0.277-0.094,0.578,0.053,0.673,0.33C25.839,16.023,26,17.002,26,18 C26,22.963,21.963,27,17,27z"/> <path fill="#EB5657" d="M17,21.054c-0.135,0-0.264-0.051-0.362-0.144l-4.235-3.979c-0.213-0.2-0.224-0.535-0.023-0.748 c0.2-0.213,0.535-0.224,0.748-0.023l3.828,3.596l6.956-8.257c0.188-0.224,0.522-0.252,0.746-0.064s0.252,0.522,0.063,0.746 l-7.315,8.685c-0.094,0.111-0.229,0.179-0.374,0.188C17.021,21.054,17.01,21.054,17,21.054z"/> </g> <path fill="#34383B" d="M26.127,10.833l2.554-2.553c0.216-0.216,0.216-0.568,0-0.784c-0.217-0.217-0.568-0.217-0.785,0l-2.553,2.553 L22.79,7.495c-0.217-0.217-0.568-0.217-0.785,0c-0.216,0.216-0.216,0.568,0,0.784l2.554,2.553l-2.554,2.553 c-0.216,0.216-0.216,0.568,0,0.784c0.108,0.108,0.251,0.163,0.393,0.163s0.284-0.054,0.393-0.163l2.553-2.553l2.553,2.553 c0.108,0.108,0.251,0.163,0.393,0.163s0.284-0.054,0.393-0.163c0.216-0.216,0.216-0.568,0-0.784L26.127,10.833z"/> </svg> ');
+	/* Fallback */ background-image: url('../img/icons/related-items-icon-status_not-approved.svg'); 
+	background-size: 50px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#main-video a.btn-status:hover,
+#main-video a.btn-status.approved:focus {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 36 36" enable-background="new 0 0 36 36" xml:space="preserve"> <g> <path fill="#FFFFFF" d="M17,27c-4.963,0-9-4.037-9-9s4.037-9,9-9c1.682,0,3.321,0.467,4.742,1.35 c0.249,0.154,0.325,0.48,0.171,0.729c-0.155,0.249-0.481,0.325-0.729,0.17c-1.254-0.779-2.7-1.19-4.184-1.19 c-4.379,0-7.941,3.563-7.941,7.941s3.563,7.941,7.941,7.941s7.941-3.563,7.941-7.941c0-0.88-0.143-1.745-0.425-2.568 c-0.094-0.277,0.054-0.578,0.33-0.672c0.277-0.094,0.578,0.053,0.673,0.33C25.839,16.023,26,17.002,26,18 C26,22.963,21.963,27,17,27z"/> <path fill="#FFFFFF" d="M17,21.054c-0.135,0-0.264-0.051-0.362-0.144l-4.235-3.979c-0.213-0.2-0.224-0.535-0.023-0.748 c0.2-0.213,0.535-0.224,0.748-0.023l3.828,3.596l6.956-8.257c0.188-0.224,0.522-0.252,0.746-0.064s0.252,0.522,0.063,0.746 l-7.315,8.685c-0.094,0.111-0.229,0.179-0.374,0.188C17.021,21.054,17.01,21.054,17,21.054z"/> </g> </svg> '); 
+	/* Fallback */ background-image: url('../img/icons/related-items-icon-status_approved.svg');
+}
+
+#main-details a.btn-icon-edit {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 41.047 41.054" enable-background="new 0 0 41.047 41.054" xml:space="preserve"> <g> <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M13.864,27.018l8.896-2.526l-6.354-6.314L13.864,27.018z M37.623,9.719l-6.354-6.314L17.29,17.297l6.354,6.315L37.623,9.719z M35.771,33.105c0,2.195-1.779,3.975-3.975,3.975H7.949 c-2.195,0-3.974-1.779-3.974-3.975V9.258c0-2.196,1.779-3.975,3.974-3.975h15.899l3.975-3.975H6.624C2.966,1.308,0,4.274,0,7.933 V34.43c0,3.658,2.966,6.624,6.624,6.624h26.498c3.658,0,6.624-2.966,6.624-6.624V13.232l-3.975,3.975V33.105z M40.576,4.415 l-3.972-3.947c-0.657-0.653-1.761-0.618-2.463,0.079l-1.906,1.895l6.354,6.314l1.907-1.894C41.198,6.165,41.233,5.069,40.576,4.415 "/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/btn-icon-edit.svg'); 
+	background-size: 16px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#main-details a.btn-icon-edit:hover,
+#main-details a.btn-icon-edit:focus {
+	background-color: #0db2ad;
+}
+
+#main-details form > p:after {
+	content: '';
+	float: right;
+	display: block;
+	width: 30px;
+	height: 30px;
+	position: relative;
+	top: -4px;
+	right: -10px;
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 41.047 41.054" enable-background="new 0 0 41.047 41.054" xml:space="preserve"> <g> <path fill-rule="#00cccc" clip-rule="evenodd" fill="#00cccc" d="M13.864,27.018l8.896-2.526l-6.354-6.314L13.864,27.018z M37.623,9.719l-6.354-6.314L17.29,17.297l6.354,6.315L37.623,9.719z M35.771,33.105c0,2.195-1.779,3.975-3.975,3.975H7.949 c-2.195,0-3.974-1.779-3.974-3.975V9.258c0-2.196,1.779-3.975,3.974-3.975h15.899l3.975-3.975H6.624C2.966,1.308,0,4.274,0,7.933 V34.43c0,3.658,2.966,6.624,6.624,6.624h26.498c3.658,0,6.624-2.966,6.624-6.624V13.232l-3.975,3.975V33.105z M40.576,4.415 l-3.972-3.947c-0.657-0.653-1.761-0.618-2.463,0.079l-1.906,1.895l6.354,6.314l1.907-1.894C41.198,6.165,41.233,5.069,40.576,4.415 "/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/btn-icon-edit-form.svg'); 
+	background-size: 16px;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	opacity: 0;
+}
+
+#main-details form > p:hover:after,
+#main-details form > p:focus:after {
+	opacity: 1;
+}
+
+#main-details form > p:hover {
+	color: #00cccc;
+	padding-left: 5px;
+	cursor: pointer;
+}
+
+#main-details form > p:active {
+	padding-left: 10px;
+}
+
+#extras .nav-tabs > li > a#tab-share {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <path fill="#707980" d="M37.134,27.078c-0.838-0.838-1.951-1.3-3.137-1.3c-0.82,0-1.6,0.234-2.283,0.648l-3.064-4.142 c1.18-1.726,1.012-4.105-0.52-5.637c-0.838-0.838-1.951-1.299-3.137-1.299c-1.184,0-2.299,0.461-3.137,1.299 c-1.531,1.533-1.701,3.912-0.52,5.638l-3.053,4.141c-0.684-0.414-1.463-0.648-2.283-0.648c-1.184,0-2.299,0.461-3.137,1.3 c-1.729,1.729-1.729,4.545,0,6.274c0.838,0.838,1.953,1.299,3.137,1.299c1.186,0,2.299-0.461,3.137-1.299 c1.531-1.531,1.701-3.912,0.52-5.639l3.055-4.14c0.684,0.413,1.461,0.647,2.281,0.647s1.6-0.234,2.283-0.648l3.064,4.142 c-1.18,1.728-1.012,4.105,0.52,5.638c0.838,0.838,1.953,1.299,3.137,1.299c1.186,0,2.299-0.461,3.137-1.299 C38.865,31.623,38.865,28.808,37.134,27.078z M17.816,32.03c-0.969,0.969-2.66,0.969-3.629,0c-1-1.001-1-2.629,0-3.63 c0.484-0.485,1.129-0.752,1.814-0.752s1.33,0.267,1.814,0.752C18.816,29.401,18.816,31.029,17.816,32.03z M23.179,21.6 c-1-1-1-2.629,0-3.63c0.484-0.485,1.129-0.752,1.814-0.752s1.33,0.267,1.814,0.751c1,1.001,1,2.63,0,3.63 C25.839,22.57,24.15,22.57,23.179,21.6z M35.812,32.03c-0.969,0.969-2.658,0.969-3.629,0c-1-1.001-1-2.629,0-3.63 c0.484-0.485,1.129-0.752,1.814-0.752s1.33,0.267,1.814,0.752C36.814,29.401,36.814,31.029,35.812,32.03z"/> </svg>');
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-share_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#extras .nav-tabs > li > a#tab-share:hover,
+#extras .nav-tabs > li > a#tab-share:focus,
+#extras .nav-tabs > li.active > a#tab-share,
+#extras .nav-tabs > li.active > a#tab-share:hover,
+#extras .nav-tabs > li.active > a#tab-share:focus {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <path fill="#00CCCC" d="M37.135,27.078c-0.838-0.838-1.951-1.3-3.137-1.3c-0.82,0-1.6,0.234-2.283,0.648l-3.064-4.142 c1.18-1.726,1.012-4.105-0.52-5.637c-0.838-0.838-1.951-1.299-3.137-1.299c-1.184,0-2.299,0.461-3.137,1.299 c-1.531,1.533-1.701,3.912-0.52,5.638l-3.053,4.141c-0.684-0.414-1.463-0.648-2.283-0.648c-1.184,0-2.299,0.461-3.137,1.3 c-1.729,1.729-1.729,4.545,0,6.274c0.838,0.838,1.953,1.299,3.137,1.299c1.186,0,2.299-0.461,3.137-1.299 c1.531-1.531,1.701-3.912,0.52-5.639l3.055-4.14c0.684,0.413,1.461,0.647,2.281,0.647s1.6-0.234,2.283-0.648l3.064,4.142 c-1.18,1.728-1.012,4.105,0.52,5.638c0.838,0.838,1.953,1.299,3.137,1.299c1.186,0,2.299-0.461,3.137-1.299 C38.865,31.623,38.865,28.808,37.135,27.078z M17.816,32.03c-0.969,0.969-2.66,0.969-3.629,0c-1-1.001-1-2.629,0-3.63 c0.484-0.485,1.129-0.752,1.814-0.752s1.33,0.267,1.814,0.752C18.816,29.401,18.816,31.029,17.816,32.03z M23.18,21.6 c-1-1-1-2.629,0-3.63c0.484-0.485,1.129-0.752,1.814-0.752s1.33,0.267,1.814,0.751c1,1.001,1,2.63,0,3.63 C25.84,22.57,24.15,22.57,23.18,21.6z M35.813,32.03c-0.969,0.969-2.658,0.969-3.629,0c-1-1.001-1-2.629,0-3.63 c0.484-0.485,1.129-0.752,1.814-0.752s1.33,0.267,1.814,0.752C36.814,29.401,36.814,31.029,35.813,32.03z"/> </svg>');
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-share_hover.svg');
+}
+
+#extras .nav-tabs > li > a#tab-comments {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <g> <path fill="#68747B" d="M19.041,38.704l-0.002-5.393h-2.305c-1.508,0-2.734-1.226-2.734-2.733V20.029 c0-1.507,1.226-2.733,2.734-2.733h16.532c1.508,0,2.733,1.226,2.733,2.733v10.549c0,1.508-1.226,2.733-2.733,2.733h-8.238 L19.041,38.704z M16.734,18.985c-0.576,0-1.044,0.468-1.044,1.044v10.549c0,0.576,0.468,1.044,1.044,1.044h3.994v3.287l3.651-3.287 h8.887c0.575,0,1.044-0.468,1.044-1.044V20.029c0-0.576-0.469-1.044-1.044-1.044H16.734z"/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-comments_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#extras .nav-tabs > li > a#tab-comments:hover,
+#extras .nav-tabs > li > a#tab-comments:focus,
+#extras .nav-tabs > li.active > a#tab-comments,
+#extras .nav-tabs > li.active > a#tab-comments:hover,
+#extras .nav-tabs > li.active > a#tab-comments:focus {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <g> <g> <path fill="#00CCCC" d="M19.041,38.704l-0.002-5.393h-2.305c-1.509,0-2.734-1.226-2.734-2.733V20.029 c0-1.507,1.226-2.733,2.734-2.733h16.531c1.508,0,2.734,1.226,2.734,2.733v10.549c0,1.508-1.227,2.733-2.734,2.733h-8.238 L19.041,38.704z M16.734,18.985c-0.576,0-1.045,0.468-1.045,1.044v10.549c0,0.576,0.469,1.044,1.045,1.044h3.994v3.287l3.65-3.287 h8.887c0.576,0,1.045-0.468,1.045-1.044V20.029c0-0.576-0.469-1.044-1.045-1.044H16.734z"/> </g> <g> <path fill="#00CCCC" d="M19.041,38.704l-0.002-5.393h-2.305c-1.509,0-2.734-1.226-2.734-2.733V20.029 c0-1.507,1.226-2.733,2.734-2.733h16.531c1.508,0,2.734,1.226,2.734,2.733v10.549c0,1.508-1.227,2.733-2.734,2.733h-8.238 L19.041,38.704z M16.734,18.985c-0.576,0-1.045,0.468-1.045,1.044v10.549c0,0.576,0.469,1.044,1.045,1.044h3.994v3.287l3.65-3.287 h8.887c0.576,0,1.045-0.468,1.045-1.044V20.029c0-0.576-0.469-1.044-1.045-1.044H16.734z"/> </g> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-comments_hover.svg');
+}
+
+
+#extras .nav-tabs > li > a#tab-notifications {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <g> <path fill="#707980" d="M33.999,33.381l-1.52-8.479c-0.442-3.431-2.453-6.039-5.167-6.993V16.82c0-1.279-1.041-2.32-2.32-2.32 s-2.32,1.041-2.32,2.32v1.066c-2.848,0.947-4.901,3.609-5.161,6.979l-1.552,8.664c-0.041,0.227,0.021,0.459,0.168,0.635 c0.147,0.177,0.366,0.278,0.595,0.278h16.538c0.004-0.001,0.01-0.001,0.015,0c0.429,0,0.776-0.348,0.776-0.776 C34.052,33.565,34.033,33.469,33.999,33.381z M24.224,16.82c0-0.424,0.345-0.769,0.768-0.769c0.424,0,0.769,0.345,0.769,0.769 v0.732c-0.252-0.027-0.508-0.043-0.769-0.043c-0.26,0-0.516,0.014-0.768,0.04V16.82z M17.65,32.891l1.399-7.828 c0.275-3.533,2.719-6.001,5.943-6.001c3.57,0,5.561,3.033,5.953,6.077l1.389,7.752H17.65z"/> <path fill="#707980" d="M27.932,35.008c-0.429,0-0.775,0.347-0.775,0.776c0,1.192-0.971,2.164-2.165,2.164 c-1.194,0-2.165-0.972-2.165-2.164c0-0.43-0.348-0.776-0.776-0.776c-0.429,0-0.776,0.347-0.776,0.776 c0,2.049,1.667,3.716,3.717,3.716c2.05,0,3.717-1.667,3.717-3.716C28.708,35.354,28.361,35.008,27.932,35.008z"/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-notifications_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#extras .nav-tabs > li > a#tab-notifications:hover,
+#extras .nav-tabs > li > a#tab-notifications:focus,
+#extras .nav-tabs > li.active > a#tab-notifications,
+#extras .nav-tabs > li.active > a#tab-notifications:hover,
+#extras .nav-tabs > li.active > a#tab-notifications:focus {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <g> <g> <path fill="#00CCCC" d="M33.998,33.381l-1.52-8.479c-0.441-3.431-2.453-6.039-5.166-6.993V16.82c0-1.279-1.041-2.32-2.32-2.32 s-2.32,1.041-2.32,2.32v1.066c-2.848,0.947-4.901,3.609-5.16,6.979l-1.553,8.664c-0.04,0.227,0.021,0.459,0.169,0.635 c0.147,0.177,0.366,0.278,0.595,0.278h16.539c0.004-0.001,0.01-0.001,0.014,0c0.43,0,0.777-0.348,0.777-0.776 C34.053,33.565,34.033,33.469,33.998,33.381z M24.224,16.82c0-0.424,0.345-0.769,0.769-0.769s0.768,0.345,0.768,0.769v0.732 c-0.252-0.027-0.508-0.043-0.768-0.043s-0.516,0.014-0.769,0.04V16.82z M17.65,32.891l1.398-7.828 c0.275-3.533,2.719-6.001,5.943-6.001c3.57,0,5.561,3.033,5.953,6.077l1.389,7.752H17.65z"/> <path fill="#00CCCC" d="M27.932,35.008c-0.428,0-0.775,0.347-0.775,0.776c0,1.192-0.971,2.164-2.164,2.164 c-1.194,0-2.166-0.972-2.166-2.164c0-0.43-0.348-0.776-0.775-0.776c-0.429,0-0.775,0.347-0.775,0.776 c0,2.049,1.667,3.716,3.717,3.716c2.049,0,3.717-1.667,3.717-3.716C28.709,35.354,28.361,35.008,27.932,35.008z"/> </g> </g> </svg> '); 
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-notifications_hover.svg'); 
+}
+
+
+#extras .nav-tabs > li > a#tab-distribution {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <g> <path fill="#707980" d="M36.262,25.804l-5.983-3.383c-0.246-0.139-0.498-0.209-0.748-0.209c-0.721,0-1.243,0.577-1.243,1.372v2.594 H21.44c-0.427,0-0.773,0.346-0.773,0.773s0.346,0.772,0.773,0.772h6.848v2.596c0,0.794,0.522,1.371,1.242,1.371 c0.251,0,0.502-0.07,0.748-0.21l5.984-3.383C36.731,27.832,37,27.415,37,26.951C37,26.488,36.732,26.07,36.262,25.804z M29.833,29.953l0.002-6.007l5.312,3.005L29.833,29.953z"/> <path fill="#707980" d="M13.773,25.797h3.475c0.151,0,0.299-0.044,0.425-0.127l4.961-3.264l1.541,2.205 c0.282,0.401,0.687,0.632,1.111,0.632c0.496,0,0.938-0.307,1.186-0.822l2.967-6.2c0.223-0.463,0.216-0.944-0.02-1.317 c-0.228-0.363-0.637-0.572-1.12-0.572l-7.017,0.663c-0.531,0.051-0.947,0.321-1.142,0.742c-0.194,0.42-0.13,0.913,0.176,1.351 l1.433,2.051l-4.731,3.113h-3.243c-0.427,0-0.773,0.346-0.773,0.773S13.346,25.797,13.773,25.797z M27.868,17.92l-2.637,5.505 L21.792,18.5L27.868,17.92z"/> <path fill="#707980" d="M26.47,29.579c-0.456-0.954-1.683-1.063-2.298-0.188l-1.539,2.203l-4.961-3.265 c-0.126-0.083-0.274-0.127-0.425-0.127h-3.475c-0.427,0-0.773,0.346-0.773,0.772s0.346,0.772,0.773,0.772h3.243l4.731,3.114 l-1.433,2.051c-0.306,0.438-0.37,0.931-0.175,1.352c0.195,0.42,0.611,0.689,1.142,0.74l6.845,0.655l0.17,0.008 c0.483,0,0.893-0.208,1.121-0.572c0.235-0.374,0.242-0.854,0.021-1.316L26.47,29.579z M21.792,35.499l3.441-4.923l2.634,5.506 L21.792,35.499z M28.296,36.896l-0.023-0.765c0.009-0.003,0.017-0.006,0.023-0.007c0.003-0.001,0.006-0.002,0.009-0.002 L28.296,36.896z"/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-distribution_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#extras .nav-tabs > li > a#tab-distribution:hover,
+#extras .nav-tabs > li > a#tab-distribution:focus,
+#extras .nav-tabs > li.active > a#tab-distribution,
+#extras .nav-tabs > li.active > a#tab-distribution:hover,
+#extras .nav-tabs > li.active > a#tab-distribution:focus {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <g> <path fill="#00CCCC" d="M36.263,25.804l-5.983-3.383c-0.246-0.139-0.498-0.209-0.748-0.209c-0.721,0-1.243,0.577-1.243,1.372v2.594 h-6.849c-0.427,0-0.772,0.346-0.772,0.773s0.346,0.772,0.772,0.772h6.849v2.596c0,0.794,0.522,1.371,1.242,1.371 c0.251,0,0.502-0.07,0.748-0.21l5.985-3.383C36.731,27.832,37,27.414,37,26.951S36.732,26.07,36.263,25.804z M29.834,29.953 l0.002-6.007l5.312,3.005L29.834,29.953z"/> <path fill="#00CCCC" d="M13.773,25.797h3.475c0.151,0,0.299-0.044,0.425-0.127l4.961-3.264l1.54,2.205 c0.282,0.401,0.688,0.632,1.111,0.632c0.496,0,0.938-0.307,1.186-0.822l2.966-6.199c0.224-0.463,0.217-0.944-0.018-1.318 c-0.229-0.364-0.637-0.572-1.121-0.572l-7.017,0.663c-0.531,0.051-0.947,0.322-1.142,0.742c-0.194,0.42-0.13,0.913,0.176,1.351 l1.433,2.051l-4.731,3.113h-3.243c-0.427,0-0.772,0.346-0.772,0.773S13.347,25.797,13.773,25.797z M27.867,17.92l-2.636,5.505 L21.792,18.5L27.867,17.92z"/> <path fill="#00CCCC" d="M26.471,29.579c-0.457-0.954-1.684-1.063-2.298-0.188l-1.539,2.203l-4.961-3.265 c-0.126-0.083-0.273-0.127-0.425-0.127h-3.475c-0.427,0-0.772,0.346-0.772,0.772s0.346,0.772,0.772,0.772h3.243l4.731,3.114 l-1.433,2.051c-0.306,0.438-0.37,0.931-0.176,1.352c0.195,0.42,0.611,0.689,1.143,0.74l6.845,0.655l0.17,0.008 c0.484,0,0.894-0.209,1.122-0.572c0.234-0.375,0.241-0.854,0.019-1.316L26.471,29.579z M21.792,35.499l3.441-4.923l2.633,5.506 L21.792,35.499z M28.297,36.896l-0.023-0.765c0.009-0.003,0.017-0.006,0.023-0.007c0.003-0.001,0.006-0.002,0.009-0.002 L28.297,36.896z"/> </g> </svg>'); background-repeat: no-repeat; background-position: center; 
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-distribution_hover.svg'); 
+}
+
+#extras .nav-tabs > li > a#tab-auditing { 
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <g> <path fill="#707980" d="M19.116,20.525h-3.787c-0.458,0-0.829-0.371-0.829-0.829s0.371-0.829,0.829-0.829h3.787 c0.457,0,0.828,0.371,0.828,0.829S19.573,20.525,19.116,20.525z"/> <path fill="#707980" d="M21.28,22.689c-1.65,0-2.993-1.343-2.993-2.993s1.343-2.993,2.993-2.993s2.993,1.343,2.993,2.993 S22.93,22.689,21.28,22.689z M21.28,18.36c-0.736,0-1.335,0.6-1.335,1.336s0.599,1.335,1.335,1.335s1.335-0.599,1.335-1.335 S22.016,18.36,21.28,18.36z"/> <path fill="#707980" d="M34.67,20.525h-9.034c-0.457,0-0.828-0.371-0.828-0.829s0.371-0.829,0.828-0.829h9.034 c0.458,0,0.829,0.371,0.829,0.829S35.128,20.525,34.67,20.525z"/> <path fill="#707980" d="M29.396,29.993c-1.65,0-2.994-1.343-2.994-2.993s1.344-2.993,2.994-2.993S32.388,25.35,32.388,27 S31.046,29.993,29.396,29.993z M29.396,25.664c-0.737,0-1.336,0.6-1.336,1.336s0.599,1.336,1.336,1.336 c0.735,0,1.334-0.6,1.334-1.336S30.131,25.664,29.396,25.664z"/> <path fill="#707980" d="M25.039,27.829h-9.71c-0.458,0-0.829-0.372-0.829-0.829s0.371-0.829,0.829-0.829h9.71 c0.458,0,0.829,0.372,0.829,0.829S25.497,27.829,25.039,27.829z"/> <path fill="#707980" d="M34.67,27.829h-3.11c-0.458,0-0.829-0.372-0.829-0.829s0.371-0.829,0.829-0.829h3.11 c0.458,0,0.829,0.372,0.829,0.829S35.128,27.829,34.67,27.829z"/> <path fill="#707980" d="M20.603,37.297c-1.649,0-2.992-1.343-2.992-2.993s1.343-2.993,2.992-2.993c1.65,0,2.993,1.343,2.993,2.993 S22.253,37.297,20.603,37.297z M20.603,32.969c-0.735,0-1.335,0.599-1.335,1.335s0.6,1.335,1.335,1.335 c0.736,0,1.335-0.599,1.335-1.335S21.339,32.969,20.603,32.969z"/> <path fill="#707980" d="M34.67,35.133h-9.71c-0.458,0-0.829-0.371-0.829-0.829s0.371-0.829,0.829-0.829h9.71 c0.458,0,0.829,0.371,0.829,0.829S35.128,35.133,34.67,35.133z"/> <path fill="#707980" d="M18.439,35.133h-3.11c-0.458,0-0.829-0.371-0.829-0.829s0.371-0.829,0.829-0.829h3.11 c0.458,0,0.829,0.371,0.829,0.829S18.897,35.133,18.439,35.133z"/> </g> </svg>'); 
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-auditing_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#extras .nav-tabs > li > a#tab-auditing:hover,
+#extras .nav-tabs > li > a#tab-auditing:focus,
+#extras .nav-tabs > li.active > a#tab-auditing,
+#extras .nav-tabs > li.active > a#tab-auditing:hover,
+#extras .nav-tabs > li.active > a#tab-auditing:focus {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve"> <g> <path fill="#00CCCC" d="M19.115,20.525h-3.787c-0.457,0-0.828-0.371-0.828-0.829s0.371-0.829,0.828-0.829h3.787 c0.457,0,0.828,0.371,0.828,0.829S19.572,20.525,19.115,20.525z"/> <path fill="#00CCCC" d="M21.279,22.689c-1.65,0-2.992-1.343-2.992-2.993s1.342-2.993,2.992-2.993s2.994,1.343,2.994,2.993 S22.93,22.689,21.279,22.689z M21.279,18.36c-0.736,0-1.334,0.6-1.334,1.336s0.598,1.335,1.334,1.335s1.336-0.599,1.336-1.335 S22.016,18.36,21.279,18.36z"/> <path fill="#00CCCC" d="M34.67,20.525h-9.033c-0.457,0-0.828-0.371-0.828-0.829s0.371-0.829,0.828-0.829h9.033 c0.459,0,0.83,0.371,0.83,0.829S35.129,20.525,34.67,20.525z"/> <path fill="#00CCCC" d="M29.396,29.993c-1.65,0-2.994-1.343-2.994-2.993s1.344-2.993,2.994-2.993S32.389,25.35,32.389,27 S31.047,29.993,29.396,29.993z M29.396,25.664c-0.738,0-1.336,0.6-1.336,1.336s0.598,1.336,1.336,1.336 c0.734,0,1.334-0.6,1.334-1.336S30.131,25.664,29.396,25.664z"/> <path fill="#00CCCC" d="M25.039,27.829h-9.711c-0.457,0-0.828-0.372-0.828-0.829s0.371-0.829,0.828-0.829h9.711 c0.457,0,0.828,0.372,0.828,0.829S25.496,27.829,25.039,27.829z"/> <path fill="#00CCCC" d="M34.67,27.829h-3.109c-0.459,0-0.83-0.372-0.83-0.829s0.371-0.829,0.83-0.829h3.109 c0.459,0,0.83,0.372,0.83,0.829S35.129,27.829,34.67,27.829z"/> <path fill="#00CCCC" d="M20.604,37.297c-1.65,0-2.992-1.343-2.992-2.993s1.342-2.993,2.992-2.993s2.992,1.343,2.992,2.993 S22.254,37.297,20.604,37.297z M20.604,32.969c-0.736,0-1.336,0.599-1.336,1.335s0.6,1.335,1.336,1.335s1.334-0.599,1.334-1.335 S21.34,32.969,20.604,32.969z"/> <path fill="#00CCCC" d="M34.67,35.133h-9.709c-0.459,0-0.83-0.371-0.83-0.829s0.371-0.829,0.83-0.829h9.709 c0.459,0,0.83,0.371,0.83,0.829S35.129,35.133,34.67,35.133z"/> <path fill="#00CCCC" d="M18.439,35.133h-3.111c-0.457,0-0.828-0.371-0.828-0.829s0.371-0.829,0.828-0.829h3.111 c0.457,0,0.828,0.371,0.828,0.829S18.896,35.133,18.439,35.133z"/> </g> </svg>'); 
+	/* Fallback */ background-image: url('../img/icons/extras-tab-icon-auditing_hover.svg');
+}
+
+#extras a.btn-icon-edit {
+	background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 41.047 41.054" enable-background="new 0 0 41.047 41.054" xml:space="preserve"> <g> <path fill-rule="evenodd" clip-rule="evenodd" fill="#00cccc" d="M13.864,27.018l8.896-2.526l-6.354-6.314L13.864,27.018z M37.623,9.719l-6.354-6.314L17.29,17.297l6.354,6.315L37.623,9.719z M35.771,33.105c0,2.195-1.779,3.975-3.975,3.975H7.949 c-2.195,0-3.974-1.779-3.974-3.975V9.258c0-2.196,1.779-3.975,3.974-3.975h15.899l3.975-3.975H6.624C2.966,1.308,0,4.274,0,7.933 V34.43c0,3.658,2.966,6.624,6.624,6.624h26.498c3.658,0,6.624-2.966,6.624-6.624V13.232l-3.975,3.975V33.105z M40.576,4.415 l-3.972-3.947c-0.657-0.653-1.761-0.618-2.463,0.079l-1.906,1.895l6.354,6.314l1.907-1.894C41.198,6.165,41.233,5.069,40.576,4.415 "/> </g> </svg>');
+	/* Fallback */ background-image: url('../img/icons/btn-icon-edit-form.svg'); 
+	background-size: 16px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+h2.title#latest {
+	background: url(../img/icons/icon-latest-updates.svg) center top no-repeat;
+}
+
+.carousel .carousel-controls a.carousel-control.left {
+	background-image: url('../img/icons/related-items-left_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.carousel .carousel-controls a.carousel-control.left:hover,
+.carousel .carousel-controls a.carousel-control.left:focus {
+	background-image: url('../img/icons/related-items-left_hover.svg');
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.carousel .carousel-controls a.carousel-control.right {
+	background-image: url('../img/icons/related-items-right_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.carousel .carousel-controls a.carousel-control.right:hover,
+.carousel .carousel-controls a.carousel-control.right:focus {
+	background-image: url('../img/icons/related-items-right_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.carousel .carousel-controls a.carousel-control.first {
+	background-image: url('../img/icons/related-items-first_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.carousel .carousel-controls a.carousel-control.first:hover,
+.carousel .carousel-controls a.carousel-control.first:focus {
+	background-image: url('../img/icons/related-items-first_hover.svg');
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.carousel .carousel-controls a.carousel-control.last {
+	background-image: url('../img/icons/related-items-last_normal.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.carousel .carousel-controls a.carousel-control.last:hover,
+.carousel .carousel-controls a.carousel-control.last:focus {
+	background-image: url('../img/icons/related-items-last_hover.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.carousel a.btn-status {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 36 36" enable-background="new 0 0 36 36" xml:space="preserve"> <g> <path fill="#EB5657" d="M17,27c-4.963,0-9-4.037-9-9s4.037-9,9-9c1.682,0,3.321,0.467,4.742,1.35 c0.249,0.154,0.325,0.48,0.171,0.729c-0.155,0.249-0.481,0.325-0.729,0.17c-1.254-0.779-2.7-1.19-4.184-1.19 c-4.379,0-7.941,3.563-7.941,7.941s3.563,7.941,7.941,7.941s7.941-3.563,7.941-7.941c0-0.88-0.143-1.745-0.425-2.568 c-0.094-0.277,0.054-0.578,0.33-0.672c0.277-0.094,0.578,0.053,0.673,0.33C25.839,16.023,26,17.002,26,18 C26,22.963,21.963,27,17,27z"/> <path fill="#EB5657" d="M17,21.054c-0.135,0-0.264-0.051-0.362-0.144l-4.235-3.979c-0.213-0.2-0.224-0.535-0.023-0.748 c0.2-0.213,0.535-0.224,0.748-0.023l3.828,3.596l6.956-8.257c0.188-0.224,0.522-0.252,0.746-0.064s0.252,0.522,0.063,0.746 l-7.315,8.685c-0.094,0.111-0.229,0.179-0.374,0.188C17.021,21.054,17.01,21.054,17,21.054z"/> </g> <path fill="#34383B" d="M26.127,10.833l2.554-2.553c0.216-0.216,0.216-0.568,0-0.784c-0.217-0.217-0.568-0.217-0.785,0l-2.553,2.553 L22.79,7.495c-0.217-0.217-0.568-0.217-0.785,0c-0.216,0.216-0.216,0.568,0,0.784l2.554,2.553l-2.554,2.553 c-0.216,0.216-0.216,0.568,0,0.784c0.108,0.108,0.251,0.163,0.393,0.163s0.284-0.054,0.393-0.163l2.553-2.553l2.553,2.553 c0.108,0.108,0.251,0.163,0.393,0.163s0.284-0.054,0.393-0.163c0.216-0.216,0.216-0.568,0-0.784L26.127,10.833z"/> </svg> ');
+	/* Fallback */ background-image: url('../img/icons/related-items-icon-status_not-approved.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.carousel a.btn-status.approved,
+.carousel a.btn-status.approved:hover,
+.carousel a.btn-status.approved:focus {
+	background-image: url('data:image/svg+xml;utf8, <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 36 36" enable-background="new 0 0 36 36" xml:space="preserve"> <g> <path fill="#FFFFFF" d="M17,27c-4.963,0-9-4.037-9-9s4.037-9,9-9c1.682,0,3.321,0.467,4.742,1.35 c0.249,0.154,0.325,0.48,0.171,0.729c-0.155,0.249-0.481,0.325-0.729,0.17c-1.254-0.779-2.7-1.19-4.184-1.19 c-4.379,0-7.941,3.563-7.941,7.941s3.563,7.941,7.941,7.941s7.941-3.563,7.941-7.941c0-0.88-0.143-1.745-0.425-2.568 c-0.094-0.277,0.054-0.578,0.33-0.672c0.277-0.094,0.578,0.053,0.673,0.33C25.839,16.023,26,17.002,26,18 C26,22.963,21.963,27,17,27z"/> <path fill="#FFFFFF" d="M17,21.054c-0.135,0-0.264-0.051-0.362-0.144l-4.235-3.979c-0.213-0.2-0.224-0.535-0.023-0.748 c0.2-0.213,0.535-0.224,0.748-0.023l3.828,3.596l6.956-8.257c0.188-0.224,0.522-0.252,0.746-0.064s0.252,0.522,0.063,0.746 l-7.315,8.685c-0.094,0.111-0.229,0.179-0.374,0.188C17.021,21.054,17.01,21.054,17,21.054z"/> </g> </svg> '); 
+	/* Fallback */ background-image: url('../img/icons/related-items-icon-status_approved.svg'); 
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+
+
+/* 	****************
+		CSS3
+	*************** */
+
+a,
+form > p,
+.navbar-nav > li > a.btn-avatar label,
+#menu button.btn-icon,
+#main-details form > p:after,
+.carousel .carousel-controls a.carousel-control,
+.carousel .carousel-indicators li,
+.btn-file,
+#user-form input,
+#user-form bheckbox,
+#user-form select,
+#user-form textarea {
+	transition: all ease-in-out 250ms;
+	-webkit-backface-visibility: hidden;
+}
+
+body .scrollpanel .sp-scrollbar .sp-thumb {
+	transition: all ease-in-out 125ms;
+	-webkit-backface-visibility: hidden;
+}
+
+
+/* 	****************
+		DEV
+	****************/
+	
+	/* colors 
+	
+	red:normal - #eb5657
+	red:hover  - #c84648
+	--
+	cyan:normal - #00cccc
+	cyan:hover  - #0db2ad
+	--
+	grey:normal - #34383b
+	grey:hover  - #4f565b
+	--
+	grey2:normal - #3e4347
+	grey2:hover  - #d6dde3
+	
+	*/
+
+.col-xs-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+	
+.avatar,
+#main-video img,
+.carousel img {
+	max-width: 100%;
+	min-width: 100%;
+	transition: all ease-in-out 250ms;
+	-webkit-backface-visibility: hidden;
+}
+
+.avatar:hover,
+.avatar:focus,
+#main-video img:hover,
+#main-video img:focus,
+.carousel img:hover,
+.carousel img:focus {
+	opacity: .75;
+}
+
+
+/* 
+	TO DO:
+	------------------------------------
+	• Group "text-transform: uppercase";
+	• Group "font-family: Light, bold, etc.";
+	• Group "colour:" and "background:";
+	• Check SVG Icons browser compatibility;
+	
+*/

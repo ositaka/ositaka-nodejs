@@ -3,6 +3,7 @@
   height: auto;
   mix-blend-mode: difference;
   position: fixed;
+  top: 0;
   width: 100%;
   z-index: z('navigation');
 
@@ -27,15 +28,15 @@
   &-triangle {
     display: block;
     filter: none;
-    left: 0.5rem;
-    margin-right: 3rem;
-    min-width: 2rem;
+    left: 0.5vw;
+    margin-right: 3vw;
+    min-width: 1.1vw;
+    min-height: 1.1vw;
     position: absolute;
     rotate: 90deg;
     scale: 2.6;
-    top: 1rem;
+    top: 0.75vw;
     transform: unset !important;
-    transform: translate3d(0%, 0%, 0);
     transform-origin: 39% 50%;
     transition: all 1s $ease-mc;
     z-index: z('triangle');
@@ -52,14 +53,25 @@
 
     @media (prefers-reduced-motion: no-preference) {
       &.is-on-preloader {
-        top: calc(30dvh - 6rem);
-        left: calc(50dvw - 6rem);
-        scale: 20;
-        rotate: 810deg;
-        transform: translate3d(-20%, 3%, 0);
+        animation: logo-in 6s $ease-mc;
+        top: calc(50dvh - 3.2vw);
+        left: calc(50dvw - 3.2vw);
+        top: 20vw;
 
         @include media('<phone') {
           scale: 8;
+        }
+      }
+
+      @keyframes logo-in {
+        from {
+          scale: 0;
+          rotate: 90deg;
+        }
+
+        to {
+          scale: 20;
+          rotate: 1620deg;
         }
       }
     }
@@ -90,6 +102,10 @@
     margin-left: 6rem;
     position: relative;
     top: 1rem;
+
+    & span {
+      opacity: 0;
+    }
   }
 
   @include media('<phone') {
@@ -108,18 +124,23 @@
   position: absolute;
   right: 10.9rem;
   text-align: center;
-  top: 2.7rem;
+  top: 3.1rem;
   z-index: z('navigation');
 }
 
 .langs__list {
   display: flex;
-  height: 3rem;
   list-style: none;
 
   & .langs__list__item a {
     font-size: 1.8rem;
-    margin-right: 2rem;
+    margin: 0 0.5rem;
+    padding: 0 0.5rem;
+    opacity: 0;
+
+    & span {
+      padding: 1rem 0;
+    }
 
     @include media('<phone') {
       font-size: 4.2rem;

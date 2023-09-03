@@ -9,6 +9,7 @@ export default class Preloader extends Component {
       element: '.preloader',
       elements: {
         title: '.preloader__text',
+        navigation: '.button-menu, .langs a, .navigation__logo-lettering span',
         number: '.preloader__number',
         numberText: '.preloader__number__text',
         logo: '.navigation__logo',
@@ -74,14 +75,18 @@ export default class Preloader extends Component {
       this.emit('completed')
 
       this.animateOut = GSAP.timeline({
-        delay: 1
+        delay: 0
+      })
+
+      this.animateOut.set(this.elements.navigation, {
+        transform: 'translateY(-30vw)',
       })
 
       this.animateOut.to(this.elements.titleSpans, {
         // duration: 1.5,
-        duration: 2.2,
+        duration: 3,
         ease: 'expo.out',
-        stagger: 0.1,
+        stagger: 0.5,
         y: '100%',
 
         // Move triangle animation
@@ -109,11 +114,13 @@ export default class Preloader extends Component {
         transform: 'translateY(-100%)'
       }, '-=1')
 
-
-      // this.animateOut.to(this.element, {
-      //   autoAlpha: 0,
-      //   duration: 1
-      // })
+      this.animateOut.to(this.elements.navigation, {
+        duration: 1.5,
+        ease: 'expo.out',
+        opacity: 1,
+        stagger: 0.1,
+        transform: 'translateY(0vw)',
+      }, '-=1.4')
 
       this.animateOut.call(_ => {
         this.destroy()

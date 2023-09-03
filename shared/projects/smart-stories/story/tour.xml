@@ -1,0 +1,1268 @@
+﻿<krpano version="1.19" title="Virtual Tour">
+
+	<include url="skin/vtourskin.xml" />
+
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type=""
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               gyro="true"
+	               webvr="true"
+	               webvr_gyro_keeplookingdirection="true"
+	               webvr_prev_next_hotspots="true"
+	               littleplanetintro="true"
+	               title="false"
+	               thumbs="false"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="false"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="true"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="true"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext="loading..."
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0xffffff"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Arial;"
+	               design_text_shadow="1"
+	               />
+
+	<include url="skin/vtourskin_design_black.xml"       />
+
+	<!-- right-click context menu to change the viewing settings -->
+	<contextmenu>
+		<item caption="Developed by Nuno Marques (OSITAKA)" onclick="openurl(https://ositaka.com,_blank);" separator="true"/>
+	</contextmenu>
+
+	<!-- gyroscope set-up -->
+	<plugin name="gyro" devices="html5" keep="true"
+        url="plugins/gyro2.js" 
+        enabled="true"
+        camroll="true"
+        friction="0.0"
+        touch_mode="full"
+        sensor_mode="1"
+        softstart="0.5"
+        autocalibration="false"
+        onavailable=""
+        onunavailable=""
+        onenable=""
+        ondisable=""
+        />
+	
+	<!-- startup action - load the first scene -->
+	<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+	</action>
+
+	<!-- setup view -->
+	<autorotate enabled="true"
+		devices="desktop"  
+		waittime="0" 
+		accel="1"
+		speed="5" 
+		horizon="0" 
+	/>
+
+	<!-- logo --> 
+	<layer name="logo" keep="true" align="topleft" x="28" y="23"
+		url="skin/logo.svg" url.mobile="skin/logo.svg" width="106px" height="48px"
+		onclick="openurl(https://smartstories.online/,_self);"
+	/>
+
+	<!-- enter VR -->
+	<layer name="enter-vr" keep="true" align="topright" x="28" y="32" padding="4 8"
+		url="skin/vr.svg" width="68px" height="36px"
+		onclick="webvr.enterVR();"
+	/>
+
+	<!-- architectural view -->
+	<layer name="architectural" keep="true" align="topright" x="156" y="32" padding="4 8"
+		url="skin/architecture.svg" width="36px" height="36px"
+		onclick="skin_view_architectural();"
+	/>
+	<action name="skin_view_architectural">
+		skin_view_look_straight();
+		tween(view.architectural, 1.0, distance(1.0,0.5));
+		tween(view.pannini,       0.0, distance(1.0,0.5));
+		tween(view.distortion,    0.0, distance(1.0,0.5));
+	</action>
+
+	<!-- planet view -->
+	<layer name="planet" keep="true" align="topright" x="108" y="32"
+		url="skin/planet.svg" width="36px" height="36px"
+		onclick="cm_littleplanet_view();"
+	/>
+	<action name="cm_littleplanet_view">
+		tween(view.architectural, 0.0, distance(1.0,0.5));
+		tween(view.pannini,       0.0, distance(1.0,0.5));
+		tween(view.fisheye,       1.0, distance(1.0,0.8));
+		tween(view.fov,           150, distance(150,0.8));
+		tween(view.vlookat,        90, distance(100,0.8));
+		add(new_hlookat, view.hlookat, 123.0);
+		tween(view.hlookat, get(new_hlookat), distance(100,0.8));
+	</action>
+
+	<!-- share -->
+	<layer name="share" keep="true" align="bottomright" x="28" y="32" padding="4 8"
+		url="skin/share.svg" width="36px" height="36px"
+		onclick="alert:hello"
+	/>
+
+	<!-- the map image -->
+	<layer name="map" url="skin/inmap.png" keep="true" handcursor="true" capture="false"
+	       align="leftbottom"
+	       scale="0.25" scalechildren="true"
+	       onclick="openmap();"
+				 x="24"
+				 y="64"
+	       />
+
+	<!-- map opening - scale the map up to 100% (or smaller if the screen is too small) -->
+	<action name="openmap">
+		set(layer[map].onclick, closemap(); );
+		layer[map].changeorigin(center,center);
+
+		set(bigscale,1);
+		if(layer[map].imagewidth GT stagewidth, div(bigscale, stagewidth, layer[map].imagewidth); );
+
+		tween(layer[map].x, 0);
+		tween(layer[map].y, 0);
+		tween(layer[map].scale, get(bigscale));
+	</action>
+
+	<!-- map closing - scale the map back to 0.25 of its image pixelsize -->
+	<action name="closemap">
+		set(layer[map].onclick, openmap(); );
+		layer[map].changeorigin(leftbottom,leftbottom);
+
+		tween(layer[map].x, 24);
+		tween(layer[map].y, 64);
+		tween(layer[map].scale, 0.25);
+	</action>
+
+
+	<!-- the map spot images -->
+	<style name="mapspot" keep="true" url="skin/camicon.png" parent="map" align="lefttop" edge="center" scale.mobile="1" />
+
+	<layer name="city-05-1" style="mapspot" x="152" y="84" 	zorder="6" onclick="mapspot_loadscene(city-05-1);" />
+	<layer name="city-04-2" style="mapspot" x="320" y="56" 	zorder="5" onclick="mapspot_loadscene(city-04-2);" />
+	<layer name="city-04-1" style="mapspot" x="438" y="380" zorder="4" onclick="mapspot_loadscene(city-04-1);" />
+	<layer name="city-03-1" style="mapspot" x="530" y="340" zorder="3" onclick="mapspot_loadscene(city-03-1);" />
+	<layer name="city-02-1" style="mapspot" x="680" y="464" zorder="2" onclick="mapspot_loadscene(city-02-1);" />
+	<layer name="city-00-1" style="mapspot" x="792" y="410" zorder="1" onclick="mapspot_loadscene(city-00-1);" />
+
+	<!-- action for loading the scene when clicking on the map spots -->
+	<action name="mapspot_loadscene">
+		if(layer[map].scale GT 0.25,
+			<!-- special mode for zoomed map: hide big map, loadscene, show small map -->
+			set(layer[map].enabled, false);
+			tween(layer[map].alpha, 0.0, 0.25, default,
+				loadscene(%1, null, MERGE, BLEND(1));
+
+				set(layer[map].onclick, openmap(); );
+				layer[map].changeorigin(leftbottom,leftbottom);
+
+				set(layer[map].x, 24);
+				set(layer[map].y, 64);
+				set(layer[map].scale, 0.25);
+
+				set(events[sceneload].onloadcomplete,
+					delayedcall(1,
+						tween(layer[map].alpha, 1.0, 0.5, default, set(layer[map].enabled, true); );
+					  );
+				  );
+			  );
+		  ,
+			<!-- small map: just load the scene -->
+			loadscene(%1, null, MERGE, BLEND(1));
+		  );
+	</action>
+
+	<!-- active spot image (overlays the normal spot) -->
+	<layer name="activespot" url="skin/camicon_red.png" keep="true"
+	       align="lefttop" zorder="2" scale.mobile="1"
+	       />
+
+	<!-- radar layer (overlays the normal spot too, but is behind the activespot image) -->
+	<layer name="radar" keep="true"
+	       url.flash="plugins/radar.swf"
+	       url.html5="plugins/radar.js"
+	       align="center" zorder="1"
+	       scale.mobile="1"
+	       fillalpha="0.5" fillcolor="0xffffff"
+	       linewidth="1.0" linecolor="0xffffff" linealpha="0.5"
+	       />
+
+	<!-- hotspot styles (black and white hotspots) -->
+	<style name="hotspot_ani_black"
+	       url="skin/hotspot_ani_black_64x64x20.png"
+	       crop="0|0|64|64"
+	       frames="20" framewidth="64" frameheight="64" frame="0"
+	       onloaded="hotspot_animate();"
+	       />
+
+	<style name="hotspot_ani_white"
+	       url="skin/hotspot_ani_white_64x64x20.png"
+	       crop="0|0|64|64"
+	       frames="20" framewidth="64" frameheight="64" frame="0"
+	       onloaded="hotspot_animate();"
+	       />
+
+	<!-- hotspot animation code -->
+	<action name="hotspot_animate">
+		if(loaded,
+			inc(frame,1,get(frames),0);
+			mul(ypos,frame,frameheight);
+			txtadd(crop,'0|',get(ypos),'|',get(framewidth),'|',get(frameheight));
+			delayedcall(0.03, hotspot_animate() );
+		  );
+	</action>
+
+
+
+	<!-- the scnes -->
+	<scene name="city-00-1" title="00-1__PANO_20190327_140703_9" onstart="updateradar();" thumburl="panos/00-1__PANO_20190327_140703_9.tiles/thumb.jpg" lat="39.339504" lng="-9.172252" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-00-1);
+			set(layer[radar].parent, city-00-1);
+			set(layer[radar].heading, -170);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_1.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+		
+		<view hlookat="-3" vlookat="0" fovtype="MFOV" fov="118.114" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/00-1__PANO_20190327_140703_9.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/00-1__PANO_20190327_140703_9.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/00-1__PANO_20190327_140703_9.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<hotspot name="city-00-2" style="hotspot_ani_white" ath="-5" atv="-1" tooltip=""
+			onclick="looktohotspot(get(name));
+							loadscene(city-00-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(120.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(-155, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-00-3" style="hotspot_ani_white" ath="176" atv="-4" tooltip=""
+			onclick="looktohotspot(get(name));
+							loadscene(city-00-3,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(-182.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(0, 8.12, 90, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-00-2" title="00-2_PANO_20190327_135506_5" onstart="updateradar();" thumburl="panos/00-2_PANO_20190327_135506_5.tiles/thumb.jpg" lat="39.339504" lng="-9.172252" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-00-1);
+			set(layer[radar].parent, city-00-1);
+			set(layer[radar].heading, -160);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_1.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+		
+		<view hlookat="576.719" vlookat="11.407" fovtype="MFOV" fov="118.114" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/00-2_PANO_20190327_135506_5.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/00-2_PANO_20190327_135506_5.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/00-2_PANO_20190327_135506_5.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<hotspot name="city-00-1" style="hotspot_ani_white" ath="173.712" atv="-2" tooltip=""
+			onclick="looktohotspot(get(name));
+							loadscene(city-00-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="-30.712" atv="-33" tooltip=""
+			onclick="looktohotspot(get(name));
+							loadscene(city-01-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>    
+
+	<scene name="city-00-3" title="00-3__PANO_20190327_141502_14" onstart="updateradar();" thumburl="panos/00-3__PANO_20190327_141502_14.tiles/thumb.jpg" lat="39.339504" lng="-9.172252" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-00-1);
+			set(layer[radar].parent, city-00-1);
+			set(layer[radar].heading, -170);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_1.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+		
+		<view hlookat="576.719" vlookat="11.407" fovtype="MFOV" fov="118.114" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/00-3__PANO_20190327_141502_14.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/00-3__PANO_20190327_141502_14.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/00-3__PANO_20190327_141502_14.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<hotspot name="city-00-1" style="hotspot_ani_white" ath="0" atv="-3" tooltip=""
+			onclick="looktohotspot(get(name));
+							loadscene(city-00-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(-160.22, 1.05, 58.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(-5, 0, 85.5, smooth(100,150,200));"
+		/>
+
+	</scene>
+    
+	<scene name="city-01-1" title="01-1__360_0023_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/01-1__360_0023_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.339504" lng="-9.172252" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-02-1);
+			set(layer[radar].parent, city-02-1);
+			set(layer[radar].heading, -1.92);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_2.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+		
+		<view hlookat="576.719" vlookat="11.407" fovtype="MFOV" fov="118.114" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/01-1__360_0023_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/01-1__360_0023_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/01-1__360_0023_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<hotspot name="city-00-3" style="hotspot_ani_white" ath="187.712" atv="14" tooltip=""
+			onclick="looktohotspot(get(name));
+							loadscene(city-01-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(150.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(0.65, 8.12, 135.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-01-2" style="hotspot_ani_white" ath="113.712" atv="44.842" tooltip=""
+			onclick="looktohotspot(get(name));
+							loadscene(city-01-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(150.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(0.65, 8.12, 135.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-02-1" style="hotspot_ani_white" ath="83.712" atv="-10" tooltip=""
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(150.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(0.65, 8.12, 135.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-01-2" title="01-2__360_0027_Stitch_YHC_not_edited" onstart="updateradar();" thumburl="panos/01-2__360_0027_Stitch_YHC_not_edited.tiles/thumb.jpg" lat="39.361030" lng="-9.155822" heading="test">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-02-1);
+			set(layer[radar].parent, city-02-1);
+			set(layer[radar].heading, 87.10);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_2.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="-101.786" vlookat="-6.286" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/01-2__360_0027_Stitch_YHC_not_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/01-2__360_0027_Stitch_YHC_not_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/01-2__360_0027_Stitch_YHC_not_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="-7.573" atv="1.001" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-02-1" style="hotspot_ani_white" ath="164.636" atv="-48.705"
+			onclick="looktohotspot(get(name));
+							loadscene(city-01-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-02-1" title="02-1__360_0033_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/02-1__360_0033_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.360523" lng="-9.157658" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-02-1);
+			set(layer[radar].parent, city-02-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_2.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="171.150" vlookat="17.016" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/02-1__360_0033_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/02-1__360_0033_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/02-1__360_0033_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="83.005" atv="1.130"
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-02-1" style="hotspot_ani_white" ath="-178.557" atv="7.181" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-5,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-02-2" title="02-2__360_0037_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/02-2__360_0037_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.360523" lng="-9.157658" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-02-1);
+			set(layer[radar].parent, city-02-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_2.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="18.841" vlookat="-4.898" fovtype="MFOV" fov="124.744" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/02-2__360_0037_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/02-2__360_0037_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/02-2__360_0037_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="99.266" atv="6.853" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-02-1" style="hotspot_ani_white" ath="-97.444" atv="-0.930" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-5,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-03-1" style="hotspot_ani_white" ath="-179.532" atv="-9.097" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-3,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-02-3" title="02-3__360_0039_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/02-3__360_0039_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.361401" lng="-9.157485" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-02-1);
+			set(layer[radar].parent, city-02-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_2.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="461.500" vlookat="18.921" fovtype="MFOV" fov="127.713" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/02-3__360_0039_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/02-3__360_0039_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/02-3__360_0039_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="100.795" atv="17.807" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-02-1" style="hotspot_ani_white" ath="9.266" atv="21.381" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-4,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-02-4" title="02-4__360_0040_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/02-4__360_0040_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.360532" lng="-9.157455" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-02-1);
+			set(layer[radar].parent, city-02-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_2.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/02-4__360_0040_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/02-4__360_0040_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/02-4__360_0040_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="86.224" atv="-6.111"
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-5,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-02-5" title="02-5__360_0046_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/02-5__360_0046_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.362916" lng="-9.157742" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-02-1);
+			set(layer[radar].parent, city-02-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_2.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/02-5__360_0046_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/02-5__360_0046_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/02-5__360_0046_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="162.045" atv="20.687" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-02-1" style="hotspot_ani_white" ath="-116.921" atv="6.113"
+			onclick="looktohotspot(get(name));
+							loadscene(city-02-4,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-03-1" style="hotspot_ani_white" ath="-148.090" atv="-35.054"
+			onclick="looktohotspot(get(name));
+							loadscene(city-03-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-03-1" title="03-1__360_0052_Stitch_YHC_not_edited" onstart="updateradar();" thumburl="panos/03-1__360_0052_Stitch_YHC_not_edited.tiles/thumb.jpg" lat="39.429857" lng="-9.222866" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-03-1);
+			set(layer[radar].parent, city-03-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_3.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="223.365" vlookat="2.806" fovtype="MFOV" fov="118.167" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/03-1__360_0052_Stitch_YHC_not_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/03-1__360_0052_Stitch_YHC_not_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/03-1__360_0052_Stitch_YHC_not_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="-148.378" atv="0.736" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-03-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-03-2" title="03-2__360_0062_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/03-2__360_0062_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.432082" lng="-9.229894" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-03-1);
+			set(layer[radar].parent, city-03-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_3.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="-19.147" vlookat="25.084" fovtype="MFOV" fov="112.897" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/03-2__360_0062_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/03-2__360_0062_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/03-2__360_0062_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="5.454" atv="3.910" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-03-3,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-02-1" style="hotspot_ani_white" ath="28.349" atv="0.998" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-03-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-03-1" style="hotspot_ani_white" ath="101.225" atv="-7.599" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-04-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-03-3" title="03-3__360_0063_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/03-3__360_0063_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.432219" lng="-9.227217" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-03-1);
+			set(layer[radar].parent, city-03-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_3.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="-31.669" vlookat="16.510" fovtype="MFOV" fov="118.165" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/03-3__360_0063_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/03-3__360_0063_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/03-3__360_0063_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="city-01-1" style="hotspot_ani_white" ath="68.651" atv="-2.230" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-03-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="city-02-1" style="hotspot_ani_white" ath="149.857" atv="2.690" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-03-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-04-1" title="04-1__360_0067_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/04-1__360_0067_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.371382" lng="-9.332016" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-04-1);
+			set(layer[radar].parent, city-04-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_4.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="169.284" vlookat="22.431" fovtype="MFOV" fov="123.042" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/04-1__360_0067_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/04-1__360_0067_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/04-1__360_0067_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="spot1" style="hotspot_ani_white" ath="-8.742" atv="-16.299"
+			onclick="looktohotspot(get(name));
+							loadscene(city-03-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="spot2" style="hotspot_ani_white" ath="159.336" atv="1.916"
+			onclick="looktohotspot(get(name));
+							loadscene(city-04-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(172.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<!--<scene name="video" title="360 Video" onstart="updateradar();" thumburl="panos/video/thumb.jpg" isvideopano="true">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-04-2);
+			set(layer[radar].parent, city-04-2);
+			set(layer[radar].heading, -112);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_5.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="576.719" vlookat="11.407" fovtype="MFOV" fov="118.114" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    
+			<image>
+					<sphere url="plugin:video" />
+			</image>
+					
+			<plugin name="video"
+					url.flash="plugins/videoplayer.swf"
+					url.html5="plugins/videoplayer.js"
+					posterurl="panos/video/poster.jpg"
+					videourl="panos/video/video.mp4|panos/video/video.webm"
+					onvideoready="skin_showloading(true);"
+					pausedonstart="false"
+					/>
+		<hotspot name="spot1" style="hotspot_ani_white" ath="153.085" atv="8.366"
+			onclick="looktohotspot(get(name));
+							loadscene(city-04-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+					
+	</scene>-->
+
+	<scene name="city-04-2" title="04-2__360_0077_Stitch_YHC_not_edited" onstart="updateradar();" thumburl="panos/04-2__360_0077_Stitch_YHC_not_edited.tiles/thumb.jpg" lat="39.374012" lng="-9.341289" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-04-2);
+			set(layer[radar].parent, city-04-2);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_5.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="-137.497" vlookat="87.082" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/04-2__360_0077_Stitch_YHC_not_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/04-2__360_0077_Stitch_YHC_not_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/04-2__360_0077_Stitch_YHC_not_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="spot1" style="hotspot_ani_white" ath="26.441" atv="0.196"
+			onclick="looktohotspot(get(name));
+							loadscene(city-04-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="spot2" style="hotspot_ani_white" ath="146.174" atv="-6.700"
+			onclick="looktohotspot(get(name));
+							loadscene(city-05-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-05-1" title="05-1__360_0085_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/05-1__360_0085_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.094329" lng="-9.261747" heading="">
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_6.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-05-1);
+			set(layer[radar].parent, city-05-1);
+			set(layer[radar].heading, -1.11);
+		</action>
+
+		<view hlookat="-268.418" vlookat="12.048" fovtype="MFOV" fov="96.434" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/05-1__360_0085_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/05-1__360_0085_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/05-1__360_0085_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="spot1" style="hotspot_ani_white" ath="-139.839" atv="-3.266"
+			onclick="looktohotspot(get(name));
+							loadscene(city-05-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="spot2" style="hotspot_ani_white" ath="51.046" atv="-23.209"
+			onclick="looktohotspot(get(name));
+							loadscene(city-00-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-05-2" title="05-2__360_0090_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/05-2__360_0090_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.094567" lng="-9.261056" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-05-1);
+			set(layer[radar].parent, city-05-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_6.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="-343.798" vlookat="52.254" fovtype="MFOV" fov="139.966" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/05-2__360_0090_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/05-2__360_0090_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/05-2__360_0090_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="spot1" style="hotspot_ani_white" ath="11.066" atv="-3.413" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-05-3,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="spot2" style="hotspot_ani_white" ath="165.569" atv="13.743" 
+			onclick="looktohotspot(get(name));
+							loadscene(city-05-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-05-3" title="05-3__360_0093_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/05-3__360_0093_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.094567" lng="-9.261056" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-05-1);
+			set(layer[radar].parent, city-05-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_6.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="-9.084" vlookat="-30.803" fovtype="MFOV" fov="119.951" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/05-3__360_0093_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/05-3__360_0093_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/05-3__360_0093_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="spot1" style="hotspot_ani_white" ath="-50.519" atv="17.166"
+			onclick="looktohotspot(get(name));
+							loadscene(city-05-2,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="spot2" style="hotspot_ani_white" ath="80.185" atv="8.568"
+			onclick="looktohotspot(get(name));
+							loadscene(city-05-4,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="spot3" style="hotspot_ani_white" ath="160.105" atv="1.371"
+			onclick="looktohotspot(get(name));
+							loadscene(city-05-5,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-05-4" title="05-4__360_0098_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/05-4__360_0098_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.094864" lng="-9.261265" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-05-1);
+			set(layer[radar].parent, city-05-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_6.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+
+		<view hlookat="100.502" vlookat="1.721" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/05-4__360_0098_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/05-4__360_0098_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/05-4__360_0098_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="spot1" style="hotspot_ani_white" ath="14.019" atv="-2.946"
+			onclick="looktohotspot(get(name));
+							loadscene(city-05-3,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+	<scene name="city-05-5" title="05-5__360_0102_Stitch_YHC_edited" onstart="updateradar();" thumburl="panos/05-5__360_0102_Stitch_YHC_edited.tiles/thumb.jpg" lat="39.094772" lng="-9.261125" heading="">
+
+		<action name="updateradar">
+			set(layer[activespot].parent, city-05-1);
+			set(layer[radar].parent, city-05-1);
+			set(layer[radar].heading, -91.11);
+		</action>
+
+		<plugin name="staticimage" url="skin/scenes_info/scene_6.svg" align="leftbottom" width="prop" height="64" x="28" y="20" enabled="false" />
+		
+		<view hlookat="-250.148" vlookat="-78.463" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/05-5__360_0102_Stitch_YHC_edited.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/05-5__360_0102_Stitch_YHC_edited.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/05-5__360_0102_Stitch_YHC_edited.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="spot1" style="hotspot_ani_white" ath="-94.766" atv="-1.791"
+			onclick="looktohotspot(get(name));
+							loadscene(city-05-3,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+		<hotspot name="spot2" style="hotspot_ani_white" ath="60.891" atv="-22.903"
+			onclick="looktohotspot(get(name));
+							loadscene(city-04-1,null,MERGE,BLEND(1));
+							set(view.stereographic, true);
+							set(view.fisheye, 1.0);
+							set(view.fov, 140);
+							lookat(320.22, 1.05, 48.15);
+							wait(BLEND);
+							oninterrupt(break);
+							lookto(202.65, 8.12, 165.5, smooth(100,100,200));"
+		/>
+
+	</scene>
+
+</krpano>

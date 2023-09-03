@@ -1,5 +1,5 @@
 .preloader(style="--color-background: #0E151E; --color-text: #BCCACD;")
-  p.preloader__text(data-animation="title")!=preloader.data.title.replace(/\n/g, '<br>')
+  p.preloader__text(data-animation="chain")!=preloader.data.title.replace(/\n/g, '<br>')
 
   .preloader__number
-    .preloader__number__text 0%
+    .preloader__number__text(data-animation="chain") 0%

@@ -13,7 +13,6 @@ const path = require('path');
 // const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

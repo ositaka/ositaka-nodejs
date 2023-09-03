@@ -1,0 +1,709 @@
+<!--
+	BOLHA 360
+	https://bolha.pt/360/
+-->
+<krpano>
+	<include url="contextmenu.xml" />
+	
+	
+	<!-- WebVR -->
+		<!-- webvr.xml - WebVR plugin, enter/exit VR buttons, VR cursor, VR setup -->
+	<include url="%SWFPATH%/plugins/webvr.xml" />
+
+	<!-- add/overwrite some settings from the webvr.xml for this example 
+		- enable the fake mode
+		- add events for portrait usage
+	-->
+	<plugin name="WebVR"
+	        mobilevr_fake_support="true"
+	        onentervr="webvr_onentervr(); webvr_act_as_gyro_in_portrait_mode(true);"
+	        onexitvr="webvr_onexitvr(); tween(layer[webvr_rotate_to_landscape_request].alpha, 0.0, 0.0);"
+	        />
+
+	<!-- re-align the vr button and 'auto-start' the video when pressing the enterVR button -->
+	<layer name="webvr_enterbutton"
+	       align="bottom" y="10%"
+	       ondown="video_touch_auto_start();"
+	       />
+
+	<!-- show a 'rotate the device' info when the mobile device is in portrait orientation in VR mode -->
+	<layer name="webvr_rotate_to_landscape_request" keep="true" vr="true" devices="mobile"
+	       url="rotate_device.png" scale="0.5"
+	       align="top" edge="center" y="28%"
+	       autoalpha="true" alpha="0.0"
+	       enabled="false"
+	       />
+
+	<events name="webvr_events" keep="true" devices="html5"
+	        onresize.mobile="webvr_act_as_gyro_in_portrait_mode();"
+	        />
+
+	<action name="webvr_act_as_gyro_in_portrait_mode">
+		if(device.mobile AND webvr.isenabled,
+			div(aspect, stagewidth, stageheight);
+			if(aspect != lastaspect OR '%1' == 'true',
+				copy(lastaspect, aspect);
+				if(stagewidth GT stageheight,
+					<!-- landscape orientation - use stereo rendering and a direct/fast gyro sensor mode -->
+					set(display.stereo, true);
+					set(webvr.mobilevr_sensor_mode, 3);
+					webvr.update();
+					tween(layer[webvr_rotate_to_landscape_request].alpha, 0.0, 0.0);
+				  ,
+					<!-- portrait orientation - use normal rendering and a smoother/slower gyro sensor mode -->
+					set(display.stereo, false);
+					set(webvr.mobilevr_sensor_mode, 1);
+					webvr.update();
+					tween(layer[webvr_rotate_to_landscape_request].alpha, 1.0);
+					delayedcall(3.0, tween(layer[webvr_rotate_to_landscape_request].alpha, 0.0, 1.0); );
+				  );
+			  );
+		  ,
+			set(lastaspect, 0);
+		  );
+	</action>
+
+
+	<!-- allow scene switching by the PageUp/PageDown keys -->
+	<events name="keybcontrol" keep="true" onkeyup="if(keycode == 33, nextscene_loop(-1)); if(keycode == 34, nextscene_loop(+1));" />
+
+
+
+    <!-- auto start video -->
+    <layer name="webvr_enterbutton" align="bottom" y="10%" ondown="video_auto_start();"/>
+
+	
+	
+	
+
+	<plugin name="gyro" devices="html5" keep="true"
+		url="%SWFPATH%/plugins/gyro2.js"
+        enabled="true"
+        camroll="true"
+        friction="0.0"
+        touch_mode="full"
+        sensor_mode="1"
+        softstart="0.5"
+        autocalibration="false"
+        onavailable=""
+        onunavailable=""
+        onenable=""
+        ondisable=""
+	/>
+
+
+	<!-- load the soundinterface plugin -->
+	<plugin name="soundinterface"
+			url.flash="%SWFPATH%/plugins/soundinterface.swf"
+			url.html5="%SWFPATH%/plugins/soundinterface.js"
+			rootpath=""
+			preload="true"
+			keep="true"
+			/>
+	<!--
+		do_crop_animation(framewidth, frameheight, framerate)
+		- animation by changing the image cropping
+		- parameters:
+		  - framewidth - the width from one frame in pixels
+		  - frameheight - the height from one frame in pixels
+		  - framerate - the animation frame rate in 'frames per second'
+		- the image can be a vertical or horizontal (or both) image-strip / sprite-sheet
+		- the action will loop automatically through all frames from left to right and top to bottom
+	-->
+	<action name="do_crop_animation" scope="local" args="framewidth, frameheight, framerate">
+		<!-- define local variables -->
+		calc(local.xframes, (caller.imagewidth /framewidth) BOR 0);
+		calc(local.frames, xframes * ((caller.imageheight / frameheight) BOR 0));
+		def(local.frame, integer, 0);
+		
+		<!-- set the first frame -->
+		calc(caller.crop, '0|0|' + framewidth + '|' + frameheight);
+		
+		<!-- do the animation -->
+		setinterval(calc('crop_anim_' + caller.name), calc(1.0 / framerate),
+			if(caller.loaded,
+				inc(frame);
+				if(frame GE frames, if(caller.onlastframe !== null, callwith(caller, onlastframe() ) ); set(frame,0); );
+				mod(xpos, frame, xframes);
+				div(ypos, frame, xframes);
+				Math.floor(ypos);
+				mul(xpos, framewidth);
+				mul(ypos, frameheight);
+				calc(caller.crop, xpos + '|' + ypos + '|' + framewidth + '|' + frameheight);
+			  ,
+				<!-- stop the interval when the hotspot gets removed -->
+				clearinterval(calc('crop_anim_' + caller.name));
+			);
+		);
+	</action>
+	
+	
+	<!-- hotspot styles -->
+	<style name="arrowspot" url="arrow.gif" distorted="true" />
+	<style name="zoomspot"   url="zoomicon.png" distorted="true" />
+
+	<!-- iPhone X Safe-Area support: -->
+	<display safearea="off" />
+	<events name="safearea_events" keep="true"
+	        onresize="if(display.safearea_inset, calc(layer[thumbs].width, 100 - display.safearea_inset.l); );"
+	        onxmlcomplete="delayedcall(1,events[safearea_events].onresize());"
+	        />
+	
+	<!-- logo -->
+	<plugin name="logo"
+	        url="logo.png"
+	        keep="true"
+	        enabled="true"
+	        align="leftttop"
+	        x="20" y="20"
+	        scale.mobile="0.5"
+	        onclick="openurl('https://bolha.pt/360-concept/', _blank)"
+	        />
+
+	<!-- loading information -->
+	<plugin name="loading"
+	        url="%SWFPATH%/loading.gif"
+	        scale="0.5"
+	        keep="true"
+	        align="center"
+	        enabled="false"
+	        visible="false"
+	        />
+
+	<events onxmlcomplete="set(plugin[loading].visible,true);"
+	        onloadcomplete="set(plugin[loading].visible,false);;"
+	        />
+
+	<!-- Combobox -->
+	<include url="%SWFPATH%/plugins/combobox.xml" />
+
+	<action name="comboboxexamples" autorun="onstart">
+		loadscene(0);
+	</action>
+
+
+	<!-- mixed static/dynamic example - add items dynamically -->
+	<combobox name="cbscenes" design="vtour" align="leftbottom" x="10" y="10" onloaded="add_scene_items();" />
+	<action name="add_scene_items" scope="local">
+		for(set(i,0), i LT scene.count, inc(i),
+			caller.additem(calc('[img src=[dq]' + scene[get(i)].thumburl +  '[dq] style=[dq]border:1px solid rgba(255,255,255,0.5);width:48px;height:32px;vertical-align:middle;margin-right:8px;[dq]/] '+scene[get(i)].title), calc('loadscene('+i+',null,MERGE,BLEND(0.5))') );
+		);
+	</action>
+
+	<!-- static example -->
+	<combobox name="cbsettings" design="vtour" align="righttop" x="10" y="10" onchange="selectItemByName(0);">
+		<item name="item0" caption="VIEW" />
+		<item name="item3" caption="Normal"        onclick="cm_normal_view();" />
+		<item name="item4" caption="Fisheye"       onclick="cm_fisheye_view();" />
+		<item name="item5" caption="Stereographic" onclick="cm_stereographic_view();" />
+		<item name="item6" caption="Architectural" onclick="cm_architectural_view();" />
+		<item name="item7" caption="Pannini"       onclick="cm_pannini_view();" />
+		<item name="item8" caption="Little Planet" onclick="cm_littleplanet_view();" />
+	</combobox>
+
+
+	<!-- include a contextmenu with projections from an other example -->
+	<include url="../animated-hotspots/contextmenu.xml" />
+	
+
+	<!-- BOLHA ZEN -->
+
+	<scene name="scene_bolha-zen-01" title="Bolha - Zen" thumburl="../scenes-bolha/panos/bolha-zen/01.tiles/thumb.jpg">
+		<view hlookat="0" vlookat="-25" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto" />
+		<preview url="../scenes-bolha/panos/bolha-zen/01.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-zen/01.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/100653_1148115-lq.mp3|%SWFPATH%/bolha/scenes/audio/100653_1148115-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		<hotspot onclick="loadscene(scene_bolha-shows-01,null,MERGE,BLEND(0.5))"  		onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="180" atv="-5"  scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-zen-02,null,MERGE,BLEND(0.5))"  		onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="0"   atv="-12" scale="1" zoom="true" />
+		<!--<hotspot name="video" url="360.png" scale="1" zoom="true"  ath="-105" atv="-20" 		onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/05/video.xml',_blank);" />-->
+
+	</scene>
+
+	<scene name="scene_bolha-zen-02" title="Bolha - Zen" thumburl="../scenes-bolha/panos/bolha-zen/02.tiles/thumb.jpg">
+		<view hlookat="0" vlookat="-20" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-zen/02.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-zen/02.tiles/pano_%s.jpg" />
+		</image>
+
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/115272_200876-lq.mp3|%SWFPATH%/bolha/scenes/audio/115272_200876-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-zen-05,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-30"   atv="0" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-zen-01,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="140"   atv="-12" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-08,null,MERGE,BLEND(0.5))"  	onhover="showtext(Go there!)" name="spot3" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="70" atv="-27" scale="1" zoom="true" />
+		<!--<hotspot name="video" url="360.png" scale="1" zoom="true"  ath="-125" atv="-20" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/02/video.xml',_blank);" />-->
+	</scene>
+
+	<scene name="scene_bolha-zen-05" title="Bolha - Zen" thumburl="../scenes-bolha/panos/bolha-zen/05.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-zen/05.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-zen/05.tiles/pano_%s.jpg" />
+		</image>
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/135447_1672196-lq.mp3|%SWFPATH%/bolha/scenes/audio/135447_1672196-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+
+		<hotspot onclick="loadscene(scene_bolha-sacred-10,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-7"     atv="-3" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-zen-02,null,MERGE,BLEND(0.5))" 	   onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="225"   atv="-12" scale="1" zoom="true" />
+
+	</scene>
+
+
+	<!-- BOLHA SACRED -->
+
+	<scene name="scene_bolha-sacred-03" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/03.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/03.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/03.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/231760_2547276-lq.mp3|%SWFPATH%/bolha/scenes/audio/231760_2547276-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-zen-01,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-10"   atv="-16" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-sacred-04,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="160"   atv="-12" scale="1" zoom="true" />
+
+	</scene>
+
+	<scene name="scene_bolha-sacred-02" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/02.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/02.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/02.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/212761_2547276-lq.mp3|%SWFPATH%/bolha/scenes/audio/212761_2547276-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-sacred-03,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="80"   atv="5" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-sacred-04,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="260"   atv="-12" scale="1" zoom="true" />
+
+	</scene>
+
+	<scene name="scene_bolha-sacred-04" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/04.tiles/thumb.jpg">
+		<view hlookat="160" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/04.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/04.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/212761_2547276-lq.mp3|%SWFPATH%/bolha/scenes/audio/212761_2547276-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-sacred-02,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="180"   atv="2" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-sacred-05,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-20"   atv="-9" scale="1" zoom="true" />
+
+
+		<!--<hotspot name="video" url="360.png" scale="1" zoom="true"  ath="-125" atv="-20" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/01/video.xml',_blank);" />-->
+	</scene>
+
+	<scene name="scene_bolha-sacred-05" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/05.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/05.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/05.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/212762_2547276-lq.mp3|%SWFPATH%/bolha/scenes/audio/212762_2547276-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-sacred-04,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-20"   atv="-2" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-sacred-06,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="210"   atv="-17" scale="1" zoom="true" />
+
+		<!--<hotspot name="video" url="360.png" scale="1" zoom="true"  ath="-240" atv="-20" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/04/video.xml',_blank);" />-->
+	</scene>
+
+	<scene name="scene_bolha-sacred-06" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/06.tiles/thumb.jpg">
+		<view hlookat="120" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/06.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/06.tiles/pano_%s.jpg" />
+		</image>
+
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/197568_1127752-lq.mp3|%SWFPATH%/bolha/scenes/audio/197568_1127752-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-sacred-05,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="125"   atv="3" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-sacred-01,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="0"   atv="-12" scale="1" zoom="true" />
+
+	</scene>
+	
+	<scene name="scene_bolha-sacred-01" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/01.tiles/thumb.jpg">
+		<view hlookat="220" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/01.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/01.tiles/pano_%s.jpg" />
+		</image>
+
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/135046_1050391-lq.mp3|%SWFPATH%/bolha/scenes/audio/135046_1050391-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+
+		<hotspot onclick="loadscene(scene_bolha-sacred-06,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-116"   atv="4" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-sacred-07,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="120"   atv="-12" scale="1" zoom="true" />
+
+	</scene>
+
+	<scene name="scene_bolha-sacred-07" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/07.tiles/thumb.jpg">
+		<view hlookat="-10" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/07.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/07.tiles/pano_%s.jpg" />
+		</image>
+
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/100653_1148115-lq.mp3|%SWFPATH%/bolha/scenes/audio/100653_1148115-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-sacred-01,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-35"   atv="10" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-sacred-08,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="170"   atv="-12" scale="1" zoom="true" />
+
+	</scene>
+
+	<scene name="scene_bolha-sacred-08" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/08.tiles/thumb.jpg">
+		<view hlookat="120" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/08.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/08.tiles/pano_%s.jpg" />
+		</image>
+
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/135447_1672196-lq.mp3|%SWFPATH%/bolha/scenes/audio/135447_1672196-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-sacred-07,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="160"   atv="-12" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-sacred-09,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="0"   atv="-12" scale="1" zoom="true" />
+
+	</scene>
+
+	<scene name="scene_bolha-sacred-09" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/09.tiles/thumb.jpg">
+		<view hlookat="235" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/09.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/09.tiles/pano_%s.jpg" />
+		</image>
+
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/100653_1148115-lq.mp3|%SWFPATH%/bolha/scenes/audio/100653_1148115-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-sacred-08,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-130"   atv="2" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-sacred-10,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="50"   atv="-7" scale="1" zoom="true" />
+
+	</scene>
+
+	<scene name="scene_bolha-sacred-10" title="Bolha - Sacred" thumburl="../scenes-bolha/panos/bolha-sacred/10.tiles/thumb.jpg">
+		<view hlookat="260" vlookat="-20" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-sacred/10.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-sacred/10.tiles/pano_%s.jpg" />
+		</image>
+
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/115272_200876-lq.mp3|%SWFPATH%/bolha/scenes/audio/115272_200876-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+		
+		<hotspot onclick="loadscene(scene_bolha-sacred-09,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-120"   atv="6" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-zen-05,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="83"   atv="-7" scale="1" zoom="true" />
+
+	</scene>
+
+
+	<!-- BOLHA LIFESTYLE -->
+
+	<scene name="scene_bolha-lifestyle-08" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/08.tiles/thumb.jpg">
+		<view hlookat="220" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/08.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/08.tiles/pano_%s.jpg" />
+		</image>
+
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/135447_1672196-lq.mp3|%SWFPATH%/bolha/scenes/audio/135447_1672196-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+				
+		<hotspot onclick="loadscene(scene_bolha-zen-02,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="120"   atv="-10" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-01,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-82"   atv="2" scale="1" zoom="true" />
+
+	</scene>
+	
+	<scene name="scene_bolha-lifestyle-01" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/01.tiles/thumb.jpg">
+		<view hlookat="240" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/01.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/01.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/157310_760102-lq.mp3|%SWFPATH%/bolha/scenes/audio/157310_760102-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+				
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-08,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-29"  atv="-10" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-02,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="270"  atv="3" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-05,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot4" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-4"  atv="-17" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-04,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot3" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="120"   atv="-18" scale="1" zoom="true" />
+
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-02" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/02.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/02.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/02.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/157310_760102-lq.mp3|%SWFPATH%/bolha/scenes/audio/157310_760102-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-08,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-70"  atv="-10" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-05,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot4" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-50"  atv="-10" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-04,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot3" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="25"   atv="-10" scale="1" zoom="true" />
+
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-04" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/04.tiles/thumb.jpg">
+		<view hlookat="280" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/04.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/04.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/415301_7919598-lq.mp3|%SWFPATH%/bolha/scenes/audio/415301_7919598-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-02,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-242"  atv="-22" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-06,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot4" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="198"  atv="-55" scale="1" zoom="true" />
+	
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-05" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/05.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/05.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/05.tiles/pano_%s.jpg" />
+		</image>
+				
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/415301_7919598-lq.mp3|%SWFPATH%/bolha/scenes/audio/415301_7919598-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+				
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-02,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot4" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="93"  atv="-15" scale="1" zoom="true" />
+	
+	</scene>
+
+	<scene name="scene_bolha-lifestyle-06" title="Bolha - Lifestyle" thumburl="../scenes-bolha/panos/bolha-lifestyle/06.tiles/thumb.jpg">
+		<view hlookat="230" vlookat="30" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto"/>
+		<preview url="../scenes-bolha/panos/bolha-lifestyle/06.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-lifestyle/06.tiles/pano_%s.jpg" />
+		</image>
+
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/157310_760102-lq.mp3|%SWFPATH%/bolha/scenes/audio/157310_760102-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="1" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+				
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-08,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot2" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-52"  atv="18" scale="1" zoom="true" />
+		<hotspot onclick="loadscene(scene_bolha-lifestyle-02,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot4" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="232"  atv="35" scale="1" zoom="true" />
+	
+	</scene>
+
+	<!-- use the panos/scenes from the bolha example -->
+	<scene name="scene_bolha-shows-01" title="BOLHA - Shows" thumburl="../scenes-bolha/panos/bolha-shows/01.tiles/thumb.jpg">
+		<view hlookat="60" vlookat="4" fov="120" maxpixelzoom="1.0" fovmax="150" limitview="auto" />
+		<preview url="../scenes-bolha/panos/bolha-shows/01.tiles/preview.jpg" />
+		<image>
+			<cube url="../scenes-bolha/panos/bolha-shows/01.tiles/pano_%s.jpg" />
+		</image>
+
+		<hotspot onclick="loadscene(scene_bolha-zen-01,null,MERGE,BLEND(0.5))"  onhover="showtext(Go there!)" name="spot1" url="waves.png" onloaded="do_crop_animation(128,128, 15);" ath="-2"   atv="-12" scale="1" zoom="true" />
+
+		<!--<hotspot name="video1" url="360.png" zoom="true" scale="0.5" ath="100" atv="-35" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/06/video.xml',_blank);" />-->
+		<!--<hotspot name="video2" url="360.png" zoom="true" scale="0.35" ath="-112" atv="-25" onhover="showtext(See 360 Video)" onclick="openurl('https://bolha.pt/360/viewer/krpano.html?xml=bolha/video/07/video.xml',_blank);" />-->
+		<!--
+		<hotspot name="spot_bolha-02" style="arrowspot" ath="-125"   atv="4"  scale="0.3" />
+		<hotspot name="spot_bolha-03" style="arrowspot" ath="80.5"  atv="3"   scale="0.6" />
+		-->
+		
+		<!-- start playing the sound -->
+		<events name="currentpano"
+				onnewpano="playsound(bgsnd, '%SWFPATH%/bolha/scenes/audio/342733_5173787-lq.mp3|%SWFPATH%/bolha/scenes/audio/342733_5173787-lq.ogg', 0);"
+				onremovepano="stopsound(bgsnd);"
+				/>
+
+		<!-- a button to pause/play the sound -->
+		<plugin name="snd" url="soundonoff.png" align="rightbottom" x="10" y="10" alpha="0.75" scale="0.5" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+				crop="0|0|50|50"
+				onclick="pausesoundtoggle(bgsnd); switch(crop, 0|0|50|50, 0|50|50|50);"
+				/>
+	</scene>
+
+
+</krpano>

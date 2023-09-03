@@ -3,12 +3,13 @@
   display: flex;
   height: 6rem;
   mix-blend-mode: difference;
+  opacity: 0;
   place-items: center;
   pointer-events: auto;
   position: fixed;
-  right: 3rem;
-  top: 2.35rem;
-  width: 6rem;
+  right: 3.5rem;
+  top: 3.6rem;
+  width: 5rem;
   z-index: z('navigation');
 
   @include media('<phone') {

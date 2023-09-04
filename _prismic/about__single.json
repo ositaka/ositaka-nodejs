@@ -73,8 +73,6 @@
           "link": {
             "type": "Link",
             "config": {
-              "select": "document",
-              "customtypes": ["contacts"],
               "label": "Link"
             }
           },
@@ -127,6 +125,25 @@
           }
         },
         "label": "Image Sections"
+      }
+    },
+    "projects_title": {
+      "type": "Text",
+      "config": {
+        "label": "Projects Title"
+      }
+    },
+    "projects_link": {
+      "type": "Link",
+      "config": {
+        "label": "Projects Link",
+        "placeholder": "Ex: \"Projects\""
+      }
+    },
+    "projects_button": {
+      "type": "Text",
+      "config": {
+        "label": "Projects Button"
       }
     }
   },

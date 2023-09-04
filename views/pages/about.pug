@@ -22,9 +22,10 @@ block content
         .about__intro__text__copy
           .text__body-small!=PrismicDOM.RichText.asHtml(about.data.about_intro[0].text)
 
-          p.text__body
-            a.about__intro__text__button.text__body-small(href=`/${lang}/${about.data.about_intro[0].link.uid}/` data-animation="link")
+          a.about__intro__text__button.text__body-small.has-arrow(href=`${about.data.about_intro[0].link.url}`)
+            div(data-animation="link")
               span=about.data.about_intro[0].button
+            include ../partials/arrow
 
       section.about__creators
         h2.title__h1.about__creators__title(data-animation="title")=about.data.team_title.replace(/\n/g, '<br>')
@@ -49,6 +50,13 @@ block content
               h3.about__awards__list__item__column(data-animation="title")=award.award_label
               h3.about__awards__list__item__column(data-animation="chain")=award.award_date
               h3.about__awards__list__item__column(data-animation="chain")=award.award_project_title
+
+      section.redirect__hero
+        .title__h1(data-animation="title")=about.data.projects_title
+        a.redirect__hero__button.has-arrow(href=`/${lang}/${about.data.projects_link.uid}/`)
+          div(data-animation="link")
+            span=about.data.projects_button
+          include ../partials/arrow
 
       include ../partials/footer
       

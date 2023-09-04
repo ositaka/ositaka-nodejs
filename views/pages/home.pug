@@ -49,9 +49,9 @@ block content
             span=home.data.featured_projects_button
           include ../partials/arrow
 
-      section.home__about
+      section.redirect__hero
         .title__h1(data-animation="title")=home.data.about_title
-        a.home__about__button.has-arrow(href=`/${lang}/${home.data.about_link.uid}/`)
+        a.redirect__hero__button.has-arrow(href=`/${lang}/${home.data.about_link.uid}/`)
           div(data-animation="link")
             span=home.data.about_button
           include ../partials/arrow

@@ -42,7 +42,7 @@ block content
                 if (typeof(project.project_image.phone) !== 'undefined')
                   source(media='(max-width: 768px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? project.project_image.phone.url : project.project_image.phone.url.replace('?auto=compress,format', '?q=30&auto=compress,format')}`)
                   source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? project.project_image.url : project.project_image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
-                img.home__projects__item__media__image(alt=project.project_image.alt data-src=project.project_image.url loading="lazy"  height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}`)
+                img.home__projects__item__media__image(alt=project.project_image.alt data-src=project.project_image.url height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}`)
 
         a.home__projects__button.has-arrow(href=`/${lang}/${home.data.featured_projects_link.uid}/`)
           div(data-animation="link")

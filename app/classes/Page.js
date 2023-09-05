@@ -514,7 +514,8 @@ export default class Page {
   rotateTriangle() {
     let triangle = document.querySelector('.navigation__logo-triangle')
 
-    if (!triangle.classList.contains('is-on-navigation')) return
+    // old preloader
+    // if (!triangle.classList.contains('is-on-navigation')) return
 
     if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance() || Detection.isTouch()) {
       triangle.style.rotate = `${Number(window.scrollY / 3 + 90)}deg`

@@ -3,7 +3,6 @@
   display: flex;
   height: 6rem;
   mix-blend-mode: difference;
-  opacity: 0;
   place-items: center;
   pointer-events: auto;
   position: fixed;
@@ -13,8 +12,8 @@
   z-index: z('navigation');
 
   @include media('<phone') {
-    height: 10rem;
-    width: 10rem;
+    height: 9.6vw;
+    width: 8vw;
   }
 
   .line {

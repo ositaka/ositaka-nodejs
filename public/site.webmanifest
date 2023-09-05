@@ -1,6 +1,6 @@
 {
-  "name": "Media Creators Studio",
-  "short_name": "Media Creators",
+  "name": "OSITAKA – Creative Developer",
+  "short_name": "OSITAKA",
   "icons": [
     {
       "src": "/android-chrome-192x192.png?v=1",
@@ -14,8 +14,8 @@
     }
   ],
   "start_url": "/?via=app",
-  "theme_color": "#3131f1",
-  "background_color": "#3131f1",
+  "theme_color": "#fff",
+  "background_color": "#000",
   "display": "standalone",
   "orientation": "portrait"
 }

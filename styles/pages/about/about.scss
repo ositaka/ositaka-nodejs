@@ -58,7 +58,9 @@
   }
 
   &__copy {
+    hyphens: auto;
     width: 84rem;
+
     & p {
       margin-bottom: 3rem;
     }
@@ -154,7 +156,6 @@
     }
 
     .about__image__section__copy {
-      hyphens: auto;
       margin-left: 0;
       margin-right: 16.2rem;
 

@@ -27,29 +27,30 @@ export default class Home extends Page {
   show() {
     super.show()
 
+
     if (Detection.isDesktop()) {
-      const scroll = this.scroll
-      const wrapper = this.elements.wrapper
-      const height = innerHeight * 0.75
-      const defaultTransition = wrapper.style.transition
+      // const scroll = this.scroll
+      // const wrapper = this.elements.wrapper
+      // const height = innerHeight * 0.75
+      // const defaultTransition = wrapper.style.transition
 
-      scroll.current = height
-      scroll.last = height
-      scroll.target = height
+      // scroll.current = height
+      // scroll.last = height
+      // scroll.target = height
 
-      setTimeout(() => {
-        this.scroll.target = 0
+      // setTimeout(() => {
+      //   this.scroll.target = 0
 
-        setTimeout(() => {
-          wrapper.style.transition = defaultTransition
-        }, 2000);
+      //   setTimeout(() => {
+      //     wrapper.style.transition = defaultTransition
+      //   }, 2000);
 
-      }, 0);
+      // }, 0);
     }
 
     setTimeout(() => {
       document.querySelector('.home__hero__media video').play()
-    }, 600);
+    }, 1000);
   }
 
   update() {

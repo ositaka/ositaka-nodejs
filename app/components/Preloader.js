@@ -9,10 +9,10 @@ export default class Preloader extends Component {
       element: '.preloader',
       elements: {
         title: '.preloader__text',
+        logo: '.navigation__logo',
         navigation: '.button-menu, .langs a, .navigation__logo-lettering span',
         number: '.preloader__number',
         numberText: '.preloader__number__text',
-        logo: '.navigation__logo',
         triangle: '.navigation__logo-triangle',
       }
     })
@@ -74,57 +74,58 @@ export default class Preloader extends Component {
     return new Promise(resolve => {
       this.emit('completed')
 
-      this.animateOut = GSAP.timeline({
-        delay: 0
-      })
+      // this.animateOut = GSAP.timeline({
+      //   delay: 2
+      // })
 
-      this.animateOut.set(this.elements.navigation, {
-        transform: 'translateY(-30vw)',
-      })
+      // this.animateOut.set(this.elements.navigation, {
+      //   transform: 'translateY(-30vw)',
+      // })
 
-      this.animateOut.to(this.elements.titleSpans, {
-        // duration: 1.5,
-        duration: 3,
-        ease: 'expo.out',
-        stagger: 0.5,
-        y: '100%',
+      // this.animateOut.to(this.elements.titleSpans, {
+      //   // duration: 1.5,
+      //   duration: 3,
+      //   ease: 'expo.out',
+      //   stagger: 0.5,
+      //   y: '100%',
 
-        // Move triangle animation
-        onComplete: () => {
-          this.elements.triangle.classList.remove('is-on-preloader')
+      //   // Move triangle animation
+      //   onComplete: () => {
+      //     this.elements.triangle.classList.remove('is-on-preloader')
 
-          setTimeout(() => {
-            this.elements.logo.classList.add('is-open')
-            this.elements.triangle.classList.add('is-on-navigation')
-          }, 1000)
-        }
-      })
+      //     setTimeout(() => {
+      //       this.elements.logo.classList.add('is-open')
+      //       this.elements.triangle.classList.add('is-on-navigation')
+      //     }, 1000)
+      //   }
+      // })
 
-      this.animateOut.to(this.elements.numberText, {
-        // duration: 1.5,
-        duration: 2.2,
-        ease: 'expo.out',
-        stagger: 0.1,
-        y: '100%'
-      }, '-=1.4')
+      // this.animateOut.to(this.elements.numberText, {
+      //   // duration: 1.5,
+      //   duration: 2.2,
+      //   ease: 'expo.out',
+      //   stagger: 0.1,
+      //   y: '100%'
+      // }, '-=1.4')
 
-      this.animateOut.to(this.element, {
-        duration: 2.5,
-        ease: 'expo.out',
-        transform: 'translateY(-100%)'
-      }, '-=1')
+      // this.animateOut.to(this.element, {
+      //   duration: 2.5,
+      //   ease: 'expo.out',
+      //   transform: 'translateY(-100%)'
+      // }, '-=1')
 
-      this.animateOut.to(this.elements.navigation, {
-        duration: 1.5,
-        ease: 'expo.out',
-        opacity: 1,
-        stagger: 0.1,
-        transform: 'translateY(0vw)',
-      }, '-=1.4')
+      // this.animateOut.to(this.elements.navigation, {
+      //   duration: 1.5,
+      //   ease: 'expo.out',
+      //   opacity: 1,
+      //   stagger: 0.05,
+      //   transform: 'translateY(0vw)',
+      // })
 
-      this.animateOut.call(_ => {
-        this.destroy()
-      })
+      // this.animateOut.call(_ => {
+      //   this.destroy()
+      // })
+      this.destroy()
     })
   }
 

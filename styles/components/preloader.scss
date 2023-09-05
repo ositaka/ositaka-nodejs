@@ -1,4 +1,6 @@
 .preloader {
+  display: none;
+
   @extend %center;
   @extend %cover;
 

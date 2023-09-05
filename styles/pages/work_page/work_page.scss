@@ -15,7 +15,7 @@
 
   @include media('<phone') {
     text-align: left;
-    width: 86%;
+    width: 92%;
   }
 }
 
@@ -181,9 +181,11 @@
   margin: -1rem auto 9rem;
   max-width: 42rem;
   text-align: center;
+  text-wrap: balance;
 
   @include media('<phone') {
-    max-width: 86%;
+    margin-top: 2vw;
+    max-width: 92%;
   }
 }
 
@@ -194,7 +196,7 @@
   width: 134rem;
 
   @include media('<phone') {
-    width: 86%;
+    width: 92%;
     margin: 0 auto 24rem;
 
     & + .work_page__full-screen {
@@ -215,7 +217,7 @@
     font-weight: 600;
 
     @include media('<phone') {
-      width: 86%;
+      width: 92%;
     }
   }
 
@@ -243,7 +245,7 @@
     }
 
     @include media('<phone') {
-      width: 86%;
+      width: 92%;
     }
   }
 

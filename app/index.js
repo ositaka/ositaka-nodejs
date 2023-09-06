@@ -323,8 +323,9 @@ class App {
       const isOnPage = link.href.indexOf('#') > 0
       const isNotEmail = link.href.indexOf('mailto') === -1
       const isNotPhone = link.href.indexOf('tel') === -1
+      const isPDF = link.href.indexOf('pdf') > 0
 
-      if (isLocal && !isOnPage) {
+      if (isLocal && !isOnPage && !isPDF) {
         link.onclick = event => {
           event.preventDefault()
 

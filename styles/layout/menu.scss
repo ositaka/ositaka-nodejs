@@ -1,53 +1,43 @@
 .button-menu {
   cursor: pointer;
   display: flex;
-  height: 6rem;
   mix-blend-mode: difference;
   place-items: center;
   pointer-events: auto;
   position: fixed;
-  right: 3.5rem;
-  top: 3.6rem;
-  width: 5rem;
+  right: clamp(24px, 5vw, 48px);
+  top: clamp(24px, 5vw, 36px);
+  height: 48px;
+  width: 48px;
   z-index: z('navigation');
-
-  @include media('<phone') {
-    height: 9.6vw;
-    width: 8vw;
-  }
 
   .line {
     fill: none;
     stroke: var(--color-text);
-    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-width: 5;
     transition: stroke-dasharray 2.6s $ease-mc, stroke-dashoffset 2.6s $ease-mc;
   }
   .line1 {
-    stroke-dasharray: 60 207;
-    stroke-width: 6;
+    stroke-dasharray: 94 327;
   }
   .line2 {
     stroke-dasharray: 60 60;
-    stroke-width: 6;
   }
   .line3 {
-    stroke-dasharray: 60 207;
-    stroke-width: 6;
+    stroke-dasharray: 94 167;
   }
   &.opened .line1 {
-    stroke-dasharray: 90 207;
-    stroke-dashoffset: -134;
-    stroke-width: 6;
+    stroke-dasharray: 100 167;
+    stroke-dashoffset: -167;
   }
   &.opened .line2 {
-    stroke-dasharray: 1 60;
-    stroke-dashoffset: -30;
-    stroke-width: 6;
+    stroke-dasharray: 100 167;
+    stroke-dashoffset: -167;
   }
   &.opened .line3 {
-    stroke-dasharray: 90 207;
-    stroke-dashoffset: -134;
-    stroke-width: 6;
+    stroke-dasharray: 100 167;
+    stroke-dashoffset: -167;
   }
 }
 
@@ -112,6 +102,7 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  min-height: 360px;
   width: 134rem;
 
   & > * {

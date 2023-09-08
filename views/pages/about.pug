@@ -22,7 +22,7 @@ block content
         .about__intro__text__copy
           .text__body-small!=PrismicDOM.RichText.asHtml(about.data.about_intro[0].text)
 
-          a.about__intro__text__button.text__body-small.has-arrow.has-arrow--new-window(href=`${about.data.about_intro[0].link.url}` target="_blank" rel="nofollow noopener")
+          a.about__intro__text__button.has-arrow.has-arrow--new-window(href=`${about.data.about_intro[0].link.url}` target="_blank" rel="nofollow noopener")
             div(data-animation="link")
               span=about.data.about_intro[0].button
             include ../partials/arrow

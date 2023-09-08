@@ -7,11 +7,8 @@
 }
 
 .work__wrapper {
-  padding-top: 10rem;
-
-  @include media('<phone') {
-    padding-top: 15rem;
-  }
+  padding-top: 15dvh;
+  padding-bottom: 5dvh;
 }
 
 .work__hero {
@@ -173,12 +170,13 @@
 
     img {
       height: 54rem;
-      width: auto;
+      width: 100%;
+      object-fit: cover;
     }
   }
 
   .work__list__item__text {
-    padding: 5rem;
+    padding: 5rem 5rem 10rem;
   }
 }
 

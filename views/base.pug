@@ -28,7 +28,10 @@ block variables
 //                                                                       
 
 doctype html
-html(class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : isTouch ? "touch" : "desktop" lang=lang style="overflow:hidden;")
+html(
+  lang=lang
+  class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : isTouch ? "touch" : "desktop" 
+  style=isDesktop ? "overflow:hidden;" : "")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")

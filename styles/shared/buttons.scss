@@ -37,13 +37,11 @@ a.button__text {
 }
 
 .has-arrow--new-window {
-  padding: 0;
-  border: unset;
-
   svg {
     rotate: -45deg;
   }
 }
+
 button {
   font: inherit;
   font-weight: 500;

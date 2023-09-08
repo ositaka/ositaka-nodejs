@@ -58,8 +58,8 @@
   }
 
   &__copy {
-    hyphens: auto;
     width: 84rem;
+    text-wrap: balance;
 
     & p {
       margin-bottom: 3rem;

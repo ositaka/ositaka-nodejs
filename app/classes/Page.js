@@ -518,10 +518,10 @@ export default class Page {
     // if (!triangle.classList.contains('is-on-navigation')) return
 
     if (Detection.isPhone() || Detection.isTablet() || Detection.isLowPerformance() || Detection.isTouch()) {
-      triangle.style.rotate = `${Number(window.scrollY / 3 + 90)}deg`
+      triangle.style.rotate = `${Number(window.scrollY / 3)}deg`
     }
     else {
-      triangle.style.rotate = `${Number(this.scroll.current / 3 + 90)}deg`
+      triangle.style.rotate = `${Number(this.scroll.current / 3)}deg`
     }
     triangle.style.transition = `rotate 0s`
   }

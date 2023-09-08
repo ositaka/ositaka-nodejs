@@ -1,5 +1,6 @@
 /node_modules
 /public
+/shared/projects
 .env
 yarn.lock
 # public

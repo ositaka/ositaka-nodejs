@@ -8,14 +8,14 @@
 
 .work_page__header {
   margin: auto;
-  padding-top: 36rem;
-  padding-bottom: 18rem;
+  padding-top: 36dvh;
+  padding-bottom: 18dvh;
   text-align: center;
   width: 134rem;
 
   @include media('<phone') {
     text-align: left;
-    width: 92%;
+    width: 88%;
   }
 }
 
@@ -25,7 +25,7 @@
   margin-top: 3rem;
 
   @include media('<phone') {
-    margin-right: 6rem;
+    margin-right: 3%;
     margin-left: 0;
   }
 }
@@ -185,7 +185,7 @@
 
   @include media('<phone') {
     margin-top: 2vw;
-    max-width: 92%;
+    max-width: 88%;
   }
 }
 
@@ -196,7 +196,7 @@
   width: 134rem;
 
   @include media('<phone') {
-    width: 92%;
+    width: 88%;
     margin: 0 auto 24rem;
 
     & + .work_page__full-screen {
@@ -210,6 +210,10 @@
   font-size: 2.3rem;
   line-height: 4.6rem;
 
+  @include media('<phone') {
+    padding-right: 5%;
+  }
+
   & .work_page__info__title {
     width: 60rem;
     margin-right: 12rem;
@@ -217,7 +221,7 @@
     font-weight: 600;
 
     @include media('<phone') {
-      width: 92%;
+      width: 88%;
     }
   }
 
@@ -245,7 +249,8 @@
     }
 
     @include media('<phone') {
-      width: 92%;
+      width: 88%;
+      font-size: 20px;
     }
   }
 
@@ -271,12 +276,12 @@
   max-width: 70%;
 
   @include media('<phone') {
-    max-width: 90%;
+    max-width: 96%;
   }
 }
 
 .work_page__next {
-  padding: 36rem 0 36rem;
+  padding: 36dvh 0 36dvh;
   text-align: center;
 }
 

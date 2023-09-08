@@ -13,42 +13,35 @@
 }
 
 .navigation__logo {
-  display: block;
-  height: 6rem;
-  left: 5rem;
+  height: 50px;
+  left: clamp(24px, 5vw, 48px);
   pointer-events: auto;
   position: absolute;
-  top: 3.3rem;
-  width: auto;
+  top: clamp(24px, 5vw, 36px);
+  width: 200px;
+  transform: scale(0.9);
+  transform-origin: center left;
 
-  & svg path {
+  & svg {
+    display: block;
+    position: absolute;
+  }
+
+  & path {
     fill: var(--color-text);
   }
 
   &-triangle {
-    display: block;
     filter: none;
-    left: 0.5vw;
-    margin-right: 3vw;
-    min-width: 1.1vw;
-    min-height: 1.1vw;
     position: absolute;
-    rotate: 90deg;
-    scale: 2.6;
-    top: 0.75vw;
+    rotate: 0deg;
     transform: unset !important;
-    transform-origin: 39% 50%;
+    transform-origin: 49.5% 39.5%;
     transition: all 1s $ease-mc;
     z-index: z('triangle');
 
-    @include media('<phone') {
-      scale: 1.2;
-      left: 1vw;
-      transition: all 2s $ease-mc;
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      rotate: 90deg !important;
+      rotate: 0deg !important;
       transition: none;
     }
   }
@@ -56,104 +49,34 @@
   & span {
     overflow: hidden;
 
-    svg {
-      width: 1.9rem;
-      height: 1.9rem;
-      max-width: 1.9rem;
-      max-height: 1.9rem;
+    @include media('<phone') {
       display: block;
-      margin-top: 1rem;
-
-      @include media('<phone') {
-        width: 2.4rem;
-        height: 2.4rem;
-        max-width: 2.4rem;
-        max-height: 2.4rem;
-      }
+      height: 50px;
+      position: absolute;
+      width: 200px;
     }
   }
-
-  &-lettering {
-    display: inline-flex;
-    margin-left: 6rem;
-    position: relative;
-    top: 1rem;
-  }
-
-  @include media('<phone') {
-    left: 5vw;
-    top: 4vw;
-
-    &-lettering {
-      margin-left: 9vw;
-      top: 0.8vw;
-    }
-  }
-}
-
-// Fix logo
-.navigation__logo-lettering span:nth-child(2) {
-  left: -0.04vw;
-  position: relative;
-}
-
-.navigation__logo-lettering span:nth-child(3) {
-  left: -0.29vw;
-  position: relative;
-  scale: 0.95;
-}
-
-.navigation__logo-lettering span:nth-child(4) {
-  left: -0.61vw;
-  position: relative;
-  scale: 0.94;
-  top: 0.02vw;
-}
-
-.navigation__logo-lettering span:nth-child(5) {
-  left: -0.7vw;
-  position: relative;
-}
-
-.navigation__logo-lettering span:nth-child(6) {
-  left: -0.7vw;
-  position: relative;
-}
-
-.navigation__logo-lettering span:nth-child(7) {
-  left: -0.7vw;
-  position: relative;
 }
 
 .langs {
   color: var(--color-text);
   mix-blend-mode: difference;
   position: absolute;
-  right: 10.9rem;
-  text-align: center;
-  top: 3.1rem;
+  right: clamp(94px, 13vw, 120px);
+  top: clamp(26px, 5vw, 36px);
   z-index: z('navigation');
 
-  @include media('<phone') {
-    top: 4vw;
+  * {
+    line-height: 1.8;
   }
 }
 
 .langs__list {
   display: flex;
   list-style: none;
+  gap: clamp(12px, 5vw, 24px);
 
-  & .langs__list__item a {
-    font-size: 1.8rem;
-    margin: 0 0.5rem;
-    padding: 0 0.5rem;
-
-    & span {
-      padding: 1rem 0;
-    }
-
-    @include media('<phone') {
-      font-size: 3.2rem;
-    }
+  a {
+    font-size: 20px;
   }
 }

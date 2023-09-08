@@ -21,6 +21,15 @@ a.footer__arrow {
     height: 6vw;
     width: 6vw;
   }
+
+  @include media('<phone') {
+    top: 1.5vw;
+
+    & svg {
+      height: 12vw;
+      width: 12vw;
+    }
+  }
 }
 
 .footer__credits {

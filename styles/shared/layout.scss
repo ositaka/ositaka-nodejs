@@ -14,7 +14,8 @@
   padding: 0 28.9rem;
 
   @include media('<phone') {
-    padding: 9rem;
+    padding-right: 12%;
+    padding-left: 7%;
   }
 }
 

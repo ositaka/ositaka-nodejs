@@ -311,7 +311,7 @@ class App {
         isOnline: false
       }));
 
-      window.alert('You are offline. Please check your internet connection.');
+      // window.alert('You are offline. Please check your internet connection.');
     });
   }
 

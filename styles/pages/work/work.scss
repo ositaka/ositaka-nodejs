@@ -1,9 +1,9 @@
 .work {
   @extend %page;
 
-  & footer {
-    display: none;
-  }
+  // & footer {
+  //   display: none;
+  // }
 }
 
 .work__wrapper {

@@ -430,10 +430,10 @@ app.post('/message-sent', (req, res) => {
     console.log('Message sent: %s', info.messageId);
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-    res.render('pages/email_sent', {
-      msg: 'Email has been sent',
-      output
-    });
+    // res.render('pages/email_sent', {
+    //   msg: 'Email has been sent',
+    //   output
+    // });
   });
 
 });

@@ -212,7 +212,6 @@ app.get('/:lang/:uid/', async (req, res) => {
 
     const { results: awards } = await api.query(Prismic.Predicates.at('document.type', 'awards'), { lang: langs[req.params.lang] })
 
-    console.log(about.data.about_intro[0], '----------- about')
     res.render('pages/about', {
       ...defaults,
       about,
@@ -228,8 +227,6 @@ app.get('/:lang/:uid/', async (req, res) => {
     altLangs = archives.alternate_languages
     colors = archives.data.colors[0]
     meta = archives.data.seo[0]
-
-    console.log(colors)
 
     res.render('pages/archives', {
       ...defaults,

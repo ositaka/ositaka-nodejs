@@ -26,32 +26,24 @@
         "label": "colors"
       }
     },
-    "customer_name": {
+    "redirect_title": {
       "type": "Text",
       "config": {
-        "label": "Customer Name",
-        "placeholder": "Ex: Viva Sara"
+        "label": "Redirect Title",
+        "placeholder": "This is an heading to bring the user to another/next page"
       }
     },
-    "title": {
-      "type": "StructuredText",
+    "redirect_link": {
+      "type": "Link",
       "config": {
-        "single": "heading2",
-        "label": "Title"
-      }
-    },
-    "project_areas": {
-      "type": "Text",
-      "config": {
-        "label": "Project Areas",
-        "placeholder": "Project areas (ex: Branding, Web, Packaging)"
+        "label": "Redirect Link"
       }
     },
     "body": {
       "type": "Slices",
       "fieldset": "Slice zone",
       "config": {
-        "labels": {},
+        "labels": null,
         "choices": {
           "media": {
             "type": "Slice",
@@ -107,6 +99,47 @@
               }
             },
             "repeat": {}
+          },
+          "websites": {
+            "type": "Slice",
+            "fieldset": "websites",
+            "description": "Websites",
+            "icon": "screen_share",
+            "display": "list",
+            "non-repeat": {
+              "section_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Section Title"
+                }
+              }
+            },
+            "repeat": {
+              "website_year": {
+                "type": "Text",
+                "config": {
+                  "label": "Website Year"
+                }
+              },
+              "website_link": {
+                "type": "Text",
+                "config": {
+                  "label": "Website Link"
+                }
+              },
+              "website_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Website Title"
+                }
+              },
+              "website_tags": {
+                "type": "Text",
+                "config": {
+                  "label": "Website Tags"
+                }
+              }
+            }
           }
         }
       }

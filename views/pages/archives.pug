@@ -7,23 +7,34 @@ block content
   .archives(background=`${colors.background}` color=`${colors.text}`)
     .archives__wrapper
 
-      .archives__header
-        h2.text__body.archives__project(data-animation="title")=archives.data.brand_name
-        .archives__title
-          h1.title__h2(data-animation="title")=archives.data.title[0].text
-          h3.title__h5.title__h5-bold.archives__project__areas(data-animation="title")=archives.data.project_areas
+      each section in archives.data.body
 
-      .archives__body
-        each section in archives.data.body
-
-          if (section.slice_type === 'media')
-            section.archives__media
-              figure.archives__media__media
-                picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
-                  if (typeof(section.primary.image.phone) !== 'undefined')
-                    source(media='(max-width: 768px)' srcset=`${section.primary.image.phone.url}`)
-                    source(media='(min-width: 769px)' srcset=`${section.primary.image.url}`)
-                  img(alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+        if (section.slice_type === 'websites')
+          //- section.archives__websites
+          section.about__awards
+            h2.title__h1.about__awards__title(data-animation="title")!=section.primary.section_title.replace(/\n/g, '<br>')
+            .about__awards__list.archives-list  
+              each website in section.items
+                a.about__awards__list__item(href=`${website.website_link}` target="_blank" rel="noopener noreferrer")
+                  h2.about__awards__list__item__column(data-animation="chain")=website.website_title
+                  h3.about__awards__list__item__column(data-animation="chain")=website.website_tags
+                  h3.about__awards__list__item__column.year(data-animation="chain")=website.website_year
 
 
+        if (section.slice_type === 'media')
+          section.archives__media
+            figure.archives__media__media
+              picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
+                if (typeof(section.primary.image.phone) !== 'undefined')
+                  source(media='(max-width: 768px)' srcset=`${section.primary.image.phone.url}`)
+                  source(media='(min-width: 769px)' srcset=`${section.primary.image.url}`)
+                img(alt=section.primary.image.alt data-src=section.primary.image.url height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}`)
+
+      //- section.redirect__hero
+      //-   .title__h1(data-animation="title") test test
+      //-   a.redirect__hero__button.has-arrow(href=`/`)
+      //-     div(data-animation="link")
+      //-       span test
+      //-     include ../partials/arrow
+          
       include ../partials/footer

@@ -10,7 +10,7 @@ block content
         h1.title__h1.contacts__title(data-animation="title")!=contacts.data.title.replace(/\n/g, '<br>')
 
       section.contacts__form
-        form(name='contact' id="contact" method='POST' action='/message-sent' onsubmit="setTimeout(() => { alert('Message sent with success!'); location.reload(); }, 600);")
+        form(name='contact' id="contact" method='POST' action='/message-sent' onsubmit="setTimeout(() => { alert('✔ Your message has been sent!'); location.reload(); }, 600);")
           input(type='hidden' name='form' value='contact')
 
           .contacts__form__services

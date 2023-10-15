@@ -1,9 +1,5 @@
 .archives {
   @extend %page;
-
-  & footer {
-    display: none;
-  }
 }
 
 .archives__header {
@@ -54,5 +50,15 @@
     height: auto;
     margin-bottom: 1.5rem;
     width: 100%;
+  }
+}
+
+.archives-list {
+  .year {
+    text-align: right;
+
+    @include media('<phone') {
+      text-align: left;
+    }
   }
 }

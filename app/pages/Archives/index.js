@@ -25,26 +25,6 @@ export default class Archives extends Page {
 
   show() {
     super.show()
-
-    if (Detection.isDesktop()) {
-      const scroll = this.scroll
-      const wrapper = this.elements.wrapper
-      const height = innerHeight * 1.35
-      const defaultTransition = wrapper.style.transition
-
-      scroll.current = height
-      scroll.last = height
-      scroll.target = height
-
-      setTimeout(() => {
-        this.scroll.target = 0
-
-        setTimeout(() => {
-          wrapper.style.transition = defaultTransition
-        }, 2000);
-
-      }, 0);
-    }
   }
 
   onResize() {

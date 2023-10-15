@@ -213,15 +213,28 @@
   }
 }
 
+.about__awards__list {
+  &:hover .about__awards__list__item {
+    opacity: 0.2;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    @include media('<phone') {
+      opacity: 1;
+    }
+  }
+}
+
 .about__awards__list__item {
+  border-top: 1px solid var(--color-text);
   border-bottom: 1px solid var(--color-text);
+  margin-bottom: -1px;
   display: flex;
   justify-content: space-between;
   padding: 2rem 0;
-
-  &:first-child {
-    border-top: 1px solid var(--color-text);
-  }
+  transition: opacity 0.4s ease, scale 0.3s 0.1s ease;
 
   & .about__awards__list__item__column:nth-child(1) {
     font-weight: 700;
@@ -242,7 +255,16 @@
 
   @include media('<phone') {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    position: relative;
+    padding: 4rem 0;
+
+    & .year {
+      position: absolute;
+      top: 4rem;
+      display: flex;
+      justify-content: end;
+    }
 
     & .about__awards__list__item__column:nth-child(1),
     & .about__awards__list__item__column:nth-child(2),

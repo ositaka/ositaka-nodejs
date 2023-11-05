@@ -22,12 +22,8 @@ block content
                 picture(style=`background-color: ${section.primary.background_color}`)
                   //- is video && is on 4g
                   if (section.primary.is_video === true && (connection === '4g' || connection === '5g' || connection === 'undefined')) 
-                    video(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback
-                      srcset=`
-                        ${section.primary.video_mobile.url} 768w, 
-                        ${section.primary.video_desktop.url} 769w
-                      ` style=`background-color: ${section.primary.background_color}`
-                      )
+                    video.desktop(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback src=`${section.primary.video_desktop.url}` )
+                    video.mobile(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback src=`${section.primary.video_mobile.url}` )
 
                   //- is video && is not on 4g: show image
                   else if (section.primary.is_video === true && connection !== '4g' && typeof(section.primary.image.phone) !== 'undefined')
@@ -49,11 +45,8 @@ block content
                 picture(height=`${section.primary.image.dimensions.height}` width=`${section.primary.image.dimensions.width}` style=`background-color: ${section.primary.background_color}`)
                   //- is video && is on 4g
                   if (section.primary.is_video === true && connection === '4g' || connection === '5g' || section.primary.is_video === true && connection === 'undefined')
-                    video(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback
-                      srcset=`
-                        ${section.primary.video_mobile.url} 768w, 
-                        ${section.primary.video_desktop.url} 1769w
-                      ` style=`background-color: ${section.primary.background_color}`)
+                    video.desktop(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback src=`${section.primary.video_desktop.url}` )
+                    video.mobile(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback src=`${section.primary.video_mobile.url}` )
 
                   //- is video && is not on 4g: show image
                   else if (section.primary.is_video === true && connection !== '4g' && typeof(section.primary.image.phone) !== 'undefined')
@@ -95,10 +88,7 @@ block content
                     picture(height=`${item.gallery_image.dimensions.height}` width=`${item.gallery_image.dimensions.width}` style=`background-color: ${item.background_color}`)
                       //- is video && is on 4g
                       if (item.is_video === true && (connection === '4g' || connection === '5g' || connection === 'undefined'))
-                        video(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback
-                          srcset=`
-                            ${item.gallery_video.url} 768w, 
-                            ${item.gallery_video.url} 769w`)
+                        video(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback src=`${item.gallery_video.url}` )
 
                       //- is video && is not on 4g: show image
                       else if (item.is_video === true && connection !== '4g' && typeof(item.gallery_image) !== 'undefined')

@@ -84,10 +84,12 @@ html(
     script(defer, src="common.js")
     script(defer, src="service-worker.js")
 
-    script(defer, src=`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`)
-    script(defer).
-      window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date()); gtag('config', "UA-XXXXXXXX-1")
+    script(defer, src='https://www.googletagmanager.com/gtag/js?id=G-52T34HZN5V')
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-52T34HZN5V');
 
 
     //- * fps v1.0.0 — https://www.cssscript.com/javascript-library-check-display-frames-per-second-fps/

@@ -233,6 +233,8 @@ figure.services__projects__item__media
 
 ### 2 — Responsive Video with JavaScript
 
+**PLEASE NOTE: This approach has been replaced by having 2 `<video>` elements, one for `video.desktop` and other for `video.mobile`.**
+
 On this chapter will take a quick look on how to be able to mimic the **responsive image** aspect, but on video. We can achieve this by using a `<video>` HTML element with a `data-src` data-attribute.
 
 #### 2.1 — Responsive Video Code — JavaScript

@@ -1,0 +1,15 @@
+video.desktop {
+  display: block;
+}
+video.mobile {
+  display: none;
+}
+
+@include media('<phone') {
+  video.mobile {
+    display: block;
+  }
+  video.desktop {
+    display: none;
+  }
+}

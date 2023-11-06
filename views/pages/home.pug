@@ -13,8 +13,8 @@ block content
         figure.home__hero__media
           picture(style=`background-color: ${home.data.video[0].background_color}`)
             //- if (connection === '4g' || connection === '5g' || connection === 'undefined') 
-            video.desktop(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback src=`${home.data.video[0].video_desktop.url}` )
-            video.mobile(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback src=`${home.data.video[0].video_mobile.url}` )
+            video.desktop(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback poster=`${home.data.video[0].video_preview.phone.url}` src=`${home.data.video[0].video_desktop.url}` )
+            video.mobile(preload="auto" playsinline loop muted disablepictureinpicture disableremoteplayback poster=`${home.data.video[0].video_preview.url}` src=`${home.data.video[0].video_mobile.url}` )
 
             //- else
             //-   if (typeof(home.data.video[0].video_preview.phone) !== 'undefined')

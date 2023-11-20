@@ -80,3 +80,22 @@
     font-size: 20px;
   }
 }
+
+// Fix old menu issue
+[lang='en'] {
+  .menu--en {
+    display: block;
+  }
+  .menu--pt {
+    display: none;
+  }
+}
+
+[lang='pt'] {
+  .menu--pt {
+    display: block;
+  }
+  .menu--en {
+    display: none;
+  }
+}

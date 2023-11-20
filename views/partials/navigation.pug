@@ -63,13 +63,57 @@ block variables
     .menu__content
       nav.menu__nav
         label.title__h5 menu
-        each item in navigation.data.list
-          if isDesktop
-            a.menu__item.title__h1(href=Link(item.link) data-animation="link")
-              span.menu__item-text=item.text
-          else
-            a.menu__item.title__h1(href=Link(item.link))
-              span.menu__item-text=item.text
+        if isDesktop
+          //- OLD MENU
+          //- a.menu__item.title__h1(href=Link(item.link))
+          //-   span.menu__item-text=item.text
+          div.menu--en
+            a.menu__item.title__h1(href='/en/about' data-animation="link")
+              span.menu__item-text About
+            a.menu__item.title__h1(href='/en/projects' data-animation="link")
+              span.menu__item-text Projects
+            a.menu__item.title__h1(href='/en/archives' data-animation="link")
+              span.menu__item-text Archives
+            a.menu__item.title__h1(href='/en/contact' data-animation="link")
+              span.menu__item-text Contact
+          div.menu--pt
+            a.menu__item.title__h1(href='/pt/sobre' data-animation="link")
+              span.menu__item-text Sobre
+            a.menu__item.title__h1(href='/pt/projetos' data-animation="link")
+              span.menu__item-text Projetos
+            a.menu__item.title__h1(href='/pt/arquivo' data-animation="link")
+              span.menu__item-text Arquivo
+            a.menu__item.title__h1(href='/pt/contacto' data-animation="link")
+              span.menu__item-text Contacto
+        else
+          //- OLD MENU
+          //- a.menu__item.title__h1(href=Link(item.link))
+          //-   span.menu__item-text=item.text
+          div.menu--en
+            a.menu__item.title__h1(href='/en/about')
+              span.menu__item-text About
+            a.menu__item.title__h1(href='/en/projects')
+              span.menu__item-text Projects
+            a.menu__item.title__h1(href='/en/archives')
+              span.menu__item-text Archives
+            a.menu__item.title__h1(href='/en/contact')
+              span.menu__item-text Contact
+          div.menu--pt
+            a.menu__item.title__h1(href='/pt/sobre')
+              span.menu__item-text Sobre
+            a.menu__item.title__h1(href='/pt/projetos')
+              span.menu__item-text Projetos
+            a.menu__item.title__h1(href='/pt/arquivo')
+              span.menu__item-text Arquivo
+            a.menu__item.title__h1(href='/pt/contacto')
+              span.menu__item-text Contacto
+        //- each item in navigation.data.list
+        //-   if isDesktop
+        //-     a.menu__item.title__h1(href=Link(item.link) data-animation="link")
+        //-       span.menu__item-text=item.text
+        //-   else
+        //-     a.menu__item.title__h1(href=Link(item.link))
+        //-       span.menu__item-text=item.text
       
       .menu__info
         .menu__follow

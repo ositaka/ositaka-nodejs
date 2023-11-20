@@ -29,7 +29,7 @@ block content
         h2.title__h1(data-animation="title")=home.data.featured_projects_title
 
         each project in home.data.featured_projects
-          a(href=`/${lang}/${lang === 'en' ? 'projects' : 'change-me'}/${project.project.uid}/`).home__projects__item
+          a(href=`/${lang}/${lang === 'en' ? 'projects' : 'projetos'}/${project.project.uid}/`).home__projects__item
             .home__projects__item__text
               h4.title__h5(data-animation="title")=project.project_brand
               h3.title__h3.title__h3-bold(data-animation="title")=project.project_title[0].text

@@ -13,27 +13,6 @@ block content
         form(name='contact' id="contact" method='POST' action='/message-sent' onsubmit="setTimeout(() => { alert('✔ Your message has been sent!'); this.reset(); location.reload();}, 600);")
           input(type='hidden' name='form' value='contact')
 
-          .contacts__form__services
-            h2.title__h3(data-animation="title")=contacts.data.services_title
-            ul.contacts__form__options.contacts__form__options__services
-              each item in contacts.data.services_options
-                li=item.option
-                  input(type="checkbox" name="services" value=`${item.option}`)
-
-          .contacts__form__budget
-            h2.title__h3(data-animation="title")=contacts.data.budget_title
-            ul.contacts__form__options.contacts__form__options__budget
-              each item in contacts.data.budget_options
-                li=item.option
-                  input(type="checkbox" name="budget" value=`${item.option}`)
-
-          .contacts__form__delivery
-            h2.title__h3(data-animation="title")=contacts.data.delivery_title
-            ul.contacts__form__options.contacts__form__options__delivery
-              each item in contacts.data.delivery_options
-                li=item.option
-                  input(type="checkbox" name="delivery" value=`${item.option}`)
-
           .contacts__form__project
             h2.title__h3(data-animation="title")=contacts.data.project_title
             label

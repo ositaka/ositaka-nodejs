@@ -1,8 +1,25 @@
-FROM node:14
+FROM node:18
 
 WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY pnpm-lock.yaml ./
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Install dependencies
+RUN pnpm install
+
+# Copy application files
 COPY . .
 
-RUN echo "Running the dockerfile"
-RUN npm run backend:build
-EXPOSE 3000
+# Build frontend assets
+RUN pnpm run frontend:build
+
+# Expose port
+EXPOSE 3001
+
+# Start the application
+CMD ["node", "app.js"]

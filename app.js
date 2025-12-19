@@ -163,7 +163,7 @@ app.get('/:lang/', async (req, res) => {
     colors = home.data.colors[0]
     meta = home.data.seo[0]
 
-    const { results: globals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang })
+    const { results: prismicGlobals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang })
 
     lang = langsReversed[lang]
 
@@ -172,7 +172,7 @@ app.get('/:lang/', async (req, res) => {
       altLangs,
       colors,
       home,
-      globals,
+      prismicGlobals,
       lang,
       meta,
     });
@@ -243,14 +243,14 @@ app.get('/:lang/:uid/', async (req, res) => {
     colors = contacts.data.colors[0]
     meta = contacts.data.seo[0]
 
-    const { results: globals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
+    const { results: prismicGlobals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
 
     res.render('pages/contacts', {
       ...defaults,
       altLangs,
       colors,
       contacts,
-      globals,
+      prismicGlobals,
       lang,
       meta,
     });
@@ -316,7 +316,7 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
     colors = work_page.data.colors[0]
     meta = work_page.data.seo[0]
 
-    const { results: globals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
+    const { results: prismicGlobals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
     const { results: parent_en } = await api.query(Prismic.Predicates.at('document.type', 'work'), { lang: "en-gb" })
     const { results: parent_pt } = await api.query(Prismic.Predicates.at('document.type', 'work'), { lang: "pt-pt" })
 
@@ -344,7 +344,7 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
       _404,
       altLangs,
       colors,
-      globals,
+      prismicGlobals,
       lang,
       meta,
       nextProject,

@@ -9,10 +9,6 @@ export default class Intro extends Page {
       elements: {
         navigation: '.navigation',
         link: '.intro__link'
-      },
-      langs: {
-        en: '#en',
-        pt: '#pt',
       }
     })
   }

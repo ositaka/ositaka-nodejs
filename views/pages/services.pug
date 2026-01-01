@@ -44,7 +44,7 @@ block content
                 .services__projects
                   each project in service.items
                     if (project)
-                      a.services__projects__item(href=`/${lang}/${lang === 'en' ? 'work' : ''}/${project.project.uid}/`)
+                      a.services__projects__item(href=`/work/${project.project.uid}/`)
                         figure.services__projects__item__media
                           picture(height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}` style=`background-color: ${project.background_color}`)
                             img.services__projects__item__media__image(
@@ -64,8 +64,7 @@ block content
       section.redirect__hero
         .title__h1(data-animation="title") Something about us
 
-        //- a.home__services__button(href=`/${lang}/${home.data.featured_projects_link.uid}/` data-animation="link")
-        a.redirect__hero__button(href=`/en/about/` data-animation="link")
+        a.redirect__hero__button(href=`/about/` data-animation="link")
           span Learn more about us
 
       include ../partials/footer

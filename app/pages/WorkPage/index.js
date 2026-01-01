@@ -15,10 +15,6 @@ export default class WorkPage extends Page {
         parallax: '.work_page__full-screen__media video, .work_page__full-screen__media img',
         gallery: '.work_page__gallery__media picture > *',
         video: '.work_page__media__media video, .work_page__media__media img',
-      },
-      langs: {
-        en: '#en',
-        pt: '#pt',
       }
     })
 

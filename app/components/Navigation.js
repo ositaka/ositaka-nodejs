@@ -2,7 +2,7 @@ import GSAP from 'gsap'
 import Component from 'classes/Component'
 
 export default class Navigation extends Component {
-  constructor({ template, langEN, langPT, menu, menuLinks, siteurl, seo_title }) {
+  constructor({ template }) {
     super({
       element: '.navigation',
       elements: {
@@ -11,45 +11,20 @@ export default class Navigation extends Component {
         textCursor: '.cursor__text',
         textContacts: '.menu__contacts label',
         textFollow: '.menu__follow label',
-      },
-      langs: {
-        en: '#en',
-        pt: '#pt',
-        menu: '.navigation__list',
         siteurl: '.navigation__logo'
       },
     })
 
-    this.onChange(template, langEN, langPT, menu, menuLinks, siteurl, seo_title)
+    this.template = template
 
   }
 
   create() {
     super.create()
 
-    const changeTextEN = () => {
-      this.elements.textContacts.innerHTML = 'get in touch'
-      this.elements.textFollow.innerHTML = 'follow me on'
-    }
-
-    const changeTextPT = () => {
-      this.elements.textContacts.innerHTML = 'entra em contacto'
-      this.elements.textFollow.innerHTML = 'siga-me no'
-    }
-
-    // set document lang attribue if click on lang
-    this.langs.en.addEventListener('click', event => {
-      document.documentElement.lang = 'en'
-      changeTextEN()
-    })
-
-    this.langs.pt.addEventListener('click', event => {
-      document.documentElement.lang = 'pt'
-      changeTextPT()
-    })
-
-    if (document.documentElement.lang === 'en') { changeTextEN() }
-    else if (document.documentElement.lang === 'pt') { changeTextPT() }
+    // Set default English text
+    this.elements.textContacts.innerHTML = 'get in touch'
+    this.elements.textFollow.innerHTML = 'follow me on'
 
     // overlay (SVG path element)
     const overlayPath = document.querySelector('.overlay__path');
@@ -236,19 +211,10 @@ export default class Navigation extends Component {
     })
   }
 
-  onChange(template, langEN, langPT, menu, /* menuLinks, */ siteurl, seo_title) {
-    if (typeof menu !== 'undefined') {
+  onChange(template, seo_title) {
+    this.template = template
+    if (seo_title) {
       document.title = seo_title
-      this.langs.en.setAttribute('href', langEN);
-      this.langs.pt.setAttribute('href', langPT);
-      this.langs.siteurl.setAttribute('href', siteurl);
-
-      // this.elements.menuLinks.forEach((element, index) => {
-      //   const link = menuLinks[index]
-
-      //   element.href = link.href
-      //   element.firstElementChild.textContent = link.firstElementChild.textContent
-      // })
     }
   }
 

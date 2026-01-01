@@ -1,5 +1,4 @@
 block variables
-  - var lang = lang
   - var meta = meta
 
 //                                                                       
@@ -29,7 +28,7 @@ block variables
 
 doctype html
 html(
-  lang=lang
+  lang="en"
   class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : isTouch ? "touch" : "desktop" 
   style=isDesktop ? "overflow:hidden;" : "")
   head

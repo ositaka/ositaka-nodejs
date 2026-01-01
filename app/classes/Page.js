@@ -41,8 +41,6 @@ export default class Page {
       videos: 'video',
     }
 
-    this.lang = document.documentElement.lang
-
     this.id = id
 
     this.transformPrefix = Prefix('transform')

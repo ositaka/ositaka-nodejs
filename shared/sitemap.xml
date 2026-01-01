@@ -1,116 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://ositaka.com/projects-archives/</loc>
+        <lastmod>2025-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/production-ready-blog-template-with-best-practices/</loc>
+        <lastmod>2025-11-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/noorui/</loc>
+        <lastmod>2025-11-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/bokkah/</loc>
+        <lastmod>2025-11-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/modern-art-gallery-website-with-tina-cms-integrati/</loc>
+        <lastmod>2025-11-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/design-code-tips/</loc>
+        <lastmod>2025-11-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
     <url>
         <loc>https://ositaka.com/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/"/>
-        <lastmod>2023-11-05</lastmod>
+        <lastmod>2025-11-17</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.00</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/about/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/about/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/sobre/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/contact/</loc>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.90</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/projects/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/about/</loc>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.90</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/archives/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/archives/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/arquivo/"/>
-        <lastmod>2023-11-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.90</priority>
-    </url>
-    <url>
-        <loc>https://ositaka.com/en/contact/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/contact/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/contacto/"/>
-        <lastmod>2023-11-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.90</priority>
-    </url>
-
-    <url>
-        <loc>https://ositaka.com/en/projects/pierre-sports/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/pierre-sports/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/pierre-sports/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/archives/</loc>
+        <lastmod>2025-10-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/projects/be-electric/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/be-electric/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/be-electric/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/projects-archives/smart-stories/</loc>
+        <lastmod>2023-12-15</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.80</priority>
+        <priority>0.70</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/projects/luc-verbeke/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/luc-verbeke/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/luc-verbeke/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/projects-archives/david-alioth/</loc>
+        <lastmod>2023-10-13</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.80</priority>
+        <priority>0.70</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/projects/sun-in-a-box/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/sun-in-a-box/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/sun-in-a-box/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/projects-archives/media-creators/</loc>
+        <lastmod>2023-09-01</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.80</priority>
+        <priority>0.70</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/projects/smart-stories/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/smart-stories/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/smart-stories/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/projects-archives/bolha-360/</loc>
+        <lastmod>2023-08-28</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.80</priority>
+        <priority>0.70</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/projects/luc-verbeke/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/luc-verbeke/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/luc-verbeke/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/projects-archives/ineos-grenadier/</loc>
+        <lastmod>2023-08-28</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.80</priority>
+        <priority>0.70</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/projects/boa-panca/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/boa-panca/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/boa-panca/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/projects-archives/lamb-weston/</loc>
+        <lastmod>2023-08-28</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.80</priority>
+        <priority>0.70</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/projects/david-alioth/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/david-alioth/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/david-alioth/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/projects-archives/pergo-flooring/</loc>
+        <lastmod>2023-08-28</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.80</priority>
+        <priority>0.70</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/en/projects/viva-sara/</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="https://ositaka.com/en/projects/viva-sara/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://ositaka.com/pt/projetos/viva-sara/"/>
-        <lastmod>2023-11-05</lastmod>
+        <loc>https://ositaka.com/projects-archives/be-electric/</loc>
+        <lastmod>2023-09-04</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.80</priority>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/viva-sara/</loc>
+        <lastmod>2023-09-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/pierre-sports/</loc>
+        <lastmod>2023-09-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/luc-verbeke/</loc>
+        <lastmod>2023-09-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/boa-panca/</loc>
+        <lastmod>2023-09-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects-archives/sun-in-a-box/</loc>
+        <lastmod>2023-09-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
     </url>
 </urlset>

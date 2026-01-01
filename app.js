@@ -32,24 +32,12 @@ const initApi = (req) => {
   });
 };
 
-const langs = Object.freeze({
-  'en': 'en-gb',
-  'pt': 'pt-pt'
-})
-
-const langsReversed = Object.freeze({ // Prismic
-  'en-gb': 'en',
-  'pt-pt': 'pt'
-})
-
 const handleLinkResolver = (doc) => {
-  const lang = langsReversed[doc.lang]
-
   if (
     doc.type === 'home' ||
     doc.type === '404'
   ) {
-    return `/${lang}/`;
+    return '/';
   }
 
   if (
@@ -59,16 +47,16 @@ const handleLinkResolver = (doc) => {
     doc.type === 'services' ||
     doc.type === 'work'
   ) {
-    return `/${lang}/${doc.uid}`;
+    return `/${doc.uid}`;
   }
 
   if (
     doc.type === 'work_page'
   ) {
-    return (doc.data.parent_page.id ? `/${lang}/${doc.data.parent_page.uid}/${doc.uid}/` : `/${lang}/${doc.uid}/`)
+    return (doc.data.parent_page.id ? `/${doc.data.parent_page.uid}/${doc.uid}/` : `/${doc.uid}/`)
   }
 
-  return `/${lang}/`;
+  return '/';
 };
 
 app.use(cookieSession({
@@ -116,7 +104,8 @@ app.use((req, res, next) => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-const handleRequest = async (api, lang, req) => {
+const handleRequest = async (api, req) => {
+  const lang = 'en-gb'; // Always use English
   const intro = await api.getSingle('intro', { lang });
   const footer = await api.getSingle('footer', { lang });
   const navigation = await api.getSingle('navigation', { lang });
@@ -142,38 +131,24 @@ app.get('/offline', async (req, res) => {
 })
 
 app.get('/', async (req, res) => {
-  res.redirect('/en/')
-})
-
-
-app.get('/:lang/', async (req, res) => {
-  let lang = langs[req.params.lang];
-
-  if (!lang) {
-    console.log("ERROR ON LANG - 1 _404")
-  }
+  const lang = 'en-gb'; // Always use English
 
   const api = await initApi(req);
-  const defaults = await handleRequest(api, lang);
+  const defaults = await handleRequest(api, req);
 
   const home = await api.getSingle('home', { lang });
 
   if (home) {
-    altLangs = home.alternate_languages
     colors = home.data.colors[0]
     meta = home.data.seo[0]
 
     const { results: prismicGlobals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang })
 
-    lang = langsReversed[lang]
-
     res.render('pages/home', {
       ...defaults,
-      altLangs,
       colors,
       home,
       prismicGlobals,
-      lang,
       meta,
     });
   }
@@ -185,17 +160,12 @@ app.get('/:lang/', async (req, res) => {
 
 });
 
-app.get('/:lang/:uid/', async (req, res) => {
-  let lang = langs[req.params.lang];
-
-  if (!lang) {
-    console.log("ERROR ON LANG - 2 _404")
-    return
-  }
+app.get('/:uid/', async (req, res) => {
+  const lang = 'en-gb'; // Always use English
 
   const uid = req.params.uid;
   const api = await initApi(req);
-  const defaults = await handleRequest(api, lang);
+  const defaults = await handleRequest(api, req);
 
   const about = await api.getByUID('about', uid, { lang });
   const archives = await api.getByUID('archives', uid, { lang });
@@ -203,85 +173,68 @@ app.get('/:lang/:uid/', async (req, res) => {
   const services = await api.getByUID('services', uid, { lang });
   const work = await api.getByUID('work', uid, { lang });
 
-  lang = langsReversed[lang]
-
   if (about) {
-    altLangs = about.alternate_languages
     colors = about.data.colors[0]
     meta = about.data.seo[0]
 
-    const { results: awards } = await api.query(Prismic.Predicates.at('document.type', 'awards'), { lang: langs[req.params.lang] })
+    const { results: awards } = await api.query(Prismic.Predicates.at('document.type', 'awards'), { lang })
 
     res.render('pages/about', {
       ...defaults,
       about,
-      altLangs,
       awards,
       colors,
-      lang,
       meta,
     });
   }
 
   else if (archives) {
-    altLangs = archives.alternate_languages
     colors = archives.data.colors[0]
     meta = archives.data.seo[0]
 
     res.render('pages/archives', {
       ...defaults,
       archives,
-      altLangs,
       colors,
-      lang,
       meta,
     });
   }
 
   else if (contacts) {
-    altLangs = contacts.alternate_languages
     colors = contacts.data.colors[0]
     meta = contacts.data.seo[0]
 
-    const { results: prismicGlobals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
+    const { results: prismicGlobals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang })
 
     res.render('pages/contacts', {
       ...defaults,
-      altLangs,
       colors,
       contacts,
       prismicGlobals,
-      lang,
       meta,
     });
   }
 
   else if (services) {
-    altLangs = services.alternate_languages
     colors = services.data.colors[0]
     meta = services.data.seo[0]
 
     res.render('pages/services', {
       ...defaults,
-      altLangs,
       colors,
-      lang,
       meta,
       services,
     });
   }
 
   else if (work) {
-    altLangs = work.alternate_languages
     colors = work.data.colors[0]
     meta = work.data.seo[0]
     let publishedItems = work.data.works.filter(item => item.published !== false)
 
     res.render('pages/work', {
       ...defaults,
-      altLangs,
       colors,
-      lang,
       meta,
       publishedItems,
       work,
@@ -295,33 +248,23 @@ app.get('/:lang/:uid/', async (req, res) => {
 });
 
 
-app.get('/:lang/:parent_page/:uid/', async (req, res) => {
-  let lang = langs[req.params.lang];
-
-  if (!lang) {
-    console.log("ERROR ON LANG - 3 _404")
-    return
-  }
+app.get('/:parent_page/:uid/', async (req, res) => {
+  const lang = 'en-gb'; // Always use English
 
   const api = await initApi(req);
   const _404 = await api.getSingle('404', { lang });
-  const defaults = await handleRequest(api, lang);
+  const defaults = await handleRequest(api, req);
   const uid = req.params.uid;
   const work_page = await api.getByUID('work_page', uid, { lang });
 
-  lang = langsReversed[lang]
-
   if (work_page) {
-    altLangs = work_page.alternate_languages
     colors = work_page.data.colors[0]
     meta = work_page.data.seo[0]
 
-    const { results: prismicGlobals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang: langs[req.params.lang] })
-    const { results: parent_en } = await api.query(Prismic.Predicates.at('document.type', 'work'), { lang: "en-gb" })
-    const { results: parent_pt } = await api.query(Prismic.Predicates.at('document.type', 'work'), { lang: "pt-pt" })
+    const { results: prismicGlobals } = await api.query(Prismic.Predicates.at('document.type', 'globals'), { lang })
 
     // Get Next Project link
-    const { results: projects } = await api.query(Prismic.Predicates.at('document.type', 'work'), { lang: langs[req.params.lang] })
+    const { results: projects } = await api.query(Prismic.Predicates.at('document.type', 'work'), { lang })
     const allProjects = projects[0].data.works.filter(item => item.published !== false)
     const currentProject = work_page.uid;
 
@@ -342,14 +285,10 @@ app.get('/:lang/:parent_page/:uid/', async (req, res) => {
     res.render('pages/work_page', {
       ...defaults,
       _404,
-      altLangs,
       colors,
       prismicGlobals,
-      lang,
       meta,
       nextProject,
-      parent_en,
-      parent_pt,
       work_page,
     });
   }

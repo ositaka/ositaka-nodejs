@@ -11,10 +11,6 @@ export default class About extends Page {
         navigation: '.navigation',
         title: '.about__hero__title',
         start: '.start__project__wrapper',
-      },
-      langs: {
-        en: '#en',
-        pt: '#pt',
       }
     })
   }

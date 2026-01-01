@@ -13,10 +13,6 @@ export default class Services extends Page {
         navigation: '.navigation',
         parallax: '.services__item__media picture > *',
         start: '.start__project__wrapper',
-      },
-      langs: {
-        en: '#en',
-        pt: '#pt',
       }
     })
 

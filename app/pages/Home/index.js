@@ -14,10 +14,6 @@ export default class Home extends Page {
         parallax: '.home__hero__media picture > *, .home__projects__item__media > *',
         fixed: '.is-fixed',
         start: '.start__project__wrapper',
-      },
-      langs: {
-        en: '#en',
-        pt: '#pt',
       }
     })
 

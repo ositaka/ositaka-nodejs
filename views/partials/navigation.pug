@@ -1,11 +1,5 @@
-block variables
-  - var altLangs = altLangs
-  - var lang = lang
-  - var parent_en = parent_en
-  - var parent_pt = parent_pt
-
 .navigation
-  a.navigation__logo.was-shown(href=`/${lang}/` aria-label="OSITAKA")
+  a.navigation__logo.was-shown(href="/" aria-label="OSITAKA")
     svg.navigation__logo-triangle(width="66" height="50" viewBox="0 0 66 50" xmlns="http://www.w3.org/2000/svg")
       path(d="m64.45,2.94c-.94-1.81-2.79-2.94-4.83-2.94H5.45C3.41,0,1.55,1.13.61,2.94c-.94,1.81-.79,3.98.38,5.65l27.08,38.4c1.03,1.47,2.66,2.31,4.45,2.31s3.42-.84,4.45-2.31l27.08-38.4c1.18-1.67,1.32-3.83.39-5.65m-2.21,4.35l-27.08,38.4c-.61.86-1.56,1.36-2.62,1.36s-2.01-.5-2.62-1.36L2.83,7.29c-.7-1-.79-2.24-.23-3.32.56-1.08,1.62-1.73,2.85-1.73h54.16c1.22,0,2.29.65,2.85,1.73.56,1.08.48,2.33-.23,3.32")
       path(d="m24.57,19.84c0,4.4,3.57,7.96,7.96,7.96s7.96-3.57,7.96-7.96-3.57-7.96-7.96-7.96c-4.4,0-7.96,3.57-7.96,7.96")
@@ -33,80 +27,29 @@ block variables
         svg(width="194" height="50" viewBox="0 0 194 50" xmlns="http://www.w3.org/2000/svg")
           path(d="m193.78,32.07c-.02-.25-.05-.5-.14-.74-.03-.11-.08-.22-.12-.33,0,0-6.16-12.33-6.16-12.33-.26-.48-.65-.88-1.13-1.13-1.22-.61-2.79-.09-3.4,1.13l-6.16,12.33c-.84,1.62.45,3.71,2.28,3.67,0,0,12.31,0,12.31,0,1.38.02,2.6-1.22,2.54-2.61m-10.61-3.58l1.92-3.85,1.93,3.85c.25.5-.11,1.09-.68,1.09h-2.49c-.56,0-.93-.59-.68-1.09")
 
-  .langs
-    ul.langs__list
-      li.langs__list__item
-        a.langs__list__link(href="#" id=`${ lang === 'en' ? 'en' : 'pt'}` data-animation="link")
-          span=lang
-
-      each altLang in altLangs
-        if ( altLang.lang === 'en-gb' )
-          li.langs__list__item
-            if (typeof(parent_en) == 'undefined')
-              a.langs__list__link#en(href=`/en/${altLang.uid === 'home' ?  '' : altLang.uid + '/'}` data-animation="link") 
-                span en
-            else if (typeof(parent_en[0]) !== 'undefined')
-              a.langs__list__link#en(href=`/en/${parent_en[0].uid}/${altLang.uid === 'home' ?  '' : altLang.uid}/` data-animation="link")
-                span en
-
-        if ( altLang.lang === 'pt-pt' )
-          li.langs__list__item
-            if (typeof(parent_pt) == 'undefined')
-              a.langs__list__link#pt(href=`/pt/${altLang.uid === 'home' ?  '' : altLang.uid + '/'}` data-animation="link")
-                span pt
-            else if (typeof(parent_pt[0]) !== 'undefined')
-              a.langs__list__link#pt(href=`/pt/${parent_pt[0].uid}/${altLang.uid === 'home' ?  '' : altLang.uid}/` data-animation="link")
-                span pt
-
 .menu__wrapper
   .menu
     .menu__content
       nav.menu__nav
         label.title__h5 menu
         if isDesktop
-          //- OLD MENU
-          //- a.menu__item.title__h1(href=Link(item.link))
-          //-   span.menu__item-text=item.text
-          div.menu--en
-            a.menu__item.title__h1(href='/en/about' data-animation="link")
-              span.menu__item-text About
-            a.menu__item.title__h1(href='/en/projects' data-animation="link")
-              span.menu__item-text Projects
-            a.menu__item.title__h1(href='/en/archives' data-animation="link")
-              span.menu__item-text Archives
-            a.menu__item.title__h1(href='/en/contact' data-animation="link")
-              span.menu__item-text Contact
-          div.menu--pt
-            a.menu__item.title__h1(href='/pt/sobre' data-animation="link")
-              span.menu__item-text Sobre
-            a.menu__item.title__h1(href='/pt/projetos' data-animation="link")
-              span.menu__item-text Projetos
-            a.menu__item.title__h1(href='/pt/arquivo' data-animation="link")
-              span.menu__item-text Arquivo
-            a.menu__item.title__h1(href='/pt/contacto' data-animation="link")
-              span.menu__item-text Contacto
+          a.menu__item.title__h1(href='/about' data-animation="link")
+            span.menu__item-text About
+          a.menu__item.title__h1(href='/projects' data-animation="link")
+            span.menu__item-text Projects
+          a.menu__item.title__h1(href='/archives' data-animation="link")
+            span.menu__item-text Archives
+          a.menu__item.title__h1(href='/contact' data-animation="link")
+            span.menu__item-text Contact
         else
-          //- OLD MENU
-          //- a.menu__item.title__h1(href=Link(item.link))
-          //-   span.menu__item-text=item.text
-          div.menu--en
-            a.menu__item.title__h1(href='/en/about')
-              span.menu__item-text About
-            a.menu__item.title__h1(href='/en/projects')
-              span.menu__item-text Projects
-            a.menu__item.title__h1(href='/en/archives')
-              span.menu__item-text Archives
-            a.menu__item.title__h1(href='/en/contact')
-              span.menu__item-text Contact
-          div.menu--pt
-            a.menu__item.title__h1(href='/pt/sobre')
-              span.menu__item-text Sobre
-            a.menu__item.title__h1(href='/pt/projetos')
-              span.menu__item-text Projetos
-            a.menu__item.title__h1(href='/pt/arquivo')
-              span.menu__item-text Arquivo
-            a.menu__item.title__h1(href='/pt/contacto')
-              span.menu__item-text Contacto
+          a.menu__item.title__h1(href='/about')
+            span.menu__item-text About
+          a.menu__item.title__h1(href='/projects')
+            span.menu__item-text Projects
+          a.menu__item.title__h1(href='/archives')
+            span.menu__item-text Archives
+          a.menu__item.title__h1(href='/contact')
+            span.menu__item-text Contact
         //- each item in navigation.data.list
         //-   if isDesktop
         //-     a.menu__item.title__h1(href=Link(item.link) data-animation="link")

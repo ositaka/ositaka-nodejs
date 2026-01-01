@@ -33,7 +33,7 @@ block content
         h2.title__h1(data-animation="title")=home.data.featured_projects_title
 
         each project in home.data.featured_projects
-          a(href=`/${lang}/${lang === 'en' ? 'projects' : 'projetos'}/${project.project.uid}/`).home__projects__item
+          a(href=`/projects/${project.project.uid}/`).home__projects__item
             .home__projects__item__text
               h4.title__h5(data-animation="title")=project.project_brand
               h3.title__h3.title__h3-bold(data-animation="title")=project.project_title[0].text
@@ -46,14 +46,14 @@ block content
                   source(media='(min-width: 769px)' srcset=`${connection === '4g' || connection === '5g' || connection === 'undefined' ? project.project_image.url : project.project_image.url.replace('?auto=compress,format', '?q=30&w=1200&auto=compress,format')}`)
                 img.home__projects__item__media__image(alt=project.project_image.alt data-src=project.project_image.url height=`${project.project_image.dimensions.height}` width=`${project.project_image.dimensions.width}`)
 
-        a.home__projects__button.has-arrow(href=`/${lang}/${home.data.featured_projects_link.uid}/`)
+        a.home__projects__button.has-arrow(href=`/${home.data.featured_projects_link.uid}/`)
           div(data-animation="link")
             span=home.data.featured_projects_button
           include ../partials/arrow
 
       section.redirect__hero
         .title__h1(data-animation="title")=home.data.about_title
-        a.redirect__hero__button.has-arrow(href=`/${lang}/${home.data.about_link.uid}/`)
+        a.redirect__hero__button.has-arrow(href=`/${home.data.about_link.uid}/`)
           div(data-animation="link")
             span=home.data.about_button
           include ../partials/arrow

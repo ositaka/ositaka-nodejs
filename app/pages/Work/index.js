@@ -12,10 +12,6 @@ export default class Work extends Page {
         navigation: '.navigation',
         workList: '.work__list',
         // start: '.start__project__wrapper',
-      },
-      langs: {
-        en: '#en',
-        pt: '#pt',
       }
     })
 

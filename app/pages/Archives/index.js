@@ -13,10 +13,6 @@ export default class Archives extends Page {
         navigation: '.navigation',
         title: '.archives__title',
         media: '.archives__media__media video, .archives__media__media img',
-      },
-      langs: {
-        en: '#en',
-        pt: '#pt',
       }
     })
 

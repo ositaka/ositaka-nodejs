@@ -164,24 +164,11 @@ class App {
       div.innerHTML = html;
 
       const divContent = div.querySelector('.content');
-      const langEN = div.querySelector('.langs #en') ? div.querySelector('.langs #en').href : '';
-      const langPT = div.querySelector('.langs #pt') ? div.querySelector('.langs #pt').href : '';
-      const menu = div.querySelector('.langs__list__link').innerHTML;
-      // const menuLinks = Array.prototype.slice.call(div.querySelectorAll('.menu__item'));
-      const siteurl = div.querySelector('.navigation__logo').href;
-      const footerDiv = div.querySelector('.footer').innerHTML;
       const seo_title = div.querySelector('title').innerHTML;
 
       this.template = divContent.getAttribute('data-template');
-      this.langEN = langEN;
-      this.langPT = langPT;
-      this.menu = menu;
-      // this.menuLinks = menuLinks;
-      this.siteurl = siteurl;
-      this.footerDiv = footerDiv;
-      this.seo_title = seo_title;
 
-      this.navigation.onChange(this.template, this.langEN, this.langPT, this.menu, /* this.menuLinks, */ this.siteurl, this.seo_title);
+      this.navigation.onChange(this.template, seo_title);
 
       // this.footer.onChange(this.footerDiv);
 
@@ -200,7 +187,7 @@ class App {
       this.addLinkListeners();
     }
     else {
-      this.onChange({ url: this.lang === 'en' ? '/' : '/pt/' });
+      this.onChange({ url: '/' });
     }
   }
 
@@ -372,7 +359,7 @@ class App {
 
   addLogoAnimation() {
     this.content = document.getElementById('content')
-    this.logo = this.navigation.langs.siteurl
+    this.logo = document.querySelector('.navigation__logo')
     this.logoIsAnimating = false;
 
     const hideLogo = () => {
@@ -440,18 +427,22 @@ class App {
       }
     }
 
-    const observer = new MutationObserver(callback)
-    observer.observe(this.logo, config);
+    if (this.logo) {
+      const observer = new MutationObserver(callback)
+      observer.observe(this.logo, config);
+    }
 
-    if (Detection.isDesktop()) {
+    if (Detection.isDesktop() && this.logo) {
       window.addEventListener('onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll', () => {
         setTimeout(() => {
-          if (this.page.scroll.current > window.innerHeight * 0.3) {
-            this.logo.classList.remove('is-open', 'is-open--scroll')
-          }
-          else {
-            this.logo.classList.add('is-open--scroll')
-            this.logo.classList.remove('was-shown')
+          if (this.logo && this.page && this.page.scroll) {
+            if (this.page.scroll.current > window.innerHeight * 0.3) {
+              this.logo.classList.remove('is-open', 'is-open--scroll')
+            }
+            else {
+              this.logo.classList.add('is-open--scroll')
+              this.logo.classList.remove('was-shown')
+            }
           }
         }, 600)
       })
@@ -462,14 +453,14 @@ class App {
       })
 
       this.logo.addEventListener('mouseleave', () => {
-        if (this.page.scroll.current > window.innerHeight / 3) {
+        if (this.page && this.page.scroll && this.page.scroll.current > window.innerHeight / 3) {
           this.logo.classList.remove('is-open')
           this.logo.classList.add('was-shown')
         }
       })
     }
 
-    else {
+    else if (this.logo) {
       window.addEventListener('scroll', () => {
         window.scrollY > 1
           ? this.logo.classList.remove('is-open')

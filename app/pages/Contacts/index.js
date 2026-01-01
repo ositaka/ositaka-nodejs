@@ -13,10 +13,6 @@ export default class Contacts extends Page {
                 budget: '.contacts__form__options__budget li',
                 delivery: '.contacts__form__options__delivery li',
                 labels: '.contacts__form__project .field',
-            },
-            langs: {
-                en: '#en',
-                pt: '#pt',
             }
         })
     }
@@ -61,10 +57,10 @@ export default class Contacts extends Page {
           })
         }
 
-        this.elements.services.forEach((element) => serviceOptions(element))
-        this.elements.budget.forEach((element) => budgetOptions(element))
-        this.elements.delivery.forEach((element) => deliveryOptions(element))
-        this.elements.labels.forEach((element) => setLabelsActive(element))
+        // this.elements.services.forEach((element) => serviceOptions(element))
+        // this.elements.budget.forEach((element) => budgetOptions(element))
+        // this.elements.delivery.forEach((element) => deliveryOptions(element))
+        // this.elements.labels.forEach((element) => setLabelsActive(element))
 
     }
 }

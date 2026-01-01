@@ -1,0 +1,35 @@
+﻿<krpano>
+
+	<!-- Flat Light Design -->
+
+	<!-- modify the <skin_settings> values -->
+	<skin_settings layout_width="100%"
+	               layout_maxwidth="100%"
+	               controlbar_width="100%"
+	               controlbar_height="0"
+	               controlbar_offset.normal="0"
+	               controlbar_offset.mobile="0"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="0"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0x0b111e"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="20"
+	               design_bgshadow="0 4 10 0xFFFFFF 0.3"
+	               design_thumbborder_bgborder="3 0xB2B2B2 1.0"
+	               design_thumbborder_padding="60"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Arial;"
+	               design_text_shadow="0"
+	               />
+
+	<!-- adjust the design of some skin elements  -->
+	<layer name="skin_layer">
+		<layer name="skin_loadingtext" width="100%" css="calc:skin_settings.design_text_css + ' text-align:center; font-size:20px;'" padding="4 6" textshadow="calc:2.0" textshadowrange="1.0" textshadowangle="90" textshadowcolor="0x2D3E50" textshadowalpha="1.0" />
+		<layer name="skin_control_bar" alpha="0" />
+	</layer>
+
+
+</krpano>

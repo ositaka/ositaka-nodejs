@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
+        <loc>https://ositaka.com/projects/nextjs-starter-template/</loc>
+        <lastmod>2026-01-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects/smart-stories/</loc>
+        <lastmod>2026-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://ositaka.com/projects/atelier-verbeke/</loc>
+        <lastmod>2026-01-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
         <loc>https://ositaka.com/projects/</loc>
         <lastmod>2025-12-19</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.90</priority>
-    </url>
-    <url>
-        <loc>https://ositaka.com/projects/production-ready-blog-template-with-best-practices/</loc>
-        <lastmod>2025-11-17</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.70</priority>
     </url>
     <url>
         <loc>https://ositaka.com/projects/noorui/</loc>
@@ -20,12 +32,6 @@
     </url>
     <url>
         <loc>https://ositaka.com/projects/bokkah/</loc>
-        <lastmod>2025-11-17</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.70</priority>
-    </url>
-    <url>
-        <loc>https://ositaka.com/projects/modern-art-gallery-website-with-tina-cms-integrati/</loc>
         <lastmod>2025-11-17</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.70</priority>
@@ -61,12 +67,6 @@
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://ositaka.com/projects/smart-stories/</loc>
-        <lastmod>2023-12-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.70</priority>
-    </url>
-    <url>
         <loc>https://ositaka.com/projects/david-alioth/</loc>
         <lastmod>2023-10-13</lastmod>
         <changefreq>monthly</changefreq>
@@ -75,30 +75,6 @@
     <url>
         <loc>https://ositaka.com/projects/media-creators/</loc>
         <lastmod>2023-09-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.70</priority>
-    </url>
-    <url>
-        <loc>https://ositaka.com/projects/bolha-360/</loc>
-        <lastmod>2023-08-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.70</priority>
-    </url>
-    <url>
-        <loc>https://ositaka.com/projects/ineos-grenadier/</loc>
-        <lastmod>2023-08-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.70</priority>
-    </url>
-    <url>
-        <loc>https://ositaka.com/projects/lamb-weston/</loc>
-        <lastmod>2023-08-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.70</priority>
-    </url>
-    <url>
-        <loc>https://ositaka.com/projects/pergo-flooring/</loc>
-        <lastmod>2023-08-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.70</priority>
     </url>
